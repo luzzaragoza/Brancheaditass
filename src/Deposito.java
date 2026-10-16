@@ -39,7 +39,7 @@ public class Deposito {
             ultimoMotivo = "Temperatura incorrecta para este químico";
             return false;
         }
-        if (c.getcantidad() > 0) {
+        if (c.getCantidad() > 0) {
             Quimico ultimo = c.getQuimico(c.getCantidad() -1);
             if (!ultimo.esCompatibleCon(q)) {
                 ultimoMotivo = "Incompatible con el último químico guardado";
