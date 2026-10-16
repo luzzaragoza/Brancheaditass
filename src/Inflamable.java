@@ -1,7 +1,10 @@
 public class Inflamable extends Quimico {
-    public Inflamable(String nombre, boolean necesitaFrio) {
-        super(nombre, necesitaFrio);
+    public Inflamable(boolean necesitaFrio) {
+        super(necesitaFrio);
     }
+
+    @Override
+    public String getNombre() { return "Inflamable"; }
 
     @Override
     public boolean esCompatibleCon(Quimico otro) {

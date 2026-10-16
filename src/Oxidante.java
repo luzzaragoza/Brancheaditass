@@ -1,7 +1,10 @@
 public class Oxidante extends Quimico {
-    public Oxidante(String nombre, boolean necesitaFrio) {
-        super(nombre, necesitaFrio);
+    public Oxidante(boolean necesitaFrio) {
+        super(necesitaFrio);
     }
+
+    @Override
+    public String getNombre() { return "Oxidante"; }
 
     @Override
     public boolean esCompatibleCon(Quimico otro) {

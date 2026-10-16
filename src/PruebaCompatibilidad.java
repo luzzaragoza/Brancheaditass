@@ -1,10 +1,10 @@
 public class PruebaCompatibilidad {
     public static void main(String[] args) {
         Quimico[] qs = {
-                new Acido("Acido", true),
-                new Base("Base", true),
-                new Inflamable("Inflamable", true),
-                new Oxidante("Oxidante", true)
+                new Acido(true),
+                new Base(true),
+                new Inflamable(true),
+                new Oxidante(true)
         };
 
         // Filas y columnas en el mismo orden: Acido, Base, Inflamable, Oxidante
