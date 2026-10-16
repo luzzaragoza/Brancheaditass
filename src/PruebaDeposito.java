@@ -1,22 +1,23 @@
-public class PruebaDeposito {
-    public class PruebaDeposito {
-        public static void main(String[] args) {
-            Deposito d = new Deposito();
+public class PurebaDeposito {
+    public static void main(String[] args) {
+        Deposito d = new Deposito();
 
-            // Caso 1: se guarda bien
-            Quimico q1 = new Acido("Ácido A");
-            System.out.println("Caso 1: " + d.guardar(q1, "H1"));
-            System.out.println("Motivo: " + d.getUltimoMotivo());
+        //Caso 1: incompatibles
+        System.out.println("Caso 1.a (base en H1, esperando true): " + d.guardar(new Base(true), "H1"));
+        System.out.println("Caso 1.b (ácido en H1, esperando true): " + d.guardar(new Acido(true) + "H1"));
+        System.out.println("Motivo: " + d.getUltimoMotivo());
 
-            // Caso 2: temperatura incorrecta
-            Quimico q2 = new Inflamable("Inflamable A");
-            System.out.println("Caso 2: " + d.guardar(q2, "H1"));
-            System.out.println("Motivo: " + d.getUltimoMotivo());
+        //Caso 2: temperatura incorrecta
+        System.out.println("Caso 2 (ácido de frío en E1, esperando false): " + d.guardar(new Acido(true), "E1"));
+        System.out.println("Motivo: " + d.getUltimoMotivo());
 
-            // Caso 3: incompatible con el último guardado
-            Quimico q3 = new Base("Base A");
-            System.out.println("Caso 3: " + d.guardar(q3, "H1"));
-            System.out.println("Motivo: " + d.getUltimoMotivo());
-        }
+        //Caso 3: canjear un estante lleno
+        d.guardar(new Acido(false), "E2");
+        d.guardar(new Inflamable(false), "E2");
+        d.guardar(new Base(false), "E2");
+        d.guardar(new Oxido(false), "E2");
+        System.out.println("Caso 3.a (canjear E2 lleno, esperando true): " + d.canjear("E2"));
+        System.out.println("Caso 3.b (guardar en E2 vacío, esperando true): " + d.guardar(new Base(false), "E2");
+        System.out.println("Caso 3.c (canjear E3 vacío, esperando false): " + d.canjear("E3"));
     }
 }

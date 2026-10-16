@@ -4,7 +4,7 @@
  */
 public class Deposito {
     private Contenedor[] contenedores = new Contenedor[6]; // ejemplo de encapsulamiento --> con private solo la clase Deposito puede tocarlo.
-    private String ultimoMotivo;
+    private String ultimoMotivo = "";
 
     public Deposito() {
         contenedores[0] = new Heladera("H1");
@@ -35,16 +35,19 @@ public class Deposito {
             ultimoMotivo = "El contenedor está lleno";
             return false;
         }
-        if (!c.temperaturaCorrecta(q)) {
+        if (!c.aceptaTemperatura(q)) {
             ultimoMotivo = "Temperatura incorrecta para este químico";
             return false;
         }
-        if (!c.esCompatible(q)) {
-            ultimoMotivo = "Incompatible con el último químico guardado";
-            return false;
+        if (c.getcantidad() > 0) {
+            Quimico ultimo = c.getQuimico(c.getCantidad() -1);
+            if (!ultimo.esCompatibleCon(q)) {
+                ultimoMotivo = "Incompatible con el último químico guardado";
+                return false;
+            }
         }
 
-        c.agregar(q);
+        c.guardar(q);
         ultimoMotivo = "";
         return true;
     }
