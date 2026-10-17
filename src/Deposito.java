@@ -15,7 +15,7 @@ public class Deposito {
         contenedores[5] = new Estante("E3");
     }
 
-    private Contenedor buscar(String codigo) {
+    public Contenedor buscar(String codigo) {
         for (int i = 0; i < contenedores.length; i++) {
             if (contenedores[i].getCodigo().equals(codigo)) {
                 return contenedores[i];
