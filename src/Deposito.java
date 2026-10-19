@@ -52,6 +52,33 @@ public class Deposito {
         return true;
     }
 
+    public boolean retirar(String codigo, int posicion, Quimico pedido) {
+        Contenedor c = buscar(codigo);
+        if (c == null) {
+            ultimoMotivo = "No existe ese contenedor";
+            return false;
+        }
+        if (posicion < 0 || posicion >= c.getCantidad()) {
+            ultimoMotivo = "Esa casilla está vacía";
+            return false;
+        }
+
+        Quimico q = c.getQuimico(posicion);
+        if (!q.coincideConPedido(pedido)) {
+            ultimoMotivo = "Retiro equivocado";
+            return false;
+        }
+
+        boolean ok = c.sacar(posicion);
+        if (!ok) {
+            ultimoMotivo = "Quedaron incompatibles pegados";
+            return false;
+        }
+
+        ultimoMotivo = "";
+        return true;
+    }
+
     public String getUltimoMotivo() {
         return ultimoMotivo;
     }

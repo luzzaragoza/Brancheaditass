@@ -3,6 +3,8 @@ public class Juego {
 
     public static final boolean CANJE_GASTA_TURNO = false;
 
+    public static final int MIN_PENDIENTES_PARA_RETIRO = 3;
+
     private static final String[] CODIGOS = {"H1", "H2", "H3", "E1", "E2", "E3"};
     private static final int MAX_PENDIENTES = 100;
 
@@ -90,7 +92,7 @@ public class Juego {
 
     private void generarPedido() {
         int moneda = (int) (Math.random() * 2);
-        if (cantidadPendientes == 0 || moneda == 0) {
+        if (cantidadPendientes < MIN_PENDIENTES_PARA_RETIRO || moneda == 0) {
             generarPedidoDeDejar();
         } else {
             generarPedidoDeRetiro();
