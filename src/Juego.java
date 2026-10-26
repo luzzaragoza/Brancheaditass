@@ -33,8 +33,8 @@ public class Juego {
         motivo = null;
 
         visitantes = new Visitante[2];
-        visitantes[0] = new Visitante("Dra. Mora", "mora.png");
-        visitantes[1] = new Visitante("Dr. Bigotes", "bigotes.png");
+        visitantes[0] = new Visitante("Dra. Mora", "mora_x4.png");
+        visitantes[1] = new Visitante("Dr. Bigotes", "bigotes_x4.png");
 
         pendientesVisitante = new Visitante[MAX_PENDIENTES];
         pendientesQuimico = new Quimico[MAX_PENDIENTES];
