@@ -1,27 +1,20 @@
-/**
- * Guarda los 6 contenedores del juego y delega en ellos
- * las operaciones de guardar, retirar y canjear.
- */
+import java.util.HashMap;
+
 public class Deposito {
-    private Contenedor[] contenedores = new Contenedor[6]; // ejemplo de encapsulamiento --> con private solo la clase Deposito puede tocarlo.
+    private HashMap<String, Contenedor> contenedores = new HashMap<>();
     private String ultimoMotivo = "";
 
     public Deposito() {
-        contenedores[0] = new Heladera("H1");
-        contenedores[1] = new Heladera("H2");
-        contenedores[2] = new Heladera("H3");
-        contenedores[3] = new Estante("E1");
-        contenedores[4] = new Estante("E2");
-        contenedores[5] = new Estante("E3");
+        contenedores.put("H1", new Heladera("H1"));
+        contenedores.put("H2", new Heladera("H2"));
+        contenedores.put("H3", new Heladera("H3"));
+        contenedores.put("E1", new Estante("E1"));
+        contenedores.put("E2", new Estante("E2"));
+        contenedores.put("E3", new Estante("E3"));
     }
 
     public Contenedor buscar(String codigo) {
-        for (int i = 0; i < contenedores.length; i++) {
-            if (contenedores[i].getCodigo().equals(codigo)) {
-                return contenedores[i];
-            }
-        }
-        return null;
+        return contenedores.get(codigo);
     }
 
     public boolean guardar(Quimico q, String codigo) {
