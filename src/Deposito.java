@@ -45,6 +45,17 @@ public class Deposito {
         return true;
     }
 
+    public boolean guardar(Quimico q) {
+        for (Contenedor c :
+        contenedores.values()) {
+            if (c.puedeGuardar(q)) {
+                return guardar(q, c.getCodigo());
+            }
+        }
+        ultimoMotivo = "No entra en ningún contenedor";
+        return false;
+    }
+
     public boolean retirar(String codigo, int posicion, Quimico pedido) {
         Contenedor c = buscar(codigo);
         if (c == null) {
