@@ -30,20 +30,19 @@ public class Deposito {
             return false;
         }
         if (!c.aceptaTemperatura(q)) {
-            perder("¡SE ARRUINÓ!", "Guardaste en " + codigo + " " + q.conArticulo()
-                    + " que necesita " + q.getTemperatura() + ".");
+            perder("¡SE ARRUINÓ!", "Guardaste " + q.getNombre() + " que necesita "
+                    + q.getTemperatura() + " en " + codigo + ".");
             return false;
         }
         if (c.getCantidad() > 0) {
             Quimico ultimo = c.getQuimico(c.getCantidad() - 1);
             if (!ultimo.esCompatibleCon(q)) {
+                String titulo = "¡EXPLOTÓ!";
                 if (ultimo.esDelMismoTipoQue(q)) {
-                    perder("¡SE PUDRIERON!", "Pusiste " + q.conArticulo() + " detrás de "
-                            + ultimo.conOtro() + " en " + codigo + ".");
-                } else {
-                    perder("¡EXPLOTÓ!", "Pusiste " + q.conArticulo() + " detrás de "
-                            + ultimo.conArticulo() + " en " + codigo + ".");
+                    titulo = "¡SE PUDRIERON!";
                 }
+                perder(titulo, "Pusiste " + q.getNombre() + " detrás de " + ultimo.getNombre()
+                        + " en " + codigo + ".");
                 return false;
             }
         }
@@ -60,7 +59,7 @@ public class Deposito {
                 return guardar(q, c.getCodigo());
             }
         }
-        perder("¡NO ENTRA!", q.conArticulo() + " de " + q.getTemperatura() + " no entra en ningún contenedor.");
+        perder("¡NO ENTRA!", q.getNombre() + " de " + q.getTemperatura() + " no entra en ningún contenedor.");
         return false;
     }
 
@@ -71,19 +70,15 @@ public class Deposito {
             return false;
         }
         if (posicion < 0 || posicion >= c.getCantidad()) {
-            perder("¡ESE NO ERA!", "Te pidieron " + pedido.conArticulo() + " en " + pedido.getTemperatura()
+            perder("¡ESE NO ERA!", "Te pidieron " + pedido.getNombre() + " de " + pedido.getTemperatura()
                     + " y elegiste una casilla vacía de " + codigo + ".");
             return false;
         }
 
         Quimico q = c.getQuimico(posicion);
         if (!q.coincideConPedido(pedido)) {
-            String entregado = q.conArticulo();
-            if (q.esDelMismoTipoQue(pedido)) {
-                entregado = entregado + " de " + q.getTemperatura();
-            }
-            perder("¡ESE NO ERA!", "Te pidieron " + pedido.conArticulo() + " en " + pedido.getTemperatura()
-                    + " y entregaste " + entregado + " de " + codigo + ".");
+            perder("¡ESE NO ERA!", "Te pidieron " + pedido.getNombre() + " de " + pedido.getTemperatura()
+                    + " y entregaste " + q.getNombre() + " de " + q.getTemperatura() + " de " + codigo + ".");
             return false;
         }
 
@@ -95,8 +90,8 @@ public class Deposito {
             if (antes.esDelMismoTipoQue(ahora)) {
                 titulo = "¡SE PUDRIERON!";
             }
-            perder(titulo, "Al sacar " + q.conArticuloDefinido() + " de " + codigo + ", "
-                    + antes.conArticuloDefinido() + " y " + ahora.conArticuloDefinido() + " quedaron pegados.");
+            perder(titulo, "Al sacar " + q.getNombre() + " de " + codigo + ", quedaron pegados "
+                    + antes.getNombre() + " y " + ahora.getNombre() + ".");
             return false;
         }
 

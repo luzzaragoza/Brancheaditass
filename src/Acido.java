@@ -15,16 +15,6 @@ public class Acido extends Quimico {
     }
 
     @Override
-    public String getNombreEnTexto() {
-        return "ácido";
-    }
-
-    @Override
-    public boolean esFemenino() {
-        return false;
-    }
-
-    @Override
     public String getImagen() {
         return "acido.png";
     }

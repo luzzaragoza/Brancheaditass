@@ -139,7 +139,7 @@ public class Juego {
     private void revisarQueLoTenes() {
         if (tipoPedido == TipoPedido.RETIRAR && !hayEnDeposito(pedido)) {
             terminar("¡NO LO TENÍAS!", visitante.getNombre() + " volvió por su "
-                    + pedido.getNombreEnTexto() + " de " + pedido.getTemperatura()
+                    + pedido.getNombre() + " de " + pedido.getTemperatura()
                     + ", pero ya no queda en el depósito: lo canjeaste.");
         }
     }

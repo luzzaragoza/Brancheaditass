@@ -7,12 +7,6 @@ public class Oxidante extends Quimico {
     public String getNombre() { return "Oxidante"; }
 
     @Override
-    public String getNombreEnTexto() { return "oxidante"; }
-
-    @Override
-    public boolean esFemenino() { return false; }
-
-    @Override
     public String getImagen() { return "oxidante.png"; }
 
     @Override
