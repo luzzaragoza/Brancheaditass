@@ -9,11 +9,24 @@ public abstract class Quimico {
         return necesitaFrio;
     }
 
+    public boolean esDelMismoTipoQue(Quimico otro) {
+        return getNombre().equals(otro.getNombre());
+    }
+
     public boolean coincideConPedido(Quimico pedido) {
-        return getNombre().equals(pedido.getNombre()) && necesitaFrio == pedido.necesitaFrio();
+        return esDelMismoTipoQue(pedido) && necesitaFrio == pedido.necesitaFrio();
+    }
+
+    public String getTemperatura() {
+        if (necesitaFrio) {
+            return "frío";
+        }
+        return "calor";
     }
 
     public abstract boolean esCompatibleCon(Quimico otro);
 
     public abstract String getNombre();
+
+    public abstract String getImagen();
 }

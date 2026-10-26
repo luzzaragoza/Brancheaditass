@@ -13,4 +13,9 @@ public class Base extends Quimico {
     public String getNombre() {
         return "Base";
     }
+
+    @Override
+    public String getImagen() {
+        return "base.png";
+    }
 }
