@@ -4,6 +4,10 @@ public abstract class Contenedor {
     protected Quimico[] quimicos;
     protected int cantidad;
 
+    public Contenedor() {
+        this("SIN CODIGO");
+    }
+
     public Contenedor(String codigo) {
         this.codigo = codigo;
         this.quimicos = new Quimico[LUGARES];
@@ -52,7 +56,7 @@ public abstract class Contenedor {
         return true;
     }
 
-    public void vaciar() {
+    void vaciar() {
         for (int i = 0; i < cantidad; i++) {
             quimicos[i] = null;
         }
