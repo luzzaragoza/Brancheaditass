@@ -3,6 +3,7 @@ import java.util.HashMap;
 public class Deposito {
     private HashMap<String, Contenedor> contenedores = new HashMap<>();
     private String ultimoMotivo = "";
+    private String ultimoTitulo = "";
 
     public Deposito() {
         contenedores.put("H1", new Heladera("H1"));
@@ -21,27 +22,34 @@ public class Deposito {
         Contenedor c = buscar(codigo);
 
         if (c == null) {
-            ultimoMotivo = "No existe ese contenedor";
+            perder("¡NO EXISTE!", "No hay ningún contenedor " + codigo + ".");
             return false;
         }
         if (c.estaLleno()) {
-            ultimoMotivo = "El contenedor está lleno";
+            perder("¡NO ENTRA!", codigo + " ya tiene 4 químicos: había que canjearlo o guardar en otro.");
             return false;
         }
         if (!c.aceptaTemperatura(q)) {
-            ultimoMotivo = "Temperatura incorrecta para este químico";
+            perder("¡SE ARRUINÓ!", "Guardaste en " + codigo + " " + q.conArticulo()
+                    + " que necesita " + q.getTemperatura() + ".");
             return false;
         }
         if (c.getCantidad() > 0) {
-            Quimico ultimo = c.getQuimico(c.getCantidad() -1);
+            Quimico ultimo = c.getQuimico(c.getCantidad() - 1);
             if (!ultimo.esCompatibleCon(q)) {
-                ultimoMotivo = "Incompatible con el último químico guardado";
+                if (ultimo.esDelMismoTipoQue(q)) {
+                    perder("¡SE PUDRIERON!", "Pusiste " + q.conArticulo() + " detrás de "
+                            + ultimo.conOtro() + " en " + codigo + ".");
+                } else {
+                    perder("¡EXPLOTÓ!", "Pusiste " + q.conArticulo() + " detrás de "
+                            + ultimo.conArticulo() + " en " + codigo + ".");
+                }
                 return false;
             }
         }
 
         c.guardar(q);
-        ultimoMotivo = "";
+        limpiarMotivo();
         return true;
     }
 
@@ -52,39 +60,66 @@ public class Deposito {
                 return guardar(q, c.getCodigo());
             }
         }
-        ultimoMotivo = "No entra en ningún contenedor";
+        perder("¡NO ENTRA!", q.conArticulo() + " de " + q.getTemperatura() + " no entra en ningún contenedor.");
         return false;
     }
 
     public boolean retirar(String codigo, int posicion, Quimico pedido) {
         Contenedor c = buscar(codigo);
         if (c == null) {
-            ultimoMotivo = "No existe ese contenedor";
+            perder("¡NO EXISTE!", "No hay ningún contenedor " + codigo + ".");
             return false;
         }
         if (posicion < 0 || posicion >= c.getCantidad()) {
-            ultimoMotivo = "Esa casilla está vacía";
+            perder("¡ESE NO ERA!", "Te pidieron " + pedido.conArticulo() + " en " + pedido.getTemperatura()
+                    + " y elegiste una casilla vacía de " + codigo + ".");
             return false;
         }
 
         Quimico q = c.getQuimico(posicion);
         if (!q.coincideConPedido(pedido)) {
-            ultimoMotivo = "Retiro equivocado";
+            String entregado = q.conArticulo();
+            if (q.esDelMismoTipoQue(pedido)) {
+                entregado = entregado + " de " + q.getTemperatura();
+            }
+            perder("¡ESE NO ERA!", "Te pidieron " + pedido.conArticulo() + " en " + pedido.getTemperatura()
+                    + " y entregaste " + entregado + " de " + codigo + ".");
             return false;
         }
 
         boolean ok = c.sacar(posicion);
         if (!ok) {
-            ultimoMotivo = "Quedaron incompatibles pegados";
+            Quimico antes = c.getQuimico(posicion - 1);
+            Quimico ahora = c.getQuimico(posicion);
+            String titulo = "¡EXPLOTÓ!";
+            if (antes.esDelMismoTipoQue(ahora)) {
+                titulo = "¡SE PUDRIERON!";
+            }
+            perder(titulo, "Al sacar " + q.conArticuloDefinido() + " de " + codigo + ", "
+                    + antes.conArticuloDefinido() + " y " + ahora.conArticuloDefinido() + " quedaron pegados.");
             return false;
         }
 
-        ultimoMotivo = "";
+        limpiarMotivo();
         return true;
+    }
+
+    private void perder(String titulo, String motivo) {
+        ultimoTitulo = titulo;
+        ultimoMotivo = motivo;
+    }
+
+    private void limpiarMotivo() {
+        ultimoTitulo = "";
+        ultimoMotivo = "";
     }
 
     public String getUltimoMotivo() {
         return ultimoMotivo;
+    }
+
+    public String getUltimoTitulo() {
+        return ultimoTitulo;
     }
 
     public boolean canjear(String codigo) {

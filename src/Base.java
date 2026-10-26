@@ -13,4 +13,19 @@ public class Base extends Quimico {
     public String getNombre() {
         return "Base";
     }
+
+    @Override
+    public String getNombreEnTexto() {
+        return "base";
+    }
+
+    @Override
+    public boolean esFemenino() {
+        return true;
+    }
+
+    @Override
+    public String getImagen() {
+        return "base.png";
+    }
 }
