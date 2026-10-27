@@ -13,4 +13,9 @@ public class Acido extends Quimico {
     public String getNombre() {
         return "Acido";
     }
+
+    @Override
+    public String getImagen() {
+        return "acido.png";
+    }
 }

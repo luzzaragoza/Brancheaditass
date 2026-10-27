@@ -14,6 +14,18 @@ public class PruebaJuego {
         System.out.println("De dejar: " + dejar + " de 20 (tiene que dar 20)");
 
         System.out.println();
+        System.out.println("=== Encargada: Luz. 20 pedidos sin que aparezca Luz ===");
+        int vecesLuz = 0;
+        for (int i = 1; i <= 20; i++) {
+            Juego j = new Juego("Luz");
+            if (j.getVisitante().getNombre().equals("Luz")) {
+                vecesLuz++;
+            }
+        }
+        System.out.println("Visitantes: " + new Juego("Luz").getCantidadVisitantes() + " (tiene que dar 6)");
+        System.out.println("Veces que vino Luz: " + vecesLuz + " (tiene que dar 0)");
+
+        System.out.println();
         System.out.println("=== Parte 2: una partida de hasta 40 turnos ===");
         Juego juego = new Juego();
         int retiros = 0;
@@ -41,7 +53,7 @@ public class PruebaJuego {
             }
         }
         System.out.println();
-        System.out.println("Terminó: " + juego.estaTerminado() + "  Motivo: " + juego.getMotivo());
+        System.out.println("Terminó: " + juego.estaTerminado() + "  " + juego.getTitulo() + " " + juego.getMotivo());
         System.out.println("Turno: " + juego.getTurno() + "  Puntaje: " + juego.getPuntaje()
                 + "  Retiros pedidos: " + retiros + "  Canjes: " + canjes);
     }

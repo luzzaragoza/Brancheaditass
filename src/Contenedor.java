@@ -1,17 +1,23 @@
+import java.util.ArrayList;
+
 public abstract class Contenedor {
     private static final int LUGARES = 4;
     protected String codigo;
-    protected Quimico[] quimicos;
-    protected int cantidad;
+    protected int lugares;
+    protected ArrayList<Quimico> quimicos;
 
     public Contenedor(String codigo) {
+        this(codigo, LUGARES);
+    }
+
+    public Contenedor(String codigo, int lugares) {
         this.codigo = codigo;
-        this.quimicos = new Quimico[LUGARES];
-        this.cantidad = 0;
+        this.lugares = lugares;
+        this.quimicos = new ArrayList<>();
     }
 
     public boolean estaLleno() {
-        return cantidad == LUGARES;
+        return quimicos.size() == lugares;
     }
 
     public boolean puedeGuardar(Quimico q) {
@@ -21,10 +27,10 @@ public abstract class Contenedor {
         if (!aceptaTemperatura(q)) {
             return false;
         }
-        if (cantidad == 0) {
+        if (quimicos.size() == 0) {
             return true;
         }
-        Quimico ultimo = quimicos[cantidad - 1];
+        Quimico ultimo = quimicos.get(quimicos.size() - 1);
         return ultimo.esCompatibleCon(q);
     }
 
@@ -32,36 +38,31 @@ public abstract class Contenedor {
         if (!puedeGuardar(q)) {
             return false;
         }
-        quimicos[cantidad] = q;
-        cantidad++;
+        quimicos.add(q);
         return true;
     }
 
     public boolean sacar(int posicion) {
-        for (int i = posicion; i < cantidad - 1; i++) {
-            quimicos[i] = quimicos[i + 1];
+        if (posicion < 0 || posicion >= quimicos.size()) {
+            return true;
         }
-        cantidad--;
-        quimicos[cantidad] = null;
+        quimicos.remove(posicion);
 
-        if (posicion > 0 && posicion < cantidad) {
-            Quimico antes = quimicos[posicion - 1];
-            Quimico ahora = quimicos[posicion];
+        if (posicion > 0 && posicion < quimicos.size()) {
+            Quimico antes = quimicos.get(posicion - 1);
+            Quimico ahora = quimicos.get(posicion);
             return antes.esCompatibleCon(ahora);
         }
         return true;
     }
 
-    public void vaciar() {
-        for (int i = 0; i < cantidad; i++) {
-            quimicos[i] = null;
-        }
-        cantidad = 0;
+    void vaciar() {
+        quimicos.clear();
     }
 
     public String getCodigo() { return codigo; }
-    public int getCantidad() { return cantidad; }
-    public Quimico getQuimico(int posicion) { return quimicos[posicion]; }
+    public int getCantidad() { return quimicos.size(); }
+    public Quimico getQuimico(int posicion) { return quimicos.get(posicion); }
 
     public abstract boolean aceptaTemperatura(Quimico q);
 }

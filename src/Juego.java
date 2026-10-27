@@ -12,7 +12,9 @@ public class Juego {
     private int turno;
     private int puntaje;
     private boolean terminado;
+    private String titulo;
     private String motivo;
+    private String encargada;
 
     private Visitante[] visitantes;
 
@@ -26,15 +28,28 @@ public class Juego {
     private int cantidadPendientes;
 
     public Juego() {
+        this("Sofi 1");
+    }
+
+    public Juego(String encargada) {
+        this.encargada = encargada;
         deposito = new Deposito();
         turno = 1;
         puntaje = 0;
         terminado = false;
+        titulo = null;
         motivo = null;
 
-        visitantes = new Visitante[2];
-        visitantes[0] = new Visitante("Dra. Mora", "mora.png");
-        visitantes[1] = new Visitante("Dr. Bigotes", "bigotes.png");
+        Visitante[] todos = {
+            new Visitante("Lyss", "lyss_x4.png"),
+            new Visitante("Luz", "luz_x4.png"),
+            new Visitante("Sofi 1", "sofi1_x4.png"),
+            new Visitante("Sofi 2", "sofi2_x4.png"),
+            new Visitante("Dra. Mora", "mora_x4.png"),
+            new Visitante("Dr. Bigotes", "bigotes_x4.png"),
+            new Visitante("Ing. Paco", "paco_x4.png")
+        };
+        armarVisitantes(todos);
 
         pendientesVisitante = new Visitante[MAX_PENDIENTES];
         pendientesQuimico = new Quimico[MAX_PENDIENTES];
@@ -56,7 +71,7 @@ public class Juego {
         }
 
         if (!salioBien) {
-            terminar(deposito.getUltimoMotivo());
+            terminar(deposito.getUltimoTitulo(), deposito.getUltimoMotivo());
             return false;
         }
 
@@ -123,8 +138,9 @@ public class Juego {
 
     private void revisarQueLoTenes() {
         if (tipoPedido == TipoPedido.RETIRAR && !hayEnDeposito(pedido)) {
-            terminar("¡NO LO TENÍAS! " + visitante.getNombre() + " volvió por su "
-                    + pedido.getNombre() + ", pero ya no está en el depósito.");
+            terminar("¡NO LO TENÍAS!", visitante.getNombre() + " volvió por su "
+                    + pedido.getNombre() + " de " + pedido.getTemperatura()
+                    + ", pero ya no queda en el depósito: lo canjeaste.");
         }
     }
 
@@ -170,8 +186,26 @@ public class Juego {
         cantidadPendientes--;
     }
 
-    private void terminar(String motivoDerrota) {
+    private void armarVisitantes(Visitante[] todos) {
+        int cantidad = 0;
+        for (Visitante v : todos) {
+            if (!v.getNombre().equals(encargada)) {
+                cantidad++;
+            }
+        }
+        visitantes = new Visitante[cantidad];
+        int i = 0;
+        for (Visitante v : todos) {
+            if (!v.getNombre().equals(encargada)) {
+                visitantes[i] = v;
+                i++;
+            }
+        }
+    }
+
+    private void terminar(String tituloDerrota, String motivoDerrota) {
         terminado = true;
+        titulo = tituloDerrota;
         motivo = motivoDerrota;
     }
 
@@ -195,8 +229,20 @@ public class Juego {
         return pedido;
     }
 
+    public String getTitulo() {
+        return titulo;
+    }
+
     public String getMotivo() {
         return motivo;
+    }
+
+    public String getEncargada() {
+        return encargada;
+    }
+
+    public int getCantidadVisitantes() {
+        return visitantes.length;
     }
 
     public int getTurno() {

@@ -3,6 +3,7 @@ public class Heladera extends Contenedor {
         super(codigo);
     }
 
+    @Override
     public boolean aceptaTemperatura(Quimico q) {
         return q.necesitaFrio();
     }
