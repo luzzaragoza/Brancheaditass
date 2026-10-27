@@ -65,7 +65,14 @@ public class VentanaJuego extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            if (juego.estaTerminado()) {
+                return;
+            }
             String codigo = panelDeposito.getCodigo(estante);
+            if (juego.esRetiro() && posicion >= juego.getContenedor(codigo).getCantidad()) {
+                mostrarMensaje("Esa casilla está vacía. Hacé clic en una que tenga un químico.");
+                return;
+            }
             boolean salioBien = juego.jugar(codigo, posicion);
             actualizarPantalla();
             if (salioBien) {
@@ -85,6 +92,9 @@ public class VentanaJuego extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            if (juego.estaTerminado()) {
+                return;
+            }
             juego.canjear(panelDeposito.getCodigo(estante));
             actualizarPantalla();
             if (juego.estaTerminado()) {
