@@ -5,6 +5,8 @@ public class Juego {
 
     public static final int MIN_PENDIENTES_PARA_RETIRO = 3;
 
+    public static final int VUELVE_POR_CANJEADO = 5; // 1 de cada 5 retiros vuelve por algo canjeado
+
     private static final String[] CODIGOS = {"H1", "H2", "H3", "E1", "E2", "E3"};
     private static final int MAX_PENDIENTES = 100;
 
@@ -119,19 +121,58 @@ public class Juego {
         pendienteActual = -1;
 
         int cualVisitante = (int) (Math.random() * visitantes.length);
-        int tipo = (int) (Math.random() * 4);
-        boolean necesitaFrio = (int) (Math.random() * 2) == 0;
-
         visitante = visitantes[cualVisitante];
-        pedido = crearQuimico(tipo, necesitaFrio);
+
+        Quimico[] posibles = new Quimico[8];
+        int cantidadPosibles = 0;
+        boolean[] temperaturas = {true, false};
+        for (int tipo = 0; tipo < 4; tipo ++) {
+            for (boolean necesitaFrio : temperaturas) {
+                Quimico q = crearQuimico(tipo, necesitaFrio);
+                if (tieneLugar(q)) {
+                    posibles[cantidadPosibles] = q;
+                    cantidadPosibles++;
+                }
+            }
+        }
+        if (cantidadPosibles > 0) {
+            pedido = posibles[(int) (Math.random() * cantidadPosibles)];
+        } else {
+            int tipo = (int) (Math.random() * 4);
+            boolean necesitaFrio = (int) (Math.random() * 2) == 0;
+            pedido = crearQuimico(tipo, necesitaFrio);
+        }
+    }
+    private void generarPedidoDeRetiro() {
+        int[] entregables = new int[cantidadPendientes];
+        int cantidadEntregables = 0;
+        int [] canjeados = new int [cantidadPendientes];
+        int cantidadCanjeados = 0;
+
+        for (int i = 0; i < cantidadPendientes; i++) {
+            if (sePuedeEntregar(pendientesQuimico[i])) {
+                entregables[cantidadEntregables] = i;
+                cantidadEntregables++;
+            } else if (!hayEnDeposito(pendientesQuimico[i])) {
+                canjeados[cantidadCanjeados] = i;
+                cantidadCanjeados++;
+            }
+        }
+
+        boolean vuelvePorCanjeado = (int) (Math.random() * VUELVE_POR_CANJEADO) == 0;
+        if (vuelvePorCanjeado && cantidadCanjeados > 0) {
+            elegirRetiro(canjeados[(int) (Math.random() * cantidadCanjeados)]);
+        } else {
+            generarPedidoDeDejar();
+        }
     }
 
-    private void generarPedidoDeRetiro() {
+    private void elegirRetiro(int posicion) {
         tipoPedido = TipoPedido.RETIRAR;
-        pendienteActual = (int) (Math.random() * cantidadPendientes);
+        pendienteActual = posicion;
 
-        visitante = pendientesVisitante[pendienteActual];
-        pedido = pendientesQuimico[pendienteActual];
+        visitante = pendientesVisitante[posicion];
+        pedido = pendientesQuimico[posicion];
 
         revisarQueLoTenes();
     }
@@ -161,6 +202,27 @@ public class Juego {
             Contenedor c = deposito.buscar(CODIGOS[i]);
             for (int j = 0; j < c.getCantidad(); j++) {
                 if (c.getQuimico(j).coincideConPedido(buscado)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean tieneLugar(Quimico q) {
+        for (int i = 0; i< CODIGOS.length; i++) {
+            if (deposito.buscar(CODIGOS[i]).puedeGuardar(q)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean sePuedeEntregar(Quimico buscado) {
+        for (int i = 0; i < CODIGOS.length; i++) {
+            Contenedor c = deposito.buscar(CODIGOS[i]);
+            for (int j = 0; j < c.getCantidad(); j++) {
+                if (c.getQuimico(j).coincideConPedido(buscado) && c.sePuedeSacar(j)) {
                     return true;
                 }
             }

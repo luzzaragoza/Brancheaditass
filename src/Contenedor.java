@@ -56,6 +56,15 @@ public abstract class Contenedor {
         return true;
     }
 
+    public boolean sePuedeSacar(int posicion) { // va en contenedor y no en juego: contenedor es el que conoce su fila.
+        if (posicion == 0 || posicion == quimicos.size() -1) {
+            return true;
+        }
+        Quimico antes = quimicos.get(posicion -1);
+        Quimico despues = quimicos.get(posicion +1);
+        return antes.esCompatibleCon(despues);
+    }
+
     void vaciar() {
         quimicos.clear();
     }
