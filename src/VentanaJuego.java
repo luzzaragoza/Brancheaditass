@@ -106,6 +106,11 @@ public class VentanaJuego extends JFrame {
     }
 
     public static void main(String[] args) {
+        try {
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+        } catch (Exception e) {
+            System.out.println("No se pudo cambiar el aspecto: se usa el de siempre.");
+        }
         new VentanaJuego(new Juego());
     }
 }

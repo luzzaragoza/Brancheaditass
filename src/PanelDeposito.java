@@ -11,23 +11,33 @@ public class PanelDeposito extends JPanel {
     public PanelDeposito(Juego juego) {
         this.juego = juego;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setBackground(Colores.PARED_DEPOSITO);
 
-        etiquetaPedido = new JLabel();
+        etiquetaPedido = etiqueta("");
         add(etiquetaPedido);
 
-        add(new JLabel("HELADERA"));
-        for (int i = 0; i < paneles.length; i++) {
-            if (i == 3) {
-                add(new JLabel("ESTANTES"));
+        add(etiqueta("HELADERA"));
+        for (int i =0; i < paneles.length; i++) {
+            if (i ==3) {
+                add(etiqueta("ESTANTES"));
             }
-            paneles[i] = new PanelContenedor(juego.getContenedor(CODIGOS[i]));
+            if (i < 3) {
+                paneles[i] = new PanelContenedor(juego.getContenedor(CODIGOS[i]), Colores.CARTEL_FRIO);
+            } else {
+                paneles[i] = new PanelContenedor(juego.getContenedor(CODIGOS[i]), Colores.CARTEL_CALOR);
+            }
             add(paneles[i]);
         }
-
-        etiquetaMensaje = new JLabel(" ");
+        etiquetaMensaje = etiqueta(" ");
         add(etiquetaMensaje);
 
         actualizar();
+    }
+
+    private JLabel etiqueta(String texto) {
+        JLabel etiqueta = new JLabel(texto);
+        etiqueta.setForeground(Colores.CREMA);
+        return etiqueta;
     }
 
     public void actualizar() {
