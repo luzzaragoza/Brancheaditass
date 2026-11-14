@@ -81,6 +81,35 @@ public class PanelMostrador extends JPanel {
         } else {
             etiquetaPedido.setText("Viene a dejar: " + pedido.getNombre() + " " + temperatura);
         }
+
+        animarLlegada();
+    }
+
+    private class LlegadaVisitante implements Runnable {
+        @Override
+        public void run() {
+            for (int x = -140; x<= 260; x = x + 8) {
+                SwingUtilities.invokeLater(new MoverVisitante(x));
+                try {
+                    Thread.sleep(15);
+                } catch (InterruptedException e) {
+                    return;
+                }
+            }
+        }
+    }
+
+    private class MoverVisitante implements Runnable {
+        private int x;
+
+        public MoverVisitante(int x) {
+            this.x = x;
+        }
+
+        @Override
+        public void run() {
+            etiquetaVisitante.setLocation(x, 192);
+        }
     }
 
     public JButton getBotonIr() {
