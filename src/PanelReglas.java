@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.Color;
-import java.awt.Font;
 import java.net.URL;
 
 public class PanelReglas extends JPanel {
@@ -12,19 +11,20 @@ public class PanelReglas extends JPanel {
 
         JLabel arriba = new JLabel("DEPÓSITO DE QUÍMICOS · TURNO NOCHE");
         arriba.setForeground(Colores.APAGADO);
+        arriba.setFont(Fuentes.texto(13f));
         arriba.setBounds(40, 36, 400, 20);
         add(arriba);
 
         JLabel titulo = new JLabel("ALQUIMIA");
         titulo.setForeground(Colores.CREMA);
-        titulo.setFont(titulo.getFont().deriveFont(Font.BOLD, 80f));
+        titulo.setFont(Fuentes.titulo(80f));
         titulo.setBounds(40, 60, 500, 90);
         add(titulo);
 
         JLabel bajada = new JLabel("<html>Del otro lado de la ventana llegan a dejar o retirar químicos.<br>"
                 + "Vos decidís dónde va cada uno.</html>");
         bajada.setForeground(Colores.CREMA);
-        bajada.setFont(bajada.getFont().deriveFont(Font.BOLD, 16f));
+        bajada.setFont(Fuentes.texto(16f));
         bajada.setBounds(40, 160, 600, 50);
         add(bajada);
 
@@ -33,8 +33,8 @@ public class PanelReglas extends JPanel {
 
         JPanel tarjeta1 = tarjeta(1, "Frío a la heladera, calor al estante",
                 "Cada químico avisa qué temperatura necesita. Si lo guardás en el lugar equivocado, perdés.", 40);
-        tarjeta1.add(cartel("Necesita frío → Heladera", Colores.CARTEL_FRIO, 82));
-        tarjeta1.add(cartel("Necesita calor → Estante", Colores.CARTEL_CALOR, 130));
+        tarjeta1.add(cartel("Necesita frío » Heladera", Colores.CARTEL_FRIO, 82));
+        tarjeta1.add(cartel("Necesita calor » Estante", Colores.CARTEL_CALOR, 130));
         add(tarjeta1);
 
         JPanel tarjeta2 = tarjeta(2, "Nunca dos del mismo grupo pegados",
@@ -61,7 +61,7 @@ public class PanelReglas extends JPanel {
         add(tarjeta3);
 
         botonEmpezar = new JButton("EMPEZAR A ATENDER");
-        botonEmpezar.setFont(botonEmpezar.getFont().deriveFont(Font.BOLD, 18f));
+        botonEmpezar.setFont(Fuentes.titulo(20f));
         botonEmpezar.setBackground(Colores.ROSA);
         botonEmpezar.setForeground(Colores.TINTA);
         botonEmpezar.setOpaque(true);
@@ -73,11 +73,13 @@ public class PanelReglas extends JPanel {
         JLabel canje = new JLabel("<html>Estante lleno: podés canjearlo por puntos extra. Pero si "
                 + "después vuelven a buscar algo de ahí, perdés.</html>");
         canje.setForeground(Colores.CREMA);
+        canje.setFont(Fuentes.texto(14f));
         canje.setBounds(340, 590, 440, 50);
         add(canje);
 
         JLabel equipo = new JLabel("Sofia1 · Sofia2 · Lyssie · Luz");
         equipo.setForeground(Colores.APAGADO);
+        equipo.setFont(Fuentes.texto(13f));
         equipo.setBounds(800, 605, 200, 20);
         add(equipo);
     }
@@ -93,19 +95,20 @@ public class PanelReglas extends JPanel {
         etiquetaNumero.setOpaque(true);
         etiquetaNumero.setBackground(Colores.ROSA);
         etiquetaNumero.setForeground(Colores.TINTA);
+        etiquetaNumero.setFont(Fuentes.titulo(16f));
         etiquetaNumero.setBorder(BorderFactory.createLineBorder(Colores.TINTA, 2));
         etiquetaNumero.setBounds(20, 22, 26, 26);
         tarjeta.add(etiquetaNumero);
 
         JLabel etiquetaTitulo = new JLabel("<html>" + titulo + "</html>");
         etiquetaTitulo.setForeground(Colores.TINTA);
-        etiquetaTitulo.setFont(etiquetaTitulo.getFont().deriveFont(Font.BOLD, 16f));
+        etiquetaTitulo.setFont(Fuentes.titulo(18f));
         etiquetaTitulo.setBounds(58, 16, 230, 48);
         tarjeta.add(etiquetaTitulo);
 
         JLabel etiquetaTexto = new JLabel("<html>" + texto + "</html>");
         etiquetaTexto.setForeground(Colores.TINTA);
-        etiquetaTexto.setFont(etiquetaTexto.getFont().deriveFont(Font.PLAIN, 14f));
+        etiquetaTexto.setFont(Fuentes.texto(14f));
         etiquetaTexto.setBounds(20, 180, 264, 110);
         etiquetaTexto.setVerticalAlignment(SwingConstants.TOP);
         tarjeta.add(etiquetaTexto);
@@ -118,6 +121,7 @@ public class PanelReglas extends JPanel {
         cartel.setOpaque(true);
         cartel.setBackground(fondo);
         cartel.setForeground(Colores.TINTA);
+        cartel.setFont(Fuentes.texto(14f));
         cartel.setBorder(BorderFactory.createLineBorder(Colores.TINTA, 2));
         cartel.setBounds(20, y, 264, 38);
         return cartel;

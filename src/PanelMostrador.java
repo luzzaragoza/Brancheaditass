@@ -19,30 +19,36 @@ public class PanelMostrador extends JPanel {
         etiquetaTurno.setBounds(20, 20, 200, 30);
         add(etiquetaTurno);
         etiquetaTurno.setForeground(Colores.CREMA);
+        etiquetaTurno.setFont(Fuentes.titulo(22f));
 
         etiquetaPuntaje = new JLabel();
         etiquetaPuntaje.setBounds(800, 20, 200, 30);
         add(etiquetaPuntaje);
         etiquetaPuntaje.setForeground(Colores.CREMA);
+        etiquetaPuntaje.setFont(Fuentes.titulo(22f));
 
         etiquetaVisitante = new JLabel();
         etiquetaVisitante.setBounds(260, 192, 128, 180);
         add(etiquetaVisitante);
         etiquetaVisitante.setForeground(Colores.CREMA);
+        etiquetaVisitante.setFont(Fuentes.texto(14f));
 
         etiquetaNombre = new JLabel();
         etiquetaNombre.setBounds(420, 230, 400, 30);
         add(etiquetaNombre);
         etiquetaNombre.setForeground(Colores.CREMA);
+        etiquetaNombre.setFont(Fuentes.titulo(26f));
 
         etiquetaPedido = new JLabel();
         etiquetaPedido.setBounds(420, 270, 400, 30);
         add(etiquetaPedido);
         etiquetaPedido.setForeground(Colores.CREMA);
+        etiquetaPedido.setFont(Fuentes.texto(18f));
 
         botonIr = new JButton("Ir al depósito");
         botonIr.setBackground(Colores.ROSA);
         botonIr.setForeground(Colores.TINTA);
+        botonIr.setFont(Fuentes.titulo(18f));
         botonIr.setOpaque(true);
         botonIr.setFocusPainted(false);
         botonIr.setBorder(BorderFactory.createLineBorder(Colores.TINTA, 3));

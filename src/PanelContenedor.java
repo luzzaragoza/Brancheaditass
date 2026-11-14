@@ -21,6 +21,7 @@ public class PanelContenedor extends JPanel {
 
         JLabel codigo = new JLabel(" " + contenedor.getCodigo() + " ");
         codigo.setForeground(Colores.TINTA);
+        codigo.setFont(Fuentes.titulo(18f));
         add(codigo);
 
         for (int i = 0; i < casillas.length; i++) {
@@ -34,6 +35,7 @@ public class PanelContenedor extends JPanel {
 
             etiquetas[i] = new JLabel();
             etiquetas[i].setForeground(Colores.TINTA);
+            etiquetas[i].setFont(Fuentes.texto(12f));
             etiquetas[i].setAlignmentX(CENTER_ALIGNMENT);
 
             JPanel columna = new JPanel();
@@ -52,6 +54,7 @@ public class PanelContenedor extends JPanel {
     public void pintarBoton(JButton boton, Color fondo) {
         boton.setBackground(fondo);
         boton.setForeground(Colores.TINTA);
+        boton.setFont(Fuentes.texto(13f));
         boton.setOpaque(true);
         boton.setFocusPainted(false);
         boton.setBorder(BorderFactory.createLineBorder(Colores.TINTA, 2));
