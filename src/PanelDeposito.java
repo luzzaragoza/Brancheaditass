@@ -42,7 +42,8 @@ public class PanelDeposito extends JPanel {
 
     public void actualizar() {
         for (int i = 0; i < paneles.length; i++) {
-            paneles[i].actualizar();
+            paneles[i].actualizar(!juego.esRetiro());
+            paneles[i].setActivo(!juego.estaTerminado());
         }
 
         Quimico pedido = juego.getPedido();
