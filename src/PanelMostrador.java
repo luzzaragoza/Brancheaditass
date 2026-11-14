@@ -85,6 +85,11 @@ public class PanelMostrador extends JPanel {
         animarLlegada();
     }
 
+    private void animarLlegada() {
+        Thread hilo = new Thread(new LlegadaVisitante());
+        hilo.start();
+    }
+
     private class LlegadaVisitante implements Runnable {
         @Override
         public void run() {
