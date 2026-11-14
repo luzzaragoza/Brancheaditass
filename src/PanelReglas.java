@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.Color;
 import java.awt.Font;
 import java.net.URL;
 
@@ -112,7 +113,7 @@ public class PanelReglas extends JPanel {
         return tarjeta;
     }
 
-    private JLabel cartel(String texto, java.awt.Color fondo, int y) {
+    private JLabel cartel(String texto, Color fondo, int y) {
         JLabel cartel = new JLabel(texto, SwingConstants.CENTER);
         cartel.setOpaque(true);
         cartel.setBackground(fondo);
