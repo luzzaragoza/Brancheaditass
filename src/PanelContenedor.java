@@ -11,6 +11,7 @@ public class PanelContenedor extends JPanel {
     private JButton[] casillas = new JButton[4];
     private JButton botonCanjear;
     private Border[] bordes = new Border[4];
+    private JLabel[] etiquetas = new JLabel[4];
     private static final Dimension TAMANIO_CASILLA = new Dimension(56, 73);
 
     public PanelContenedor(Contenedor contenedor, Color fondo) {
@@ -29,7 +30,18 @@ public class PanelContenedor extends JPanel {
             casillas[i].setMaximumSize(TAMANIO_CASILLA);
             pintarBoton(casillas[i], Colores.CREMA);
             casillas[i].addMouseListener(new MouseEncima(i));
-            add(casillas[i]);
+            casillas[i].setAlignmentX(CENTER_ALIGNMENT);
+
+            etiquetas[i] = new JLabel();
+            etiquetas[i].setForeground(Colores.TINTA);
+            etiquetas[i].setAlignmentX(CENTER_ALIGNMENT);
+
+            JPanel columna = new JPanel();
+            columna.setLayout(new BoxLayout(columna, BoxLayout.Y_AXIS));
+            columna.setOpaque(false);
+            columna.add(casillas[i]);
+            columna.add(etiquetas[i]);
+            add(columna);
         }
 
         botonCanjear = new JButton("Canjear +" + Juego.PUNTOS_CANJE);
@@ -48,6 +60,7 @@ public class PanelContenedor extends JPanel {
     public void actualizar(boolean esDejar) {
         int cantidad = contenedor.getCantidad();
         for (int i = 0; i < casillas.length; i++) {
+            etiquetas[i].setText("" + (i + 1));
             if (i < cantidad) {
                 Quimico q = contenedor.getQuimico(i);
                 URL url = getClass().getResource("/img/" + q.getImagen());
@@ -58,10 +71,9 @@ public class PanelContenedor extends JPanel {
                     casillas[i].setIcon(null);
                     casillas[i].setText(q.getNombre());
                 }
+                bordes[i] = BorderFactory.createMatteBorder(3, 3, 6, 3, Colores.TINTA);
                 if (i == cantidad - 1) {
-                    bordes[i] = BorderFactory.createMatteBorder(3, 3, 6, 3, Colores.ROSA);
-                } else {
-                    bordes[i] = BorderFactory.createMatteBorder(3, 3, 6, 3, Colores.TINTA);
+                    etiquetas[i].setText("último");
                 }
             } else if (i == cantidad && esDejar) {
                 casillas[i].setIcon(null);
