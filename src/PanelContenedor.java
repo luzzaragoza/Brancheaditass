@@ -1,10 +1,13 @@
 import javax.swing.*;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.net.URL;
 
 public class PanelContenedor extends JPanel {
     private Contenedor contenedor;
     private JButton[] casillas = new JButton[4];
     private JButton botonCanjear;
+    private static final Dimension TAMANIO_CASILLA = new Dimension(56, 73);
 
     public PanelContenedor(Contenedor contenedor, Color fondo) {
         this.contenedor = contenedor;
@@ -17,6 +20,9 @@ public class PanelContenedor extends JPanel {
 
         for (int i = 0; i < casillas.length; i++) {
             casillas[i] = new JButton();
+            casillas[i].setMinimumSize(TAMANIO_CASILLA);
+            casillas[i].setPreferredSize(TAMANIO_CASILLA);
+            casillas[i].setMaximumSize(TAMANIO_CASILLA);
             pintarBoton(casillas[i], Colores.CREMA);
             add(casillas[i]);
         }
@@ -38,8 +44,17 @@ public class PanelContenedor extends JPanel {
     public void actualizar() {
         for (int i = 0; i < casillas.length; i++) {
             if (i < contenedor.getCantidad()) {
-                casillas[i].setText(contenedor.getQuimico(i).getNombre());
+                Quimico q = contenedor.getQuimico(i);
+                URL url  = getClass().getResource("/img/" + q.getImagen());
+                if (url != null) {
+                    casillas[i].setIcon(new ImageIcon(url));
+                    casillas[i].setText("");
+                } else {
+                    casillas[i].setIcon(null);
+                    casillas[i].setText(q.getNombre());
+                }
             } else {
+                casillas[i].setIcon(null);
                 casillas[i].setText("vacía");
             }
         }
