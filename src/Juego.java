@@ -111,8 +111,8 @@ public class Juego {
     }
 
     private void generarPedido() {
-        int moneda = (int) (Math.random() * 2);
-        if (cantidadPendientes < MIN_PENDIENTES_PARA_RETIRO || moneda == 0) {
+        int moneda = (int) (Math.random() * 3);
+        if (cantidadPendientes < MIN_PENDIENTES_PARA_RETIRO || moneda != 2) {
             generarPedidoDeDejar();
         } else {
             generarPedidoDeRetiro();
@@ -166,7 +166,7 @@ public class Juego {
         if (vuelvePorCanjeado && cantidadCanjeados > 0) {
             elegirRetiro(canjeados[(int) (Math.random() * cantidadCanjeados)]);
         } else if (cantidadEntregables > 0) {
-            elegirRetiro(entregables [(int) (Math.random() * cantidadCanjeados)]);
+            elegirRetiro(entregables [(int) (Math.random() * cantidadEntregables)]);
         } else {
             generarPedidoDeDejar();
         }
