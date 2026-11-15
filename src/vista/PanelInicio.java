@@ -26,7 +26,7 @@ public class PanelInicio extends JPanel {
         arriba.setBounds(40, 36, 400, 20);
         add(arriba);
 
-        JLabel titulo = new JLabel("ALQUIMIA");
+        JLabel titulo = new JLabel("POCIONELLA");
         titulo.setForeground(Colores.CREMA);
         titulo.setFont(Fuentes.titulo(80f));
         titulo.setBounds(40, 60, 500, 90);

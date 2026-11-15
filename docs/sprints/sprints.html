@@ -1,3 +1,4 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <!doctype html>
 <html lang="es">
 <head>
@@ -32,6 +33,17 @@ details.sprint > summary .left h3::after { content: " ▾"; color: var(--muted);
 details.sprint[open] > summary .left h3::after { content: " ▴"; }
 details.sprint .sprint-body { display: grid; gap: 18px; padding: 0 clamp(18px, 3vw, 30px) clamp(18px, 3vw, 30px); }
 .done-list { margin: 0; padding: 4px 18px 14px 34px; display: grid; gap: 6px; line-height: 1.5; }
+.st-grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.st-card { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 16px 18px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.st-card.yo { border: 2px solid var(--p-luz); }
+.st-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.st-k { font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.st-list { margin: 0; padding-left: 20px; display: grid; gap: 6px; line-height: 1.5; font-size: 15px; }
+.st-tag { display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: .04em; border: 1px solid currentColor; border-radius: 999px; padding: 1px 7px; margin-right: 4px; white-space: nowrap; vertical-align: 1px; }
+.st-tag.late { color: var(--accent); }
+.st-tag.now { color: var(--muted); }
+.st-tag.new { color: var(--good); }
+.st-sum { font-weight: 700; }
 </style>
 <title>Pocionella - Sprints</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -137,7 +149,7 @@ section { margin-top: 56px; display: grid; gap: 20px; }
 /* ---------- Tubos ---------- */
 .rack-wrap { overflow-x: auto; padding-bottom: 6px; }
 .rack {
-  display: grid; grid-template-columns: repeat(7, minmax(118px, 1fr)); gap: 14px;
+  display: grid; grid-template-columns: repeat(9, minmax(118px, 1fr)); gap: 14px;
   min-width: 0; align-items: end;
 }
 .slot { display: grid; gap: 10px; justify-items: center; text-align: center; }
@@ -341,16 +353,99 @@ h2, h3, .sprint, .guide, .task { scroll-margin-top: 70px; }
   <header class="hero">
     <div class="hero-top">
       <span class="eyebrow">Paradigma Orientado a Objetos · UADE · 2C 2026</span>
-      <h1>Sprints de <em>Alquimia</em></h1>
+      <h1>Sprints de <em>Pocionella</em></h1>
       <p class="sub">Qué hace cada una y cuándo, para el TP del depósito de químicos.</p>
     </div>
 
     <div class="dates">
-      <div class="date-card"><span class="big" id="dPre">–</span><span class="what">Próxima pre-entrega</span><span class="when" id="dPreWhen">Cada lunes, sin nota</span></div>
-      <div class="date-card"><span class="big" id="dFin">–</span><span class="what">Entrega final y defensa</span><span class="when">Lunes 16/11 (Grupo 1) · 30/11 si son Grupo 2</span></div>
+      <div class="date-card"><span class="big" id="dPre">–</span><span class="what">Código congelado</span><span class="when" id="dPreWhen">Viernes 13/11 · desde ahí, solo arreglos de errores</span></div>
+      <div class="date-card"><span class="big" id="dFin">–</span><span class="what">Entrega final</span><span class="when">Domingo 15/11 a la noche · defensa el lunes 30/11 (Grupo 2)</span></div>
       <div class="date-card"><span class="big" id="dNow">–</span><span class="what" id="dNowWhat">Sprint actual</span><span class="when" id="dNowWhen"></span></div>
     </div>
   </header>
+
+  <section aria-labelledby="estTitle" id="estado">
+    <div style="display:grid;gap:6px">
+      <span class="eyebrow">Cierre · domingo 15/11 · Sprint 9</span>
+      <h2 id="estTitle">Cómo vamos</h2>
+      <p class="lead"><b>Cómo terminó (15/11):</b> entraron los +10 por jugada y el turno en el top 5 (Sofia2, #36 y #38), <code>getImagenEncargada()</code> y <code>getLugares()</code> en todo el código (Sofia1, #39), y el récord, las reglas, el ticket, el frasco y el título POCIONELLA (Luz). Las secuencias, el diagrama de clases y la memoria quedaron al día con <code>main</code>. <b>No llegó:</b> la pantalla final con los dibujos del boceto (sigue siendo una columna de textos). <b>Sin confirmar al cierre:</b> la prueba final de Lyssie con las cuatro encargadas y la revisión de la memoria de Sofia1. Las tarjetas de abajo son el estado al 31/10 y quedan como registro. El Sprint 4 cerró con la ventana andando. Desde el 27/10 solo entró el pull request #13; del Sprint 5 todavía no hay nada subido y termina el domingo 1/11. Ya no hay pre-entregas: todo se entrega junto el domingo 15/11 a la noche.</p>
+    </div>
+    <div class="st-grid">
+      <article class="st-card">
+        <div class="st-head"><span class="owner" data-p="sofia1">Sofia1</span><span class="st-k">Revisa a Luz en el S5</span></div>
+        <span class="st-k">Hizo</span>
+        <ul class="st-list">
+          <li><code>Quimico</code>, <code>Acido</code> y <code>Base</code>, con <code>getImagen()</code>.</li>
+          <li><code>Juego</code> entero: turnos, pendientes, retiros, canje y «no lo tenías».</li>
+          <li>Los 7 visitantes y la encargada, <code>Visitante</code> inmutable y el enum <code>TipoPedido</code>.</li>
+          <li>Los motivos de derrota (pull request #10).</li>
+          <li>Un primer balanceo del azar en la rama <code>claude/cool-allen-djbydq</code>, todavía sin pull request.</li>
+        </ul>
+        <span class="st-k">Debe</span>
+        <ul class="st-list">
+          <li><span class="st-tag now">S5</span><code>JugadaInvalidaException</code> en lugar del <code>boolean</code> más <code>getUltimoMotivo()</code>.</li>
+          <li><span class="st-tag new">Nuevo</span>Con Lyssie: que <code>Juego</code> traiga solo químicos que entren en algún lado y pida solo retiros que se puedan entregar sin que explote (ver Sprint 5). Su rama de balanceo es el punto de partida.</li>
+          <li><span class="st-tag new">Nuevo</span>La interfaz <code>Dibujable</code>: tiene la carga más liviana del Sprint 5 y escribió las dos clases que la implementan.</li>
+          <li><span class="st-tag late">Del S4</span>Pasar al UML <code>Juego</code>, <code>Visitante</code>, <code>TipoPedido</code> y la interfaz.</li>
+        </ul>
+      </article>
+      <article class="st-card">
+        <div class="st-head"><span class="owner" data-p="sofia2">Sofia2</span><span class="st-k">Revisa a Lyssie en el S5</span></div>
+        <span class="st-k">Hizo</span>
+        <ul class="st-list">
+          <li><code>Inflamable</code>, <code>Oxidante</code> y la prueba de los 16 pares.</li>
+          <li><code>PartidaConsola</code> (pull request #8).</li>
+          <li>Los controles de la ventana: no seguir jugando después de perder y avisar si se toca una casilla vacía (pull request #13). Lo mergeó el 27/10.</li>
+        </ul>
+        <span class="st-k">Debe</span>
+        <ul class="st-list">
+          <li><span class="st-tag now">S5</span><code>Puntaje</code> con <code>Comparable</code>, la pantalla final y el top 5. Suman guardar bien (+10) y entregar el correcto (+10), como constantes en <code>Juego</code>, y el puntaje nunca baja de 0. El canje queda como está hasta que se decida.</li>
+          <li><span class="st-tag late">Del S4</span>Revisar que las dos secuencias usen <code>juego.jugar(...)</code> y <code>juego.getMotivo()</code>.</li>
+        </ul>
+      </article>
+      <article class="st-card">
+        <div class="st-head"><span class="owner" data-p="lyssie">Lyssie</span><span class="st-k">Revisa a Sofia2 en el S5</span></div>
+        <span class="st-k">Hizo</span>
+        <ul class="st-list">
+          <li><code>Contenedor</code>, <code>Heladera</code>, <code>Estante</code> y los retiros con corrimiento.</li>
+          <li><code>ArrayList</code> en <code>Contenedor</code> y los dos constructores con <code>this(codigo, LUGARES)</code> (pull request #12, mergeado el 27/10).</li>
+        </ul>
+        <span class="st-k">Debe</span>
+        <ul class="st-list">
+          <li><span class="st-tag new">Nuevo</span>Que el estante lleno deje de ser derrota: es un aviso y se elige otro.</li>
+          <li><span class="st-tag new">Nuevo</span>Con Sofia1: que siempre haya dónde poner el químico que llega y que cada retiro se pueda entregar sin que explote (ver Sprint 5).</li>
+          <li><span class="st-tag now">S5</span>Balanceo en la ventana, ya con las dos reglas nuevas, y la persona de afuera para el domingo 1/11.</li>
+          <li><span class="st-tag late">Del S4</span>El 4 sigue escrito a mano en el mensaje de <code>Deposito</code> y en <code>PanelContenedor</code>: un <code>getLugares()</code> en <code>Contenedor</code> lo deja en un solo lugar.</li>
+          <li><span class="st-tag late">Del S4</span>Pasar al UML <code>Contenedor</code> con <code>ArrayList</code>.</li>
+        </ul>
+      </article>
+      <article class="st-card yo">
+        <div class="st-head"><span class="owner" data-p="luz">Luz</span><span class="st-k">Revisa a Sofia1 en el S5</span></div>
+        <span class="st-k">Hizo</span>
+        <ul class="st-list">
+          <li><code>Deposito</code> con <code>canjear</code>, el <code>HashMap</code> y la sobrecarga <code>guardar(Quimico q)</code>.</li>
+          <li><code>VentanaJuego</code>, <code>PanelMostrador</code>, <code>PanelDeposito</code> y <code>PanelContenedor</code>: la partida se juega en la ventana (pull request #9).</li>
+          <li>Mergeó el pull request #12 y arregló el #13 para que compile.</li>
+        </ul>
+        <span class="st-k">Debe</span>
+        <ul class="st-list">
+          <li><span class="st-tag now">S5</span>Pedirle a design los PNG de los químicos y el fondo del mostrador. En el boceto están dibujados, pero no exportados.</li>
+          <li><span class="st-tag now">S5</span>Aplicar el boceto: la clase <code>Colores</code>, las fuentes en <code>src/fuentes/</code>, las casillas con <code>getImagen()</code>, la pantalla de reglas y la elección de la encargada (hoy siempre atiende "Sofi 1"; la pantalla de inicio pasó al Sprint 6).</li>
+          <li><span class="st-tag late">Del S4</span>for-each en <code>Juego</code>, <code>PartidaConsola</code> y los paneles, que todavía recorren <code>CODIGOS</code> con índice.</li>
+          <li><span class="st-tag late">Del S4</span>Pasar al UML <code>Deposito</code> con el mapa y las clases de la ventana.</li>
+        </ul>
+      </article>
+      <article class="st-card">
+        <div class="st-head"><span class="owner" data-p="todas">Entre todas</span><span class="st-k">Lo que tenemos que hacer</span></div>
+        <ul class="st-list">
+          <li><span class="st-tag late">Del S4</span><b>El UML</b>: el del repositorio es del 5/10. Cada una pasa sus clases.</li>
+          <li><span class="st-tag now">Dom 1/11</span>La persona de afuera juega sin ayuda, y revisión cruzada.</li>
+          <li><span class="st-tag now">Profe</span>Siguen sin respuesta: destructores, si alcanza con la ventana o hace falta el archivo (y si sirve <code>puntajes.txt</code>), y qué hilo alcanza.</li>
+          <li class="st-sum">Calendario nuevo: son Grupo 2 y no hay pre-entregas. El código se congela el viernes 13/11, la entrega final es el domingo 15/11 a la noche y la defensa, el lunes 30/11.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
 
   <section aria-labelledby="calTitle">
     <div style="display:grid;gap:6px">
@@ -384,29 +479,24 @@ h2, h3, .sprint, .guide, .task { scroll-margin-top: 70px; }
     <div style="display:grid;gap:6px">
       <span class="eyebrow">2 · Pendientes</span>
       <h2 id="decTitle">Lo que falta decidir</h2>
-      <p class="lead">Cada cosa se decide en la fecha indicada y se anota en «Ya decidido», acá abajo, así nadie programa con una idea distinta. Actualizado el 19/10 con lo que ya está en <code>main</code>.</p>
+      <p class="lead">Cada cosa se decide en la fecha indicada y se anota en «Ya decidido», acá abajo, así nadie programa con una idea distinta. Actualizado el 27/10 con lo que ya está en <code>main</code>.</p>
     </div>
     <div class="table-wrap">
       <table class="risks gp">
         <thead><tr><th>Qué falta decidir</th><th>Propuesta o dato</th></tr></thead>
         <tbody>
-          <tr class="gp-u"><td colspan="2">Esta semana, con el UML</td></tr>
-<tr><td>Qué interfaz usan</td><td>Propuesta: <code>Dibujable</code> con <code>getImagen()</code>, para <code>Quimico</code> y <code>Visitante</code>.</td></tr>
-<tr><td>Qué método se sobrecarga</td><td>Propuesta: <code>guardar(Quimico q)</code> en <code>Deposito</code>, al lado de <code>guardar(q, codigo)</code>: lo guarda en el primer contenedor donde entre. Tarea de Luz en el Sprint 4.</td></tr>
-<tr><td>Agregar <code>getImagen()</code> a <code>Quimico</code></td><td>Propuesta: sí. Hoy ningún químico lo tiene y la ventana del Sprint 5 lo necesita. Tarea del Sprint 4.</td></tr>
+          <tr class="gp-u"><td colspan="2">Esta semana</td></tr>
+<tr><td>Si canjear suma o resta, y cuánto</td><td>Hay dudas: algunas quieren que canjear <b>cueste</b> puntos en vez de sumarlos. Decidido el 31/10: primero se programa que siempre haya un químico disponible (que entre al dejar y que se pueda entregar al retirar), se juega para ver cuánto se puede sumar y recién ahí se decide. Mientras tanto queda en +40. Si resta, la propuesta es −20.</td></tr>
+<tr><td>Qué pasa con «no lo tenías»</td><td>Se decide junto con el canje. Si canjear pasa a costar puntos, la propuesta es sacarlo: lo canjeado se borra de los pendientes y nadie vuelve a buscarlo, para no castigar dos veces.</td></tr>
           <tr class="gp-u"><td colspan="2">Preguntarle al profe (pendiente desde el 19/10)</td></tr>
-<tr><td>En qué grupo están: 1 (16/11) o 2 (30/11)</td><td>Mientras tanto, el plan apunta al 16/11.</td></tr>
 <tr><td>Qué espera el profe de «destructores»</td><td>Java no tiene destructores.</td></tr>
 <tr><td>Si cuenta el archivo, la interfaz gráfica o las dos</td><td>Unidad 6 de la guía: se acuerda con el docente.</td></tr>
 <tr><td>Usar un archivo para el top 5</td><td>Archivos se ven el 2/11.</td></tr>
-<tr><td>Qué se muestra en cada pre-entrega</td><td>Cada lunes es una pre-entrega sin nota.</td></tr>
           <tr class="gp-u"><td colspan="2">Del juego</td></tr>
-<tr><td>Si guardar en un estante lleno es derrota o solo un aviso</td><td>Hoy el código lo trata como <b>derrota</b>: <code>guardar</code> devuelve <code>false</code> y <code>Juego</code> termina la partida. Confirmarlo a propósito o cambiarlo.</td></tr>
-<tr><td>Cuántos visitantes hay y quién atiende</td><td>El boceto dice seis visitantes (las otras tres del equipo, la Dra. Mora, el Dr. Bigotes y el Ing. Paco) y una encargada que se elige al empezar. Hoy <code>Juego</code> tiene dos visitantes y ninguna encargada.</td></tr>
-<tr><td>Nombres de los PNG</td><td>Propuesta: minúscula, sin tildes y con el tamaño al final (<code>mora_x4.png</code>, <code>mora_x2.png</code>), en <code>src/img/</code>. Están en el pull request #7. Faltan los íconos de los químicos y el fondo del mostrador.</td></tr>
+<tr><td>Cómo se elige la encargada en la ventana</td><td><code>Juego(String encargada)</code> ya existe, pero la ventana arranca con <code>new Juego()</code> y siempre atiende "Sofi 1". <b>Decidido el 2/11:</b> hay una pantalla de inicio (en el boceto, «¿Quién atiende hoy?») con las cuatro fichas del equipo. Se elige una y «Empezar» crea <code>new Juego(encargada)</code>. Repartido en el Sprint 6.</td></tr>
+<tr><td>Los PNG que faltan</td><td>Los químicos (<code>acido.png</code>, <code>base.png</code>, <code>inflamable.png</code> y <code>oxidante.png</code>, que es lo que devuelve <code>getImagen()</code>) y <code>fondo_mostrador.png</code>. En el boceto están dibujados, pero no exportados. Luz se los pide a design.</td></tr>
           <tr class="gp-u"><td colspan="2">Más adelante</td></tr>
-<tr><td>Botón Volver al mostrador sin jugar</td><td>Sprint 4.</td></tr>
-<tr><td>Qué más suma puntos, además del canje</td><td>Sprint 5, propuesta de Sofia2.</td></tr>
+<tr><td>Botón Volver al mostrador sin jugar</td><td>Lo muestra el boceto y todavía no está en la ventana.</td></tr>
 <tr><td>Qué hace el hilo</td><td>Antes del Sprint 6. Opciones: animar la llegada del visitante o la explosión, o guardar el top 5 en segundo plano. Consultarlo con el profe.</td></tr>
         </tbody>
       </table>
@@ -428,7 +518,18 @@ h2, h3, .sprint, .guide, .task { scroll-margin-top: 70px; }
         <li><b>Pedidos al azar:</b> con <code>Math.random()</code> y casteo a <code>int</code>, en <code>Juego</code>.</li>
         <li><b>Quién avanza el turno:</b> <code>Juego</code>, solo. La ventana (o la consola) llama a <code>juego.jugar(codigo, posicion)</code>; si da <code>false</code>, muestra <code>juego.getMotivo()</code>. <code>siguienteTurno()</code> es privado y nadie de afuera lo llama. Resuelve la duda 2 del Sprint 2.</li>
         <li><b>Dónde se anotan las decisiones:</b> en esta lista. El CLAUDE.md que nombran las tareas viejas no se sube al repositorio.</li>
-        <li><b>Fechas de entrega:</b> Cada lunes es una pre-entrega sin nota, salvo el 12/10 y el 9/11 (feriados). La final y la defensa son el día del 2.° parcial: 16/11 (Grupo 1) o 30/11 (Grupo 2).</li>
+        <li><b>Fechas de entrega</b> (27/10): <b>ya no hay pre-entregas</b>; se entrega todo junto el <b>domingo 15/11 a la noche</b>. Son <b>Grupo 2</b>: la defensa es el <b>lunes 30/11</b>. El código se congela el viernes 13/11.</li>
+        <li><b>Estante lleno</b> (27/10): <b>ya no es derrota</b>. Guardar en un estante lleno es un aviso: la partida sigue y se elige otro estante o se canjea.</li>
+        <li><b>Siempre hay dónde ponerlo</b> (27/10): antes de traer un químico, <code>Juego</code> revisa que entre en algún estante. Pasaba que llegaban químicos hasta que no había dónde ponerlos y tampoco se podía canjear, y se perdía antes del primer canje.</li>
+        <li><b>Qué suma puntos</b> (27/10): <b>guardar en el estante correcto +10</b> y <b>entregar el químico correcto +10</b>. Guardar pide pensar la compatibilidad con el último, y entregar también: hay que elegir uno que al sacarlo no deje pegados dos incompatibles. Así se suma desde el primer turno. El canje está en revisión (ver «Lo que falta decidir»).</li>
+        <li><b>El puntaje nunca baja de 0</b> (31/10). Así, si canjear pasa a costar puntos, siempre se puede canjear aunque no alcance.</li>
+        <li><b>Orden de trabajo</b> (31/10): primero la regla de que siempre haya un químico disponible; después se juega para medir la dificultad; con eso se decide el canje y «no lo tenías».</li>
+        <li><b>Siempre se puede entregar</b> (27/10): <code>Juego</code> solo pide retirar algo si en el depósito hay al menos uno que coincide y que se puede sacar sin que explote. Si no hay ninguno así, el pedido es de dejar. Lo canjeado sigue pudiendo volver («no lo tenías»): es el riesgo del canje.</li>
+        <li><b>Quién hace la interfaz <code>Dibujable</code></b> (27/10): Sofia1, que es la que menos carga tiene en el Sprint 5 y escribió <code>Quimico</code> y <code>Visitante</code>.</li>
+        <li><b>Visitantes y encargada:</b> seis visitantes (las otras tres del equipo, la Dra. Mora, el Dr. Bigotes y el Ing. Paco) y una encargada. Está en <code>Juego</code>.</li>
+        <li><b>Nombres de los PNG:</b> minúscula, sin tildes y con el tamaño al final (<code>mora_x4.png</code>), en <code>src/img/</code>. Entraron con el pull request #7.</li>
+        <li><b>Interfaz:</b> <code>Dibujable</code> con <code>getImagen()</code>, para <code>Quimico</code> y <code>Visitante</code>.</li>
+        <li><b>Sobrecarga de un método:</b> <code>guardar(Quimico q)</code> en <code>Deposito</code>, al lado de <code>guardar(q, codigo)</code>. Está en el código.</li>
       </ul>
     </details>
   </section>
@@ -499,6 +600,20 @@ h2, h3, .sprint, .guide, .task { scroll-margin-top: 70px; }
         <p class="rg-lose">Lo canjeado ya no se puede entregar: si después vuelven a buscar algo que estaba ahí, se pierde. No es un bug.</p>
       </div>
       <div class="rg-card">
+        <h3>Qué suma puntos <span class="rg-ok">Decidido</span></h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Jugada</th><th>Puntos</th><th>Por qué</th></tr></thead>
+            <tbody>
+              <tr><td>Canjear un estante lleno</td><td><b>+40</b> por ahora</td><td>En revisión: puede pasar a costar puntos (propuesta −20). Se decide después de probar la regla de disponibilidad.</td></tr>
+              <tr><td>Guardar en el estante correcto</td><td><b>+10</b></td><td>Hay que pensar la temperatura y el último de la fila.</td></tr>
+              <tr><td>Entregar el químico correcto</td><td><b>+10</b></td><td>Hay que elegir uno que al sacarlo no deje pegados dos incompatibles.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>En <code>Juego</code>: <code>PUNTOS_CANJE = 40</code> (ya está), <code>PUNTOS_GUARDAR = 10</code> y <code>PUNTOS_RETIRAR = 10</code>. Si el balanceo pide otros valores, se cambia solo la constante. El puntaje nunca baja de 0.</p>
+      </div>
+      <div class="rg-card">
         <h3>Mejores puntajes <span class="rg-ok">Decidido</span></h3>
         <p>Los 5 mejores de esa computadora: iniciales de 3 letras, puntaje y turno. Si la partida entra en el top 5, la pantalla final pide las iniciales.</p>
         <p><b>Propuesto:</b> se guardan en <code>puntajes.txt</code>, al lado del juego, una línea por puesto (<code>LUZ;340;31</code>). Si el archivo no existe o falla, la tabla arranca vacía y se sigue jugando. Consultarlo con el profe antes de programarlo.</p>
@@ -518,11 +633,13 @@ h2, h3, .sprint, .guide, .task { scroll-margin-top: 70px; }
             <tr><td>Retiro equivocado</td><td><b>¡ESE NO ERA!</b></td><td>Te pidieron un inflamable en calor y entregaste una base de E3.</td></tr>
             <tr><td>Al correrse</td><td><b>¡EXPLOTÓ!</b></td><td>Al sacar el inflamable de H1, el ácido y la base quedaron pegados.</td></tr>
             <tr><td>No lo tenías</td><td><b>¡NO LO TENÍAS!</b></td><td>El Dr. Bigotes volvió por su oxidante, pero canjeaste el estante E1.</td></tr>
-            <tr><td>Estante lleno</td><td>Pendiente</td><td>Hoy el código lo trata como derrota. Falta confirmarlo (ver «Lo que falta decidir»).</td></tr>
+            <tr><td>Estante lleno</td><td>Ya no es derrota</td><td>Decidido el 27/10: es un aviso y se elige otro estante. Hoy el código todavía termina la partida; lo cambia Lyssie en el Sprint 5.</td></tr>
           </tbody>
         </table>
       </div>
       <p>El boceto da por hecho que se juega hasta perder. Lo que falta decidir está en <a href="#decisiones">Lo que falta decidir</a>.</p>
+      <p class="rg-tip"><b>Siempre hay dónde ponerlo</b> (decidido el 27/10): <code>Juego</code> solo trae un químico si entra en algún estante. Si todos los estantes de esa temperatura están llenos, se puede canjear uno.</p>
+      <p class="rg-tip"><b>Siempre se puede entregar</b> (decidido el 27/10): <code>Juego</code> solo pide un retiro si hay al menos un químico que coincide y que se puede sacar sin que explote: el último o el primero de su estante, o uno del medio cuyos dos vecinos son compatibles entre sí. La jugadora igual tiene que elegir bien: si saca otro que también coincide pero deja pegados dos incompatibles, explota.</p>
     </div>
   </section>
 
@@ -530,12 +647,12 @@ h2, h3, .sprint, .guide, .task { scroll-margin-top: 70px; }
     <div style="display:grid;gap:6px">
       <span class="eyebrow">3 · Para consultar</span>
       <h2 id="guiaPTitle">Lo que pide la guía del profe</h2>
-      <p class="lead">Cada tema tiene que poder señalarse en el código. La tabla dice dónde va cada uno en Alquimia y es la base de la memoria técnica.</p>
+      <p class="lead">Cada tema tiene que poder señalarse en el código. La tabla dice dónde va cada uno en Pocionella y es la base de la memoria técnica.</p>
     </div>
     <div class="rg-grid">
       <div class="rg-card">
         <h3>Cuándo se ve cada tema en clase</h3>
-        <p><code>final</code> y clases internas: 5/10. <code>ArrayList</code> y <code>HashMap</code>: 19/10. Excepciones: 26/10. Archivos y paquetes: 2/11. Swing e hilos: 30/11, después de la entrega del Grupo 1, así que se aprenden por cuenta propia.</p>
+        <p><code>final</code> y clases internas: 5/10. <code>ArrayList</code> y <code>HashMap</code>: 19/10. Excepciones: 26/10. Archivos y paquetes: 2/11. Swing e hilos: 30/11, el día de la defensa y después de la entrega final (15/11), así que se aprenden por cuenta propia.</p>
       </div>
       <div class="rg-card">
         <h3>Qué se entrega y cómo se aprueba</h3>
@@ -545,7 +662,7 @@ h2, h3, .sprint, .guide, .task { scroll-margin-top: 70px; }
     </div>
     <div class="table-wrap">
       <table class="gp">
-        <thead><tr><th>Tema de la guía</th><th>Dónde va en Alquimia</th><th>Sprint</th><th>Estado</th></tr></thead>
+        <thead><tr><th>Tema de la guía</th><th>Dónde va en Pocionella</th><th>Sprint</th><th>Estado</th></tr></thead>
         <tbody>
           <tr class="gp-u"><td colspan="4">Unidad 1 · POO y UML</td></tr>
           <tr><td>Diagrama de clases del sistema completo</td><td>El diagrama unido, con las clases del boceto y las que suma esta tabla.</td><td>S2 y S6</td><td><span class="gp-s ok">En el diseño</span></td></tr>
@@ -556,21 +673,21 @@ h2, h3, .sprint, .guide, .task { scroll-margin-top: 70px; }
           <tr class="gp-u"><td colspan="4">Unidad 2 · El lenguaje</td></tr>
           <tr><td>Estructura, sintaxis y buenas prácticas</td><td>Convenciones de la sección 6 del CLAUDE.md y revisión cruzada.</td><td>Siempre</td><td><span class="gp-s ok">En el diseño</span></td></tr>
           <tr><td>Primitivos y de referencia, casteo</td><td>Casteo al elegir al azar: <code>(int) (Math.random() * 4)</code> en <code>Juego.generarPedidoDeDejar()</code>.</td><td>S3</td><td><span class="gp-s ok">En el código</span></td></tr>
-          <tr><td>Arrays</td><td><code>Quimico[4]</code> en <code>Contenedor</code>, <code>Contenedor[6]</code> en <code>Deposito</code> y los pendientes de <code>Juego</code>.</td><td>S2 y S3</td><td><span class="gp-s ok">En el código</span></td></tr>
+          <tr><td>Arrays</td><td>Los pendientes y los visitantes de <code>Juego</code>, <code>CODIGOS</code> y las casillas de <code>PanelContenedor</code>. <code>Contenedor</code> y <code>Deposito</code> pasaron a colecciones.</td><td>S2 y S3</td><td><span class="gp-s ok">En el código</span></td></tr>
           <tr class="gp-u"><td colspan="4">Unidad 3 · Clases y objetos</td></tr>
-          <tr><td>Herencia</td><td><code>Quimico</code> y sus 4 tipos; <code>Contenedor</code>, <code>Heladera</code> y <code>Estante</code>; los paneles extienden <code>JPanel</code> (Sprint 4).</td><td>S2</td><td><span class="gp-s ok">En el código</span></td></tr>
-          <tr><td>Sobrecarga y sobreescritura; sobrecarga de constructores</td><td>Sobreescritura: <code>esCompatibleCon</code> y <code>aceptaTemperatura</code> (en el código). Sobrecarga de constructores: <code>Contenedor(codigo)</code> y <code>Contenedor(codigo, lugares)</code> (falta). Sobrecarga de un método: <code>guardar(Quimico q)</code> en <code>Deposito</code> (falta).</td><td>S2 y S4</td><td><span class="gp-s prop">En parte</span></td></tr>
-          <tr><td><code>public</code>, <code>private</code>, <code>protected</code> y default</td><td>Los tres primeros ya están en el código. Default (sin modificador): <code>vaciar()</code> de <code>Contenedor</code>, que solo usa el depósito. Hoy es <code>public</code>.</td><td>S2 y S4</td><td><span class="gp-s prop">En parte</span></td></tr>
-          <tr><td>Una clase abstracta y una interfaz, con su contrato</td><td>Abstractas: <code>Quimico</code> y <code>Contenedor</code>. <b>Falta la interfaz.</b> Propuesta: <code>Dibujable</code>, con <code>getImagen()</code>, que implementan <code>Quimico</code> y <code>Visitante</code>.</td><td>S2</td><td><span class="gp-s miss">Falta</span></td></tr>
+          <tr><td>Herencia</td><td><code>Quimico</code> y sus 4 tipos; <code>Contenedor</code>, <code>Heladera</code> y <code>Estante</code>; los paneles extienden <code>JPanel</code>.</td><td>S2</td><td><span class="gp-s ok">En el código</span></td></tr>
+          <tr><td>Sobrecarga y sobreescritura; sobrecarga de constructores</td><td>Sobreescritura: <code>esCompatibleCon</code> y <code>aceptaTemperatura</code> (en el código). Sobrecarga de constructores: <code>Contenedor(codigo)</code> y <code>Contenedor(codigo, lugares)</code>. Sobrecarga de un método: <code>guardar(Quimico q)</code> en <code>Deposito</code>. Todo en el código.</td><td>S2 y S4</td><td><span class="gp-s ok">En el código</span></td></tr>
+          <tr><td><code>public</code>, <code>private</code>, <code>protected</code> y default</td><td>Los tres primeros ya están en el código. Default (sin modificador): <code>vaciar()</code> de <code>Contenedor</code>, que solo usa el depósito.</td><td>S2 y S4</td><td><span class="gp-s ok">En el código</span></td></tr>
+          <tr><td>Una clase abstracta y una interfaz, con su contrato</td><td>Abstractas: <code>Quimico</code> y <code>Contenedor</code>. <b>Falta la interfaz.</b> <code>Dibujable</code>, con <code>getImagen()</code>, que implementan <code>Quimico</code> y <code>Visitante</code>: los dos ya tienen el método.</td><td>S2</td><td><span class="gp-s miss">Falta</span></td></tr>
           <tr><td>Polimorfismo</td><td><code>esCompatibleCon</code> y <code>aceptaTemperatura</code>.</td><td>S2</td><td><span class="gp-s ok">En el código</span></td></tr>
-          <tr><td><code>super()</code> y <code>this()</code></td><td><code>super(necesitaFrio)</code> en cada químico y <code>super(codigo)</code> en <code>Heladera</code> y <code>Estante</code> (en el código); <code>this(codigo, LUGARES)</code> uniendo los dos constructores de <code>Contenedor</code> (falta).</td><td>S2 y S4</td><td><span class="gp-s prop">En parte</span></td></tr>
+          <tr><td><code>super()</code> y <code>this()</code></td><td><code>super(necesitaFrio)</code> en cada químico y <code>super(codigo)</code> en <code>Heladera</code> y <code>Estante</code> (en el código); <code>this(codigo, LUGARES)</code> uniendo los dos constructores de <code>Contenedor</code>.</td><td>S2 y S4</td><td><span class="gp-s ok">En el código</span></td></tr>
           <tr><td><code>static</code></td><td>Constantes <code>static final</code>: <code>LUGARES</code> en <code>Contenedor</code> y <code>PUNTOS_CANJE</code> en <code>Juego</code> (en el código); tamaño del top y la clase <code>Colores</code> (Sprint 5).</td><td>S2 a S5</td><td><span class="gp-s prop">En parte</span></td></tr>
           <tr><td>Un patrón GRASP y un principio SOLID, nombrados en la documentación</td><td>GRASP: Experto (cada químico decide su compatibilidad), Controlador (<code>Juego</code>) o Creador (<code>Deposito</code> crea sus contenedores). SOLID: abierto/cerrado (el quinto tipo) o responsabilidad única (solo <code>TablaPuntajes</code> toca archivos).</td><td>S6 y S7</td><td><span class="gp-s prop">Propuesto</span></td></tr>
-          <tr><td>Opcional y valorado: inmutables, enum, clases internas</td><td><code>Visitante</code> inmutable (atributos <code>final</code>, sin setters) y el enum <code>TipoPedido</code> {DEJAR, RETIRAR}, los dos en el código. Los listeners como clases internas llegan con la ventana (Sprint 4).</td><td>S3 y S4</td><td><span class="gp-s prop">En parte</span></td></tr>
+          <tr><td>Opcional y valorado: inmutables, enum, clases internas</td><td><code>Visitante</code> inmutable (atributos <code>final</code>, sin setters) y el enum <code>TipoPedido</code> {DEJAR, RETIRAR}, los dos en el código. Los listeners de <code>VentanaJuego</code> son clases internas (<code>IrAlDeposito</code>, <code>ClicCasilla</code> y <code>Canjear</code>).</td><td>S3 y S4</td><td><span class="gp-s ok">En el código</span></td></tr>
           <tr class="gp-u"><td colspan="4">Unidad 4 · Colecciones</td></tr>
-          <tr><td>Colecciones genéricas: listas, mapas</td><td><code>ArrayList&lt;Quimico&gt;</code> en <code>Contenedor</code> y en los pendientes. Mapa: <code>HashMap&lt;String, Contenedor&gt;</code> en <code>Deposito</code>, para buscar por código.</td><td>S4</td><td><span class="gp-s prop">Propuesto</span></td></tr>
+          <tr><td>Colecciones genéricas: listas, mapas</td><td><code>ArrayList&lt;Quimico&gt;</code> en <code>Contenedor</code> y <code>HashMap&lt;String, Contenedor&gt;</code> en <code>Deposito</code>, para buscar por código. Los pendientes de <code>Juego</code> siguen en arrays.</td><td>S4</td><td><span class="gp-s ok">En el código</span></td></tr>
           <tr><td><code>Comparable</code> y/o <code>Comparator</code></td><td>Una clase <code>Puntaje</code> (iniciales, puntos y turno) que implementa <code>Comparable&lt;Puntaje&gt;</code> para ordenar el top 5.</td><td>S5</td><td><span class="gp-s miss">Falta</span></td></tr>
-          <tr><td>Recorrido con for-each</td><td>Pendientes, paneles y puntajes.</td><td>S4</td><td><span class="gp-s ok">Planeado</span></td></tr>
+          <tr><td>Recorrido con for-each</td><td>Ya está en <code>Deposito.guardar(q)</code> y en <code>Juego.armarVisitantes</code>. Faltan los paneles, <code>PartidaConsola</code> y los puntajes.</td><td>S4 y S5</td><td><span class="gp-s prop">En parte</span></td></tr>
           <tr class="gp-u"><td colspan="4">Unidad 5 · Excepciones</td></tr>
           <tr><td><code>try</code>, <code>catch</code> y <code>finally</code></td><td>La ventana y la partida por consola atrapan la excepción propia; <code>finally</code> cierra el archivo de puntajes.</td><td>S5 y S6</td><td><span class="gp-s ok">Planeado</span></td></tr>
           <tr><td><code>throw</code> y <code>throws</code></td><td>El modelo lanza <code>JugadaInvalidaException</code> y lo declara con <code>throws</code>.</td><td>S5</td><td><span class="gp-s ok">Planeado</span></td></tr>
@@ -714,7 +831,7 @@ h2, h3, .sprint, .guide, .task { scroll-margin-top: 70px; }
     </div>
   </section>
 
-  <footer>Sofia1, Sofia2, Lyssie y Luz · Juego de Alquimia · Prof. Pablo Hernández</footer>
+  <footer>Sofia1, Sofia2, Lyssie y Luz · Pocionella · Prof. Pablo Hernández</footer>
 </div>
 
 <script>
@@ -949,7 +1066,7 @@ h2, h3, .sprint, .guide, .task { scroll-margin-top: 70px; }
     },
     {
       n: 3, name: 'El juego por consola', start: '2026-10-12', end: '2026-10-18',
-      tube: 'Pedidos, turnos, retiros y práctica de Swing', gate: 'Pre-entrega sin nota · lunes 19/10', deliver: true,
+      tube: 'Pedidos, turnos, retiros y práctica de Swing', gate: 'Se juega una partida por consola',
       goal: 'Se juega una partida entera escribiendo en la consola. Así queda probado que el modelo anda sin Swing, y la ventana después solo se enchufa.',
       groups: [{ title: '', tasks: [
         T(['todas'], 'En la reunión del lunes, decidir lo que falta (tabla «Lo que falta decidir»): estante lleno, fin de la partida, canje, retiros y quién dibuja los PNG. Anotar cada decisión en el CLAUDE.md.', '', D(
@@ -1036,8 +1153,8 @@ h2, h3, .sprint, .guide, .task { scroll-margin-top: 70px; }
       crit: 'Se juega una partida de principio a fin por consola, con dejar, retirar y canjear.'
     },
     {
-      n: 4, name: 'La ventana y pre-entrega', short: 'La ventana', start: '2026-10-19', end: '2026-10-25',
-      tube: 'Swing conectado al modelo y ArrayList', gate: 'Pre-entrega sin nota · lunes 26/10', deliver: true,
+      n: 4, name: 'La ventana', short: 'La ventana', start: '2026-10-19', end: '2026-10-25',
+      tube: 'Swing conectado al modelo y ArrayList', gate: 'Se juega una partida en la ventana',
       goal: 'Se juega una partida entera en la ventana, aunque sea fea. La lógica sigue en el modelo: la ventana solo pregunta y muestra.',
       groups: [{ title: '', tasks: [
         T(['luz'], '<code>VentanaJuego</code> con <code>CardLayout</code>, <code>PanelMostrador</code>, <code>PanelDeposito</code> y <code>PanelContenedor</code> como estante con Canjear, a partir de su práctica.', 'IntelliJ IDEA, Swing a mano', D(
@@ -1153,16 +1270,18 @@ h2, h3, .sprint, .guide, .task { scroll-margin-top: 70px; }
           ['Los dibujos en <code>main</code>, en <code>src/img/</code>.'],
           ['La ventana carga <code>mora_x4.png</code> con <code>getResource</code> y se ve nítido.']))
       ]}],
-      critLabel: 'Criterio de la pre-entrega (lunes 26/10)',
+      critLabel: 'Criterio para pasar al Sprint 5',
       crit: 'Se juega una partida yendo del mostrador al depósito, aunque sea con rectángulos. Ningún listener decide una regla.'
     },
     {
       n: 5, name: 'Que se entienda y excepciones', short: 'Que se entienda', start: '2026-10-26', end: '2026-11-01',
-      tube: 'Puntaje, top 5, balanceo y excepciones', gate: 'Pre-entrega sin nota · lunes 2/11', deliver: true,
+      tube: 'Puntaje, top 5, balanceo y excepciones', gate: 'Domingo 1/11 · lo juega alguien de afuera',
       goal: 'Alguien que nunca vio el juego lo juega sin explicación y entiende por qué perdió. Con este sprint el juego queda completo.',
       groups: [{ title: '', tasks: [
-        T(['sofia2'], 'Puntaje, pantalla final y top 5 ordenado con <code>Comparable</code>. El canje ya suma; decidir qué más suma. El top 5 se guarda en archivo en el Sprint 6.', 'IntelliJ IDEA', D(
-          ['Proponer en el grupo qué suma puntos (por ejemplo, cada jugada válida) y, si en el balanceo se decidió permitir rechazar entregas, cuánto resta rechazar (sección 8). Decidirlo entre las cuatro y anotarlo en el CLAUDE.md.',
+        T(['sofia2'], 'Puntos por jugada (guardar +10, entregar +10), <code>Puntaje</code>, pantalla final y top 5 ordenado con <code>Comparable</code>. El top 5 se guarda en archivo en el Sprint 6.', 'IntelliJ IDEA', D(
+          ['<b>Decidido el 27/10:</b> canjear +40 (ya está), guardar en el estante correcto +10 y entregar el químico correcto +10. Va primero, porque cambia el balanceo.',
+           'En <code>Juego</code>: <code>public static final int PUNTOS_GUARDAR = 10;</code> y <code>PUNTOS_RETIRAR = 10;</code> al lado de <code>PUNTOS_CANJE</code>. En <code>jugar(...)</code>, cuando la jugada salió bien, sumar la constante que corresponde según <code>tipoPedido</code>.',
+           'El puntaje nunca baja de 0 (decidido el 31/10). Hoy nada resta, pero si el canje pasa a costar puntos, la resta se hace en un solo lugar que no deje bajar de 0. El canje no se toca hasta que se decida.',
            'El puntaje lo lleva <code>Juego</code> (sección 3); la ventana solo lo muestra.',
            'Pantalla final (<code>PanelFinal</code>), ocupando toda la ventana: dibujo, título, qué pasó, turno, puntaje, «Jugar de nuevo» (crea un <code>Juego</code> nuevo) y «Ver reglas».',
             '<b>Top 5 en memoria:</b> una clase <code>Puntaje</code> (iniciales, puntos y turno) que implementa <code>Comparable&lt;Puntaje&gt;</code>; <code>TablaPuntajes</code> guarda una lista, la ordena con <code>Collections.sort(...)</code> y se queda con los 5 primeros. Si la partida entra, se piden las iniciales.',
@@ -1188,13 +1307,52 @@ h2, h3, .sprint, .guide, .task { scroll-margin-top: 70px; }
            'Anotar el antes y el después para la defensa. Si rompe algo, se descarta la rama (tabla de riesgos).'],
           ['Jugadas inválidas informadas con una excepción propia.'],
           ['Cada forma de perder del Sprint 4 sigue mostrando su mensaje, ahora desde la excepción.'])),
-        T(['lyssie'], 'Balanceo final en la ventana: cada una juega 10 partidas y anota el turno en que perdió. La cantidad de lugares y el valor del canje se cambian en un solo lugar del código.', 'una tabla compartida', D(
-          ['Usar la misma planilla del Sprint 4, con una pestaña nueva.',
+        T(['lyssie'], 'Balanceo final en la ventana: cada una juega 10 partidas y anota el turno en que perdió y el puntaje. Con eso se decide si canjear suma o resta, y cuánto.', 'una tabla compartida', D(
+          ['Jugar con las reglas nuevas ya en <code>main</code>: estante lleno como aviso, químicos que siempre entran y retiros que siempre se pueden entregar. Hasta que eso no esté, no se balancea.',
+           'Anotar también el puntaje final, cuántos canjes hubo y si alguna vez hizo falta canjear para poder seguir. Es lo que se usa para decidir el canje (31/10).',
+           'Usar la misma planilla del Sprint 4, con una pestaña nueva, y anotar también cuántos canjes hubo.',
            'Cada una juega 10 partidas en la ventana y anota turno y motivo.',
            'Si la mayoría de las 40 termina antes del turno 10, seguir con el ajuste siguiente de la sección 8, uno por vez.',
            'Comprobar que la cantidad de lugares está en un solo lugar del código: cambiar ese número tiene que alcanzar.'],
           ['40 partidas anotadas y los ajustes que hicieron falta.'],
           ['La decisión final de balanceo está escrita en el CLAUDE.md.'])),
+        T(['lyssie'], '<b>Nuevo, decidido el 27/10.</b> El estante lleno ya no es derrota: guardar ahí es un aviso, la partida sigue y se elige otro estante.', 'IntelliJ IDEA', D(
+          ['Crear la rama <code>estante-lleno</code> desde <code>main</code> actualizado' + G_GIT + '.',
+           'Hoy <code>Deposito.guardar(q, codigo)</code> devuelve <code>false</code> con «¡NO ENTRA!» y <code>Juego.jugar</code> termina la partida.',
+           'Que <code>jugar</code> devuelva <code>false</code> sin terminar la partida y que deje un aviso (por ejemplo, «E1 está lleno: canjealo o elegí otro»). La ventana y la consola lo muestran y la jugadora vuelve a elegir.',
+           'Ojo con <code>getMotivo()</code>: hoy solo tiene texto si se perdió. Hace falta distinguir aviso de derrota (con <code>estaTerminado()</code> alcanza).',
+           'Si la excepción de Sofia1 entra antes, el aviso puede ser la misma excepción sin terminar la partida. Ponerse de acuerdo con ella.'],
+          ['Guardar en un estante lleno no termina la partida.'],
+          ['Probar en la ventana y en la consola: guardar en un estante lleno muestra el aviso y se puede seguir jugando en el mismo turno.'])),
+        T(['lyssie', 'sofia1'], '<b>Nuevo, decidido el 27/10.</b> Antes de traer un químico, <code>Juego</code> revisa que entre en algún estante, y antes de pedir un retiro, que haya uno que se pueda entregar sin que explote. Así siempre se puede jugar y se llega a canjear.', 'IntelliJ IDEA', D(
+          ['Partir de la rama <code>claude/cool-allen-djbydq</code> de Sofia1, que ya tiene <code>tieneLugar(q)</code>. Ojo: ahí se sortea 3 veces y, si no entra, se trae igual.',
+           'La regla nueva: entre los 8 químicos posibles (4 tipos, frío o calor), sortear solo entre los que entran en algún estante. Un estante con lugar siempre acepta un químico del otro grupo que el último, así que mientras quede un estante con lugar hay al menos uno que entra.',
+           'Si no entra ninguno, es porque todos los estantes de esa temperatura están llenos: ahí se puede canjear. Mostrar el botón y el aviso.',
+           '<b>Retiros:</b> siguen saliendo de los pendientes, pero solo de los que se pueden entregar. Un pendiente se puede entregar si en el depósito hay un químico que coincide (tipo y temperatura) y que se puede sacar sin que explote: es el último o el primero de su estante, o está en el medio y sus dos vecinos son compatibles entre sí (<code>antes.esCompatibleCon(despues)</code>).',
+           'La rama de Sofia1 ya tiene <code>estaEnPunta(q)</code>, que cubre el primero y el último. Falta sumar el caso del medio con vecinos compatibles, para que no se pierdan retiros que sí se pueden hacer.',
+           'Si ningún pendiente se puede entregar, el pedido es de dejar.',
+           'Lo canjeado puede volver igual («no lo tenías»), como en la rama de Sofia1 (<code>VUELVE_POR_CANJEADO</code>): es el riesgo del canje y no se toca.',
+           'Abrir un pull request y pedir revisión según la tabla.'],
+          ['<code>Juego</code> nunca trae un químico que no entra en ningún lado ni pide un retiro que no se puede entregar sin que explote.'],
+          ['Jugar 10 partidas por consola: ninguna termina porque «no había dónde ponerlo» ni porque cualquier retiro explotaba.', 'Las únicas derrotas por retiro son por elegir mal (había otro que coincidía y no explotaba) o por «no lo tenías» después de canjear.', 'En la planilla de balanceo se anota cuántos canjes hubo: tiene que haber canjes.'])),
+        T(['luz'], '<b>Nuevo.</b> Pedirle a design los PNG que faltan: los cuatro químicos y el fondo del mostrador. En el boceto están dibujados, pero no exportados.', 'design', D(
+          ['Mandar el pedido con los nombres exactos: <code>acido.png</code>, <code>base.png</code>, <code>inflamable.png</code> y <code>oxidante.png</code> (lo que devuelve <code>getImagen()</code>), y <code>fondo_mostrador.png</code>.',
+           'Ya agrandados, como el resto: agrandarlos desde Java los deja borrosos.',
+           'Guardarlos en <code>src/img/</code> y probar que la casilla los carga con <code>getResource</code>.'],
+          ['Los cinco PNG en <code>src/img/</code>.'],
+          ['Una casilla ocupada se ve con el dibujo de su químico, sin ningún <code>if</code> por tipo.'])),
+        T(['sofia1'], '<b>Viene del Sprint 4.</b> La interfaz <code>Dibujable</code> con <code>getImagen()</code>, que implementan <code>Quimico</code> y <code>Visitante</code>.', 'IntelliJ IDEA y draw.io', D(
+          ['Crear la rama <code>dibujable</code>' + G_GIT + '.',
+           '<code>public interface Dibujable { String getImagen(); }</code> en su propio archivo.',
+           '<code>public abstract class Quimico implements Dibujable</code> y <code>public class Visitante implements Dibujable</code>. Los dos ya tienen el método, así que no hay que cambiar nada más.',
+           'En el UML: la interfaz con «interface» arriba del nombre y las dos flechas de implementación (punteadas, con triángulo vacío).'],
+          ['La interfaz en el código y en el UML.'],
+          ['La fila «Una clase abstracta y una interfaz» de la guía pasa a «En el código».'])),
+        T(['todas'], '<b>Viene del Sprint 4.</b> El UML al día y el pull request #13 mergeado.', 'draw.io y GitHub', D(
+          ['<b>UML:</b> cada una pasa sus clases como dice la tarea del Sprint 4.',
+           '<b>Pull request #13:</b> el 27/10 se pasaron los cambios de <code>VentanaPrueba.java</code> a <code>VentanaJuego.java</code> y ya compila. Sofia2 lo mira y lo mergea.'],
+          ['El diagrama coincide con <code>main</code>.'],
+          ['Otra del grupo elige tres métodos al azar del código y los encuentra en el diagrama.'])),
         T(['lyssie'], 'Conseguir a alguien de afuera del grupo para probar el juego el domingo.', 'Meet con pantalla compartida, o en persona', D(
           ['Buscar a alguien que no haya visto el juego ni el código.',
            'Acordar el domingo 1/11 y cómo (Meet o en persona).',
@@ -1207,19 +1365,19 @@ h2, h3, .sprint, .guide, .task { scroll-margin-top: 70px; }
            'Si no puede explicarlo, mejorar el mensaje de derrota esa misma semana.',
            'Después, revisión cruzada según la tabla.'],
           [], ['Se cumple el criterio del sprint.'])),
-        T(['todas'], 'Lunes 2/11: pre-entrega sin nota con el juego completo en la ventana. El lunes siguiente (9/11) es feriado.', 'GitHub', D(
-          ['Llevar el juego jugable de punta a punta, con la pantalla final y el top 5.',
-           'Mostrar la tabla de la guía con lo que ya se puede señalar en el código y lo que falta (archivos, paquetes, hilo y memoria).',
-           'Anotar lo que diga el profe y repartirlo para los Sprints 6 y 7.'],
-          ['La lista de comentarios del profe, repartida.'],
-          ['Cada comentario tiene dueña y sprint.']))
+        T(['todas'], 'Lunes 2/11: repartir lo que dejó la prueba del domingo y lo que falta de la guía. Ya no hay pre-entrega.', 'WhatsApp o Meet', D(
+          ['Repasar lo que anotaron mientras jugaba la persona de afuera y darle dueña a cada cosa.',
+           'Recorrer la tabla de la guía: lo que todavía no se puede señalar (archivos, paquetes, hilo y memoria) va a los Sprints 6 y 7.',
+           'Si el profe contestó las consultas, anotarlo en «Lo que falta decidir».'],
+          ['Cada pendiente con dueña y sprint.'],
+          ['No queda nada sin dueña para el 13/11.']))
       ]}],
       critLabel: 'Criterio para pasar al Sprint 6',
       crit: 'Esa persona explica con sus palabras por qué perdió. Si no puede, el mensaje de derrota todavía no alcanza.'
     },
     {
       n: 6, name: 'UML final, archivos, hilo y memoria', short: 'UML, archivos e hilo', start: '2026-11-02', end: '2026-11-08',
-      tube: 'Archivos, paquetes, hilo, UML y memoria', gate: 'Lunes 9/11 feriado · sin pre-entrega',
+      tube: 'Archivos, paquetes, hilo, UML y memoria', gate: 'El UML coincide con el código',
       goal: 'Se suma lo último que pide la guía (archivo, paquetes e hilo), el UML se pone al día con el código y se escribe el borrador de la memoria técnica.',
       groups: [{ title: '', tasks: [
         T(['sofia1', 'lyssie', 'luz'], 'Cada una actualiza la parte del diagrama de clases que dibujó en el Sprint 1, comparándola clase por clase con el código final. Incluye <code>ArrayList</code>, el mapa, la interfaz, <code>Puntaje</code> y la excepción nueva.', 'draw.io al lado de IntelliJ IDEA', D(
@@ -1268,15 +1426,39 @@ h2, h3, .sprint, .guide, .task { scroll-margin-top: 70px; }
         T(['todas'], 'Domingo 8/11: revisión cruzada y repaso de la tabla de la guía.', 'GitHub y Meet', D(
           ['Revisión cruzada según la tabla.',
            'Recorrer la tabla de la guía fila por fila y abrir en el código cada lugar que señala.'],
-          [], ['Se cumple el criterio del sprint.']))
+          [], ['Se cumple el criterio del sprint.'])),
+        T(['luz'], '<b>Nuevo, decidido el 2/11.</b> Pantalla de inicio <code>PanelInicio</code>: «¿Quién atiende hoy?» con las cuatro fichas del equipo y el botón «Empezar». Es la primera carta del <code>CardLayout</code>.', 'IntelliJ IDEA, Swing a mano; el diseño está en el boceto', D(
+          ['Crear la rama <code>inicio</code> desde <code>main</code> actualizado' + G_GIT + '.',
+           '<code>PanelInicio</code> extiende <code>JPanel</code>, con fondo <code>Colores.FONDO</code>: arriba el título POCIONELLA, en el medio cuatro <code>JButton</code> con el dibujo x4 de cada una (Lyss, Luz, Sofi 1 y Sofi 2) y abajo «Empezar».',
+           'Un atributo <code>private String elegida = "Sofi 1";</code>. Al hacer clic en una ficha se guarda el nombre y la ficha elegida se pinta con su color (los colores del equipo van en <code>Colores</code>).',
+           'Se agrega como carta <code>"inicio"</code> y es la que se ve al abrir la ventana.',
+           '«Empezar» llama a un método de <code>VentanaJuego</code>, por ejemplo <code>empezar(String encargada)</code>, que hace <code>juego = new Juego(encargada)</code>, arma de nuevo los paneles con ese juego y muestra <code>"mostrador"</code>. Por eso el <code>Juego</code> ya no se crea en el <code>main</code>.',
+           'La ventana no decide quién visita: eso lo sigue haciendo <code>Juego</code> con la encargada que recibe.',
+           'Sumar <code>PanelInicio</code> al UML de vista.'],
+          ['Se elige quién atiende antes de empezar la partida.'],
+          ['Si se elige Luz, en 20 pedidos seguidos nunca viene Luz al mostrador.', 'El proyecto compila y se juega una partida igual que antes.'])),
+        T(['sofia1'], '<b>Nuevo, decidido el 2/11.</b> La encargada en <code>Juego</code> con su dibujo, para que la pantalla de inicio y el mostrador la puedan mostrar.', 'IntelliJ IDEA', D(
+          ['Hoy <code>Juego(String encargada)</code> guarda solo el nombre y <code>getEncargada()</code> lo devuelve.',
+           'Sumar <code>getImagenEncargada()</code>: recorre los visitantes con un for-each y devuelve el <code>getImagen()</code> del que se llama igual que la encargada.',
+           'Si el nombre que llega no es de ninguna de las cuatro, que atienda "Sofi 1", así la partida siempre arranca.',
+           'Actualizar <code>Juego</code> en el UML con el método nuevo.',
+           'Avisarle a Luz el nombre exacto del método para usarlo en la ventana.'],
+          ['<code>Juego</code> dice quién atiende y con qué dibujo.'],
+          ['Un <code>main</code> de prueba crea un <code>Juego</code> por cada una de las cuatro e imprime el nombre y el dibujo correctos.'])),
+        T(['sofia2'], '<b>Nuevo, decidido el 2/11.</b> «Jugar de nuevo» en <code>PanelFinal</code> vuelve a la pantalla de inicio, para poder elegir otra encargada.', 'IntelliJ IDEA', D(
+          ['Esperar a que la rama <code>inicio</code> de Luz esté en <code>main</code>.',
+           'En el listener de «Jugar de nuevo», en lugar de crear el <code>Juego</code> ahí, mostrar la carta <code>"inicio"</code>. El juego nuevo lo crea «Empezar».',
+           'Actualizar la secuencia si muestra el comienzo de la partida.'],
+          ['Después de perder se puede volver a elegir quién atiende.'],
+          ['Jugar de nuevo arranca con el depósito vacío, el puntaje en 0 y la encargada nueva.']))
       ]}],
       critLabel: 'Criterio para pasar al Sprint 7',
       crit: 'Cada tema de la guía se puede señalar en el código, incluidos el archivo, los paquetes y el hilo. El UML coincide con el código.'
     },
     {
       n: 7, name: 'Defensa', start: '2026-11-09', end: '2026-11-15',
-      tube: 'Memoria final, ensayo y congelar', gate: 'Entrega final y defensa · lunes 16/11', deliver: true,
-      goal: 'No se agregan funciones. Se termina la memoria, se congela el código y las cuatro practican defenderlo. Si les toca el Grupo 2 (30/11), las dos semanas que sobran son colchón.',
+      tube: 'Memoria final, ensayo y congelar', gate: 'Entrega final · domingo 15/11 a la noche', deliver: true,
+      goal: 'No se agregan funciones. Se termina la memoria, se congela el código y se entrega el domingo 15/11 a la noche. Son Grupo 2: la defensa es el lunes 30/11, y las dos semanas del medio son para ensayar.',
       groups: [{ title: '', tasks: [
         T(['luz'], 'Memoria final: el diseño y la tabla de temas de la guía, revisada contra el código congelado.', 'Google Docs', D(
           ['Partir del borrador de Sofia1.',
@@ -1308,12 +1490,187 @@ h2, h3, .sprint, .guide, .task { scroll-margin-top: 70px; }
         T(['todas'], 'Congelar el código el viernes 13/11. Desde ahí, solo arreglos de errores. Exportar el UML a PDF.', 'draw.io', D(
           ['<b>Viernes 13/11:</b> se mergea lo último aprobado y desde ahí solo entran arreglos de errores.',
            'Exportar el diagrama unido y las secuencias a PDF' + G_DRAW + '.',
-           'Confirmar con el profe qué se entrega el 16/11 y en qué formato, y armarlo: UML, código, memoria.'],
+           'Confirmar con el profe qué se entrega el domingo 15/11 a la noche y en qué formato, y armarlo: UML, código, memoria.'],
           ['El código final, el UML en PDF, la memoria y lo que pida el profe.'],
-          ['Se cumple el criterio de la entrega final.']))
+          ['Se cumple el criterio de la entrega final.'])),
+        T(['lyssie'], '<b>Nuevo, decidido el 2/11.</b> En la prueba final, probar la pantalla de inicio: una partida atendiendo cada una de las cuatro.', 'la computadora de otra integrante', D(
+          ['Elegir a cada una en «¿Quién atiende hoy?» y jugar hasta el turno 10.',
+           'Anotar si alguna vez vino al mostrador la que atiende.',
+           'Probar «Jugar de nuevo» y elegir a otra.',
+           'Si algo falla, avisarle a Luz antes del viernes 13/11.'],
+          [], ['Las cuatro encargadas funcionan y ninguna se visita a sí misma.']))
       ]}],
-      critLabel: 'Criterio de la entrega final (lunes 16/11, Grupo 1)',
+      critLabel: 'Criterio de la entrega final (domingo 15/11 a la noche) · defensa el lunes 30/11',
       crit: 'El juego corre, el UML coincide con el código, la memoria señala cada tema de la guía y las cuatro contestan las nueve preguntas sin mirar.'
+    },
+    {
+      n: 8, name: 'Extra: lo que quedaba sin dueña', short: 'Extra', start: '2026-11-14', end: '2026-11-15',
+      tube: 'Pantalla final, UML y memoria al día', gate: 'Todo con dueña antes de entregar',
+      goal: 'Armado el sábado 14/11 mirando <code>main</code>: lo que nadie tenía asignado y lo que sigue abierto de antes. Ya están hechos la excepción (#16), <code>Dibujable</code>, las fuentes, el hilo y la pantalla de reglas (#17), los colores de cada químico (#18), el balanceo de retiros (#19), las dos secuencias con la excepción, la memoria técnica y el mostrador y el depósito como el boceto (rama <code>boceto-pantallas</code>).',
+      groups: [
+        { title: 'Sin dueña hasta hoy', tasks: [
+          T(['sofia2'], 'La pantalla final muestra el título y el motivo de <b>todas</b> las derrotas, incluida «¡NO LO TENÍAS!». Hoy esa derrota vuelve al mostrador sin decir nada.', 'IntelliJ IDEA', D(
+            ['«No lo tenías» no sale de la jugada: <code>Juego</code> lo detecta al armar el pedido siguiente, así que <code>jugar(...)</code> devuelve <code>true</code> y la partida ya está terminada.',
+             'En <code>VentanaJuego</code>, después de <code>juego.jugar(...)</code> y de <code>juego.canjear(...)</code>, preguntar <code>juego.estaTerminado()</code> en lugar de mirar solo lo que devolvió.',
+             'Si terminó, mostrar la carta de <code>PanelFinal</code> con <code>juego.getTitulo()</code> y <code>juego.getMotivo()</code>.'],
+            ['Ninguna derrota vuelve al mostrador.'],
+            ['Probar las formas de perder de la tabla de «Reglas del juego»: cada una muestra su título y su motivo.'])),
+          T(['sofia2'], 'Pasar sus clases al diagrama de clases: <code>Puntaje</code> con <code>Comparable</code>, <code>TablaPuntajes</code> y <code>PanelFinal</code>. La tarea del Sprint 6 era de las otras tres y estas clases no las tenía nadie.', 'draw.io', D(
+            ['Abrir el diagrama de clases que pasa Luz y dibujar las tres clases con atributos, métodos y visibilidad.',
+             '<code>Comparable&lt;Puntaje&gt;</code> va como interfaz, con la flecha de implementación punteada.',
+             'Relaciones: <code>VentanaJuego</code> tiene un <code>PanelFinal</code> y conoce la <code>TablaPuntajes</code>; la tabla tiene de 0 a 5 <code>Puntaje</code>.'],
+            ['Las tres clases en el diagrama, con los mismos nombres que el código.'],
+            ['Otra del grupo encuentra en el diagrama tres métodos elegidos al azar de esas clases.'])),
+          T(['luz'], 'Exportar al repositorio el diagrama de clases y las dos secuencias con la excepción.', 'draw.io e IntelliJ IDEA', D(
+            ['El de clases, encima de <code>DiagramaDeClases-Alquimia.drawio.svg</code>.',
+             'Las páginas de guardar y retirar, cada una encima de su <code>.drawio.svg</code>.',
+             'Commit y push de los tres archivos.'],
+            ['Los SVG del repositorio coinciden con el código de <code>main</code>.'],
+            ['Se abren en GitHub y se ve la flecha roja de la excepción.'])),
+          T(['luz'], 'El récord en la barra de arriba del mostrador y del depósito («MEJOR 340»), como en el boceto, cuando entre el top 5 de Sofia2.', 'IntelliJ IDEA', D(
+            ['Leer el primer puesto de <code>TablaPuntajes</code> y mostrarlo al lado del puntaje.',
+             'Si la tabla está vacía, no mostrar nada.'],
+            ['El récord se ve en las dos pantallas.'],
+            ['Con <code>puntajes.txt</code> borrado, la barra no muestra el récord y el juego sigue.'])),
+          T(['luz'], 'Completar la memoria con lo de Sofia2 (<code>Comparable</code>, <code>finally</code> y <code>puntajes.txt</code>) y exportarla a PDF.', 'Claude Docs', D(
+            ['Pasar a «En el código» las filas que hoy dicen «Pendiente», con la clase y el método.',
+             'Sacar de «Qué falta completar» lo que ya esté.',
+             'Exportar a PDF para la entrega.'],
+            ['La memoria sin filas pendientes.'],
+            ['Cada fila se puede abrir en el código.'])),
+          T(['sofia1'], 'Revisar la memoria técnica contra el código. La armó Luz, con la tabla que Sofia1 iba a usar para el borrador.', 'Claude Docs e IntelliJ IDEA', D(
+            ['Abrir cada clase y método de la tabla «Temas de la guía en el código» y confirmar que está con ese nombre.',
+             'Revisar que el GRASP (Experto) y el SOLID (Responsabilidad única) se puedan contar con sus propias palabras.',
+             'Dejar comentarios en el documento con lo que no coincida.'],
+            ['Una revisión con comentarios, o un «está bien».'],
+            ['Ninguna fila de la tabla señala algo que no existe.'])),
+          T(['lyssie'], 'Revisar el pull request de <code>boceto-pantallas</code> (en el Sprint 7 le toca revisar a Luz) y jugar una partida en la ventana.', 'GitHub e IntelliJ IDEA', D(
+            ['Mirar <code>PanelMostrador</code>, <code>PanelDeposito</code> y <code>PanelContenedor</code> con la lista «Qué mirar en cada revisión».',
+             'Ojo: <code>Acido.getNombre()</code> ahora devuelve «Ácido» con tilde, y <code>PruebaQuimicos</code> lo espera así.',
+             'Jugar hasta perder: dejar, retirar, canjear y «Volver al mostrador».'],
+            ['El pull request aprobado o con comentarios.'],
+            ['Ningún panel decide una regla: solo le pregunta a <code>Juego</code> y muestra.']))
+        ]},
+        { title: 'Sigue abierto de antes', tasks: [
+          T(['sofia2'], '<b>Viene de los Sprints 5 y 6.</b> <code>Puntaje</code> con <code>Comparable</code>, la pantalla final, el top 5 y <code>puntajes.txt</code> con <code>try</code>, <code>catch</code> y <code>finally</code>. Al 14/11 no hay nada subido.', 'IntelliJ IDEA', D(
+            ['Seguir las tareas de los Sprints 5 y 6.',
+             'Subirlo en un pull request apenas compile, aunque falte el archivo: los paquetes de Luz esperan a que entre.'],
+            [], ['Se cumplen los criterios de los Sprints 5 y 6.'])),
+          T(['sofia1'], '<b>Viene del Sprint 6.</b> <code>getImagenEncargada()</code> en <code>Juego</code>. Hoy la ventana arma el nombre del dibujo a partir del nombre de la encargada; con el método, se lo pide al modelo.', 'IntelliJ IDEA', D(
+            ['Igual que en el Sprint 6.', 'Avisarle a Luz para que los paneles lo usen.'],
+            [], ['La encargada se ve bien en el mostrador y en el depósito con cualquiera de las cuatro.'])),
+          T(['luz'], '<b>Viene del Sprint 6.</b> <code>PanelInicio</code> («¿Quién atiende hoy?»). Hoy el juego arranca siempre con «Sofi 1».', 'IntelliJ IDEA', D(
+            ['Igual que en el Sprint 6.'],
+            [], ['Se elige quién atiende y esa persona nunca viene al mostrador.'])),
+          T(['luz'], '<b>Viene del Sprint 6.</b> Paquetes <code>modelo</code> y <code>vista</code>, al final, cuando lo de Sofia2 ya esté en <code>main</code>. El hilo ya está: la visitante entra caminando.', 'IntelliJ IDEA', D(
+            ['Igual que en el Sprint 6.', 'Hacerlo al final para no pisar las ramas de las demás.'],
+            [], ['El paquete <code>modelo</code> no importa nada de Swing y las pruebas corren igual.']))
+        ]}
+      ],
+      critLabel: 'Criterio para entregar (domingo 15/11 a la noche)',
+      crit: 'Ninguna derrota vuelve al mostrador sin explicar por qué, el UML y la memoria tienen las clases de las cuatro y no queda nada sin dueña.'
+    },
+    {
+      n: 9, name: 'Pulido final: todo lo que falta, con dueña', short: 'Pulido final', start: '2026-11-15', end: '2026-11-15',
+      tube: 'Puntos, pantalla final, detalles del boceto, UML y memoria', gate: 'Entrega · hoy a la noche', deliver: true,
+      goal: 'Armado el domingo 15/11 a la tarde, comparando <code>main</code> con el boceto y con lo decidido. Ya están: la excepción, <code>Dibujable</code>, el hilo, las reglas, <code>Ranking</code> con <code>puntajes.txt</code> (#25), los colores de la pantalla final (#27), el aviso de estante lleno y la elección de la encargada (#28 y #30), <code>getLugares()</code> (#21), el UML corregido (#29) y los paquetes <code>modelo</code>, <code>vista</code> y <code>pruebas</code> (rama <code>paquetes</code>). Cada tarea dice si ya era de alguien o si no tenía dueña, y a quién se propone. <b>Las Sofis confirman antes de las 17 h</b>; si no, lo hace Luz. En <code>Juego</code> va primero lo de Sofia2 (los puntos) y después lo de Sofia1, para no pisarse.',
+      groups: [
+        { title: 'P1 · Primero: el puntaje (cambia cómo se juega)', tasks: [
+          T(['sofia2'], '<span class="st-tag late">Ya asignada · S5</span>Sumar <b>+10 al guardar bien</b> y <b>+10 al entregar el correcto</b>, como se decidió el 27/10. Hoy solo suma el canje (+40), así que casi todas las partidas terminan con 0.', 'IntelliJ IDEA', D(
+            ['En <code>Juego</code>, al lado de <code>PUNTOS_CANJE</code>: <code>public static final int PUNTOS_GUARDAR = 10;</code> y <code>public static final int PUNTOS_RETIRAR = 10;</code>.',
+             'En <code>jugar(...)</code>, cuando la jugada salió bien, sumar <code>PUNTOS_GUARDAR</code> si el pedido era de dejar y <code>PUNTOS_RETIRAR</code> si era de retirar.',
+             'Un aviso de estante lleno no suma: la jugada no se hizo.',
+             'El puntaje nunca baja de 0 (31/10).',
+             'Correr <code>PruebaJuego</code> y jugar una partida en la ventana.'],
+            ['Las dos constantes en <code>Juego</code> y el puntaje que sube en cada turno bien jugado.'],
+            ['Guardar bien 3 veces da 30 en la barra de arriba; canjear después suma 40 más.'])),
+          T(['sofia2'], '<span class="st-tag late">Ya asignada · S6</span>Guardar el <b>turno</b> en <code>puntajes.txt</code>, como se decidió (<code>LUZ;340;31</code>). Hoy <code>Ranking</code> guarda solo las iniciales y los puntos.', 'IntelliJ IDEA', D(
+            ['Sumar <code>turno</code> a <code>Puntaje</code>: atributo, parámetro del constructor y <code>getTurno()</code>.',
+             'En <code>Ranking.guardar()</code>, escribir <code>iniciales;puntos;turno</code>. En <code>cargar()</code>, leer las tres partes con <code>split(";")</code> e <code>Integer.parseInt(...)</code>.',
+             'Una línea vieja con dos partes no tiene que romper nada: se saltea o se lee con turno 0.',
+             '<code>PantallaFinal</code> muestra el turno en cada fila del top 5.'],
+            ['<code>puntajes.txt</code> con tres datos por línea y el top 5 mostrando el turno.'],
+            ['Borrar <code>puntajes.txt</code> o romper una línea a mano no hace caer el juego.']))
+        ]},
+        { title: 'P2 · La pantalla final como el boceto', tasks: [
+          T(['sofia2'], '<span class="st-tag late">Ya asignada · S5 y S6</span><code>PantallaFinal</code> como en el boceto. Hoy es una columna de textos; los dibujos ya están en <code>src/img/</code> y nadie los usa.', 'IntelliJ IDEA, Swing a mano', D(
+            ['Arriba, la escena de la derrota: <code>escena_explota.png</code>, <code>escena_pudren.png</code>, <code>escena_temperatura.png</code>, <code>escena_equivocado.png</code> o <code>escena_canjeaste.png</code> (560 × 220), según el título que da <code>Juego</code>.',
+             'Sobre la escena, la encargada x4 y el efecto (<code>efecto_hollin.png</code>, <code>efecto_olor.png</code> o <code>efecto_ups.png</code>, 112 × 144), en las posiciones del boceto.',
+             'La tarjeta «QUÉ PASÓ» con el motivo y una pista corta de cómo evitarlo.',
+             'Dos recuadros: «LLEGASTE AL TURNO» y «PUNTAJE FINAL».',
+             'Botones «JUGAR DE NUEVO» y «VER REGLAS».',
+             'A la derecha, «MEJORES PUNTAJES»: el top 5 y, si la partida entra, las iniciales ahí mismo.',
+             'Qué escena va con cada derrota tiene que salir del modelo (por ejemplo, del título), sin un <code>if</code> por tipo de químico en la vista.'],
+            ['La pantalla final igual al boceto, con los dibujos.'],
+            ['Perder de cada forma de la tabla «Reglas del juego» muestra su escena, su motivo, el turno y el puntaje.']))
+        ]},
+        { title: 'P3 · Detalles del boceto en la ventana (Luz)', tasks: [
+          T(['luz'], '<span class="st-tag late">Ya asignada · S8</span>El récord en la barra de arriba del mostrador y del depósito: «MEJOR 340» con la coronita, como en el boceto.', 'IntelliJ IDEA', D(
+            ['Leer el primer puesto de <code>Ranking</code> y mostrarlo al lado del puntaje.',
+             'Si la tabla está vacía, no se muestra.'],
+            ['El récord en las dos pantallas.'],
+            ['Con <code>puntajes.txt</code> borrado, la barra no muestra el récord y el juego sigue.'])),
+          T(['luz'], '<span class="st-tag late">Ya asignada · S5, «Aplicar el boceto»</span>Las tarjetas 2 y 3 de la pantalla de reglas con los ejemplos ✓ y ✗ del boceto.', 'IntelliJ IDEA', D(
+            ['Tarjeta 2: un estante que está bien (✓) y uno que explota o se pudre (✗), con los dibujos de los químicos.',
+             'Tarjeta 3: lo que pasa al sacar uno del medio.',
+             'Sin cambiar la fuente pixelada.'],
+            ['Las tres tarjetas como en el boceto.'],
+            ['Alguien que no jugó entiende la regla mirando solo los ejemplos.'])),
+          T(['luz'], '<span class="st-tag new">Sin dueña hasta hoy</span>El dibujo del químico en el cuadrado de «LLEVÁS» o «TE PIDEN» del depósito. Hoy está vacío.', 'IntelliJ IDEA', D(
+            ['Cargar <code>juego.getPedido().getImagen()</code> en ese <code>JLabel</code>, igual que las casillas.'],
+            ['El cuadrado con el químico del pedido.'],
+            ['Cambia en cada turno, sin ningún <code>if</code> por tipo.'])),
+          T(['luz'], '<span class="st-tag new">Sin dueña hasta hoy</span>En un retiro, el ticket en el globo de la encargada, como en el boceto.', 'IntelliJ IDEA', D(
+            ['Si <code>juego.esRetiro()</code>, mostrar el ticket con el tipo y la temperatura pedidos; si no, esconderlo.'],
+            ['El ticket solo en los retiros.'],
+            ['Dejar y retirar se distinguen de un vistazo en el mostrador.'])),
+          T(['luz'], '<span class="st-tag new">Sin dueña hasta hoy</span>El frasco del químico sobre el mostrador, como en el boceto.', 'IntelliJ IDEA', D(
+            ['Un <code>JLabel</code> con <code>getImagen()</code> del pedido, en la posición del boceto.',
+             'Solo cuando el pedido es de dejar.'],
+            ['El frasco sobre el mostrador.'],
+            ['Se ve qué trae la visitante antes de ir al depósito.']))
+        ]},
+        { title: 'P4 · El modelo, después de los puntos (Sofia1)', tasks: [
+          T(['sofia1'], '<span class="st-tag late">Ya asignada · S6 y S8</span><code>getImagenEncargada()</code> en <code>Juego</code>. Hoy la vista arma el nombre del dibujo a mano en <code>PanelMostrador</code>, <code>PanelDeposito</code> y <code>PanelInicio</code>.', 'IntelliJ IDEA', D(
+            ['Recorrer los visitantes con for-each y devolver el <code>getImagen()</code> del que se llama igual que la encargada.',
+             'Avisarle a Luz para que los tres paneles lo usen.',
+             'Sumarlo al UML.'],
+            ['El nombre del dibujo sale del modelo.'],
+            ['Con cada una de las cuatro encargadas se ve el dibujo correcto en el mostrador y en el depósito.'])),
+          T(['sofia1'], '<span class="st-tag late">En parte · S4, Lyssie</span>Usar <code>getLugares()</code> donde todavía está el 4 escrito a mano: los mensajes de <code>Deposito</code>, el aviso de <code>Juego</code>, los arrays de <code>PanelContenedor</code>, el <code>for</code> de <code>VentanaJuego</code> y <code>PartidaConsola</code>.', 'IntelliJ IDEA', D(
+            ['<code>getLugares()</code> ya está en <code>Contenedor</code> (#21).',
+             'Cambiar cada 4 por <code>getLugares()</code> del contenedor que corresponda, o por <code>Contenedor.LUGARES</code> donde no hay uno a mano.',
+             'Probar cambiando <code>LUGARES</code> a 3: el juego tiene que andar igual, con 3 casillas.',
+             'Volverlo a 4 antes del commit.'],
+            ['La cantidad de lugares en un solo lugar del código.'],
+            ['Con <code>LUGARES = 3</code>, mensajes, casillas y canje dicen 3.']))
+        ]},
+        { title: 'P5 · Cierre: probar, UML y memoria', tasks: [
+          T(['lyssie'], '<span class="st-tag late">Ya asignada · S7</span>Prueba final con las cuatro encargadas, desde <code>main</code> recién descargado, cuando ya esté todo lo de arriba.', 'IntelliJ IDEA, en una computadora limpia', D(
+            ['Descargar <code>main</code> como si fuera el profe y correr <code>vista.VentanaJuego</code>.',
+             'Una partida atendiendo cada una: que nunca venga la que atiende.',
+             'Dejar, retirar, canjear, el aviso de estante lleno, perder y guardar las iniciales.',
+             'Avisarle a Luz cualquier error.'],
+            [], ['Las cuatro encargadas funcionan y no aparece ningún error.'])),
+          T(['luz'], '<span class="st-tag late">Ya asignada · S8</span>El UML final: <code>PanelInicio</code>, <code>getLugares()</code>, los paquetes y todo lo que entre hoy (puntos, turno, <code>getImagenEncargada()</code>).', 'draw.io', D(
+            ['Al final, cuando ya esté todo mergeado.',
+             'Exportarlo encima de <code>DiagramaDeClases-Alquimia.drawio.svg</code>, en modo claro.'],
+            ['El diagrama coincide con <code>main</code>.'],
+            ['Tres métodos al azar del código están en el diagrama con el mismo nombre.'])),
+          T(['luz'], '<span class="st-tag late">Ya asignada · S8</span>La memoria al día (paquetes «Listo» y lo de hoy) y exportada a PDF.', 'Claude Docs', D(
+            ['Pasar Paquetes a «Listo» y sumar lo que entre hoy.',
+             'Exportar a PDF para la entrega.'],
+            ['La memoria sin filas «Falta».'],
+            ['Cada fila se puede abrir en el código.'])),
+          T(['sofia1'], '<span class="st-tag late">Ya asignada · S8</span>Revisar la memoria contra el código, después de que Luz la actualice.', 'Claude Docs e IntelliJ IDEA', D(
+            ['Abrir cada clase y método de la tabla y confirmar que está con ese nombre.',
+             'Comentar en el documento lo que no coincida.'],
+            ['Una revisión con comentarios, o un «está bien».'],
+            ['Ninguna fila señala algo que no existe.']))
+        ]}
+      ],
+      critLabel: 'Criterio para entregar (hoy, domingo 15/11, a la noche)',
+      crit: 'El puntaje suma en cada jugada, la pantalla final es la del boceto, la ventana tiene los detalles del boceto, la prueba con las cuatro encargadas pasa y el UML y la memoria coinciden con <code>main</code>.'
     }
   ];
 
@@ -1321,7 +1678,7 @@ h2, h3, .sprint, .guide, .task { scroll-margin-top: 70px; }
     ['sofia1', ['Clases de químicos y diagrama unido', '<code>Quimico</code>, <code>Acido</code>, <code>Base</code> + <code>getImagen()</code>', '<code>Juego</code>: turnos, pedidos, visitantes y pendientes', 'Motivos de derrota, incluido «no lo tenías»', 'Excepción propia (cubre el canje)', 'UML de químicos y borrador de la memoria', 'Ensayo con las nueve preguntas']],
     ['sofia2', ['Secuencias de guardar y retirar', '<code>Inflamable</code>, <code>Oxidante</code> + <code>getImagen()</code>, pruebas', 'Partida por consola con canje', 'Clics: ir al depósito, casillas, canjear y volver', 'Puntaje, pantalla final y top 5 con <code>Comparable</code>', 'Top 5 en <code>puntajes.txt</code> y secuencias finales', 'Repaso de las secuencias para la defensa']],
     ['lyssie', ['Clases de contenedores', '<code>Contenedor</code> + <code>vaciar()</code>, <code>Heladera</code>, <code>Estante</code>', 'Retiros, corrimiento y «no lo tenías»', '<code>ArrayList</code> y primer balanceo con canjes', 'Balanceo final (incluye el valor del canje) y prueba externa', 'UML de contenedores y simulacro', 'Prueba final de punta a punta']],
-    ['luz', ['Clases de juego y vista, boceto de pantallas', '<code>Deposito</code> + <code>canjear()</code>, <code>main</code> de consola', 'Práctica de Swing: <code>CardLayout</code>, escena y estantes', '<code>VentanaJuego</code>, paneles y <code>HashMap</code> en <code>Deposito</code>', 'Aplicar el boceto: paleta, fuentes y PNG', 'Paquetes, hilo y UML de vista', 'Memoria final: tabla de temas de la guía']]
+    ['luz', ['Clases de juego y vista, boceto de pantallas', '<code>Deposito</code> + <code>canjear()</code>, <code>main</code> de consola', 'Práctica de Swing: <code>CardLayout</code>, escena y estantes', '<code>VentanaJuego</code>, paneles y <code>HashMap</code> en <code>Deposito</code>', 'Aplicar el boceto: paleta, fuentes y PNG', 'Pantalla de inicio, paquetes, hilo y UML de vista', 'Memoria final: tabla de temas de la guía']]
   ];
 
   // ---------- almacenamiento por navegador ----------
@@ -1357,22 +1714,9 @@ h2, h3, .sprint, .guide, .task { scroll-margin-top: 70px; }
     var d = daysTo(iso), el = document.getElementById(id);
     el.textContent = d > 1 ? d + ' días' : d === 1 ? 'Mañana' : d === 0 ? 'Hoy' : 'Ya pasó';
   }
-  // pre-entregas sin nota: cada lunes, salvo 12/10 y 9/11 (feriados)
-  var PRE_ENTREGAS = [
-    ['2026-10-19', 'Lunes 19/10 · partida por consola'],
-    ['2026-10-26', 'Lunes 26/10 · el juego anda en la ventana'],
-    ['2026-11-02', 'Lunes 2/11 · juego completo, alguien de afuera lo entiende']
-  ];
-  var proxPre = null;
-  PRE_ENTREGAS.forEach(function (p) { if (!proxPre && daysTo(p[0]) >= 0) proxPre = p; });
-  if (proxPre) {
-    setCount('dPre', proxPre[0]);
-    document.getElementById('dPreWhen').textContent = proxPre[1] + ' (sin nota)';
-  } else {
-    document.getElementById('dPre').textContent = 'Listo';
-    document.getElementById('dPreWhen').textContent = 'Ya no quedan pre-entregas';
-  }
-  setCount('dFin', '2026-11-16');
+  // sin pre-entregas (27/10): se entrega todo junto el 15/11; el código se congela el 13/11
+  setCount('dPre', '2026-11-13');
+  setCount('dFin', '2026-11-15');
   var current = null;
   SPRINTS.forEach(function (s) { if (state(s).kind === 'now') current = s; });
   if (current) {
@@ -1385,7 +1729,7 @@ h2, h3, .sprint, .guide, .task { scroll-margin-top: 70px; }
   } else {
     document.getElementById('dNow').textContent = 'Listo';
     document.getElementById('dNowWhat').textContent = 'Plan terminado';
-    document.getElementById('dNowWhen').textContent = 'Los siete sprints pasaron';
+    document.getElementById('dNowWhen').textContent = 'Los nueve sprints pasaron';
   }
 
   // ---------- tubos ----------
@@ -1617,3 +1961,6 @@ h2, h3, .sprint, .guide, .task { scroll-margin-top: 70px; }
 
 </body>
 </html>
+
+
+</body></html>
