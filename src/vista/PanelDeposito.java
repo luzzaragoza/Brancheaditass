@@ -12,8 +12,12 @@ public class PanelDeposito extends JPanel {
     private static final int[] FILAS_ESTANTES = {45, 178, 311};
 
     private Juego juego;
+    private Ranking ranking = new Ranking();
     private JLabel etiquetaTurno;
     private JLabel etiquetaPuntaje;
+    private JLabel corona;
+    private JLabel etiquetaMejor;
+    private JLabel etiquetaRecord;
     private JLabel etiquetaLlevas;
     private JLabel cuadradito;
     private JLabel etiquetaPedido;
@@ -35,21 +39,28 @@ public class PanelDeposito extends JPanel {
         barra.setBounds(0, 0, 1024, 56);
         barra.add(texto("ALQUIMIA", Fuentes.titulo(20f), Colores.CREMA, 20, 14, 110, 28));
         barra.add(texto("· DEPÓSITO", Fuentes.texto(13f), Colores.LAVANDA, 122, 18, 120, 24));
-        etiquetaLlevas = texto("", Fuentes.texto(12f), Colores.LAVANDA, 330, 16, 110, 24);
+        etiquetaLlevas = texto("", Fuentes.texto(12f), Colores.LAVANDA, 250, 16, 110, 24);
         etiquetaLlevas.setHorizontalAlignment(SwingConstants.RIGHT);
         barra.add(etiquetaLlevas);
         cuadradito = new JLabel();
         cuadradito.setBorder(BorderFactory.createLineBorder(Colores.CREMA, 2));
-        cuadradito.setBounds(450, 13, 30, 30);
+        cuadradito.setBounds(370, 13, 30, 30);
         barra.add(cuadradito);
-        etiquetaPedido = texto("", Fuentes.texto(17f), Colores.CREMA, 490, 14, 300, 28);
+        etiquetaPedido = texto("", Fuentes.texto(17f), Colores.CREMA, 410, 14, 250, 28);
         barra.add(etiquetaPedido);
-        etiquetaTurno = texto("", Fuentes.titulo(18f), Colores.CREMA, 760, 14, 140, 28);
+        etiquetaTurno = texto("", Fuentes.titulo(18f), Colores.CREMA, 650, 14, 110, 28);
         etiquetaTurno.setHorizontalAlignment(SwingConstants.RIGHT);
         barra.add(etiquetaTurno);
-        barra.add(texto("♥", new Font(Font.SANS_SERIF, Font.BOLD, 22), Colores.ROSA, 920, 13, 24, 28));
-        etiquetaPuntaje = texto("", Fuentes.titulo(18f), Colores.CREMA, 946, 14, 70, 28);
+        barra.add(texto("♥", new Font(Font.SANS_SERIF, Font.BOLD, 22), Colores.ROSA, 774, 13, 24, 28));
+        etiquetaPuntaje = texto("", Fuentes.titulo(18f), Colores.CREMA, 800, 14, 66, 28);
         barra.add(etiquetaPuntaje);
+        corona = new JLabel(imagen("corona.png"));
+        corona.setBounds(870, 21, 21, 12);
+        barra.add(corona);
+        etiquetaMejor = texto("MEJOR", Fuentes.texto(12f), Colores.LAVANDA, 898, 16, 50, 24);
+        barra.add(etiquetaMejor);
+        etiquetaRecord = texto("", Fuentes.titulo(18f), Colores.CREMA, 946, 14, 70, 28);
+        barra.add(etiquetaRecord);
         add(barra);
 
         // la heladera y la estantería son JLabel con la imagen, y los contenedores van adentro
@@ -147,6 +158,7 @@ public class PanelDeposito extends JPanel {
         etiquetaEncargada.setIcon(imagen(juego.getEncargada().toLowerCase().replace(" ", "") + "_x2.png"));
         etiquetaTurno.setText("TURNO " + juego.getTurno());
         etiquetaPuntaje.setText("" + juego.getPuntaje());
+        mostrarRecord();
 
         String lleno = null;
         for (int i = 0; i < paneles.length; i++) {
@@ -188,6 +200,17 @@ public class PanelDeposito extends JPanel {
         } else {
             etiquetaAyuda.setText(lleno + " está lleno: podés canjearlo por +" + Juego.PUNTOS_CANJE
                     + ", pero si después vienen a buscar algo de ahí, perdés.");
+        }
+    }
+
+    // el mejor puntaje de puntajes.txt; si todavía no hay ninguno, no se muestra
+    private void mostrarRecord() {
+        boolean hayRecord = ranking.getCantidad() > 0;
+        corona.setVisible(hayRecord);
+        etiquetaMejor.setVisible(hayRecord);
+        etiquetaRecord.setVisible(hayRecord);
+        if (hayRecord) {
+            etiquetaRecord.setText("" + ranking.getPuntaje(0));
         }
     }
 
