@@ -1,4 +1,4 @@
-public class Visitante {
+public class Visitante implements Dibujable {
     private final String nombre;
     private final String imagen;
 
@@ -11,6 +11,7 @@ public class Visitante {
         return nombre;
     }
 
+    @Override
     public String getImagen() {
         return imagen;
     }

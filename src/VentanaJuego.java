@@ -8,6 +8,7 @@ public class VentanaJuego extends JFrame {
     private JPanel pantallas;
     private PanelMostrador panelMostrador;
     private PanelDeposito panelDeposito;
+    private PanelReglas panelReglas;
 
     public VentanaJuego(Juego juego) {
         this.juego = juego;
@@ -19,11 +20,14 @@ public class VentanaJuego extends JFrame {
         cartas = new CardLayout();
         pantallas = new JPanel(cartas);
 
+        panelReglas = new PanelReglas();
         panelMostrador = new PanelMostrador(juego);
         panelDeposito = new PanelDeposito(juego);
+        pantallas.add(panelReglas, "reglas");
         pantallas.add(panelMostrador, "mostrador");
         pantallas.add(panelDeposito, "deposito");
 
+        panelReglas.getBotonEmpezar().addActionListener(new Empezar());
         panelMostrador.getBotonIr().addActionListener(new IrAlDeposito());
         for (int i = 0; i < 6; i++) {
             PanelContenedor panel = panelDeposito.getPanel(i);
@@ -44,6 +48,14 @@ public class VentanaJuego extends JFrame {
 
     public void mostrarMensaje(String texto) {
         panelDeposito.mostrarMensaje(texto);
+    }
+
+    private class Empezar implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            cartas.show(pantallas, "mostrador");
+            panelMostrador.actualizar();
+        }
     }
 
     private class IrAlDeposito implements ActionListener {

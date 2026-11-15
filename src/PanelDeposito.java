@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.Font;
 
 public class PanelDeposito extends JPanel {
     private static final String[] CODIGOS = {"H1", "H2", "H3", "E1", "E2", "E3"};
@@ -13,13 +14,13 @@ public class PanelDeposito extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBackground(Colores.PARED_DEPOSITO);
 
-        etiquetaPedido = etiqueta("");
+        etiquetaPedido = etiqueta("", Fuentes.texto(18f));
         add(etiquetaPedido);
 
-        add(etiqueta("HELADERA"));
+        add(etiqueta("HELADERA", Fuentes.titulo(22f)));
         for (int i =0; i < paneles.length; i++) {
             if (i ==3) {
-                add(etiqueta("ESTANTES"));
+                add(etiqueta("ESTANTES", Fuentes.titulo(22f)));
             }
             if (i < 3) {
                 paneles[i] = new PanelContenedor(juego.getContenedor(CODIGOS[i]), Colores.CARTEL_FRIO);
@@ -28,21 +29,23 @@ public class PanelDeposito extends JPanel {
             }
             add(paneles[i]);
         }
-        etiquetaMensaje = etiqueta(" ");
+        etiquetaMensaje = etiqueta(" ", Fuentes.texto(16f));
         add(etiquetaMensaje);
 
         actualizar();
     }
 
-    private JLabel etiqueta(String texto) {
+    private JLabel etiqueta(String texto, Font fuente) {
         JLabel etiqueta = new JLabel(texto);
         etiqueta.setForeground(Colores.CREMA);
+        etiqueta.setFont(fuente);
         return etiqueta;
     }
 
     public void actualizar() {
         for (int i = 0; i < paneles.length; i++) {
-            paneles[i].actualizar();
+            paneles[i].actualizar(!juego.esRetiro());
+            paneles[i].setActivo(!juego.estaTerminado());
         }
 
         Quimico pedido = juego.getPedido();

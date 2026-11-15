@@ -18,31 +18,37 @@ public class PanelMostrador extends JPanel {
         etiquetaTurno = new JLabel();
         etiquetaTurno.setBounds(20, 20, 200, 30);
         add(etiquetaTurno);
-        setForeground(Colores.CREMA);
+        etiquetaTurno.setForeground(Colores.CREMA);
+        etiquetaTurno.setFont(Fuentes.titulo(22f));
 
         etiquetaPuntaje = new JLabel();
         etiquetaPuntaje.setBounds(800, 20, 200, 30);
         add(etiquetaPuntaje);
-        setForeground(Colores.CREMA);
+        etiquetaPuntaje.setForeground(Colores.CREMA);
+        etiquetaPuntaje.setFont(Fuentes.titulo(22f));
 
         etiquetaVisitante = new JLabel();
         etiquetaVisitante.setBounds(260, 192, 128, 180);
         add(etiquetaVisitante);
-        setForeground(Colores.CREMA);
+        etiquetaVisitante.setForeground(Colores.CREMA);
+        etiquetaVisitante.setFont(Fuentes.texto(14f));
 
         etiquetaNombre = new JLabel();
         etiquetaNombre.setBounds(420, 230, 400, 30);
         add(etiquetaNombre);
-        setForeground(Colores.CREMA);
+        etiquetaNombre.setForeground(Colores.CREMA);
+        etiquetaNombre.setFont(Fuentes.titulo(26f));
 
         etiquetaPedido = new JLabel();
         etiquetaPedido.setBounds(420, 270, 400, 30);
         add(etiquetaPedido);
-        setForeground(Colores.CREMA);
+        etiquetaPedido.setForeground(Colores.CREMA);
+        etiquetaPedido.setFont(Fuentes.texto(18f));
 
         botonIr = new JButton("Ir al depósito");
         botonIr.setBackground(Colores.ROSA);
         botonIr.setForeground(Colores.TINTA);
+        botonIr.setFont(Fuentes.titulo(18f));
         botonIr.setOpaque(true);
         botonIr.setFocusPainted(false);
         botonIr.setBorder(BorderFactory.createLineBorder(Colores.TINTA, 3));
@@ -80,6 +86,40 @@ public class PanelMostrador extends JPanel {
             etiquetaPedido.setText("Viene a retirar: " + pedido.getNombre() + " " + temperatura);
         } else {
             etiquetaPedido.setText("Viene a dejar: " + pedido.getNombre() + " " + temperatura);
+        }
+
+        animarLlegada();
+    }
+
+    private void animarLlegada() {
+        Thread hilo = new Thread(new LlegadaVisitante());
+        hilo.start();
+    }
+
+    private class LlegadaVisitante implements Runnable {
+        @Override
+        public void run() {
+            for (int x = -140; x<= 260; x = x + 8) {
+                SwingUtilities.invokeLater(new MoverVisitante(x));
+                try {
+                    Thread.sleep(15);
+                } catch (InterruptedException e) {
+                    return;
+                }
+            }
+        }
+    }
+
+    private class MoverVisitante implements Runnable {
+        private int x;
+
+        public MoverVisitante(int x) {
+            this.x = x;
+        }
+
+        @Override
+        public void run() {
+            etiquetaVisitante.setLocation(x, 192);
         }
     }
 

@@ -1,4 +1,4 @@
-public abstract class Quimico {
+public abstract class Quimico implements Dibujable {
     protected boolean necesitaFrio;
 
     public Quimico(boolean necesitaFrio) {
@@ -27,6 +27,4 @@ public abstract class Quimico {
     public abstract boolean esCompatibleCon(Quimico otro);
 
     public abstract String getNombre();
-
-    public abstract String getImagen();
 }

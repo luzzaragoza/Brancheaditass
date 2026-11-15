@@ -165,6 +165,8 @@ public class Juego {
         boolean vuelvePorCanjeado = (int) (Math.random() * VUELVE_POR_CANJEADO) == 0;
         if (vuelvePorCanjeado && cantidadCanjeados > 0) {
             elegirRetiro(canjeados[(int) (Math.random() * cantidadCanjeados)]);
+        } else if (cantidadEntregables > 0) {
+            elegirRetiro(entregables [(int) (Math.random() * cantidadCanjeados)]);
         } else {
             generarPedidoDeDejar();
         }
