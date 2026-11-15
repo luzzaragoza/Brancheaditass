@@ -25,7 +25,7 @@ public class Deposito {
             throw new JugadaInvalidaException("¡NO EXISTE!", "No hay ningún contenedor " + codigo + ".");
         }
         if (c.estaLleno()) {
-            throw new JugadaInvalidaException("¡NO ENTRA!", codigo + " ya tiene 4 químicos: había que canjearlo o guardar en otro.");
+            throw new JugadaInvalidaException("¡NO ENTRA!", codigo + " ya tiene " + c.getLugares() + " químicos: había que canjearlo o guardar en otro.");
         }
         if (!c.aceptaTemperatura(q)) {
             throw new JugadaInvalidaException("¡SE ARRUINÓ!", "Guardaste " + q.getNombre() + " que necesita "
@@ -94,7 +94,7 @@ public class Deposito {
         }
         if (!c.estaLleno()) {
             throw new JugadaInvalidaException("NO SE PUEDE CANJEAR", codigo
-                    + " no está lleno. Solo se puede canjear uno lleno (4 químicos).");
+                    + " no está lleno. Solo se puede canjear uno lleno (" + c.getLugares() + " químicos).");
         }
         c.vaciar();
     }

@@ -80,7 +80,7 @@ public class Juego {
             return false;
         }
         if (tipoPedido == TipoPedido.DEJAR && estaLleno(codigo)) {
-            aviso = codigo + " ya tiene 4 químicos: canjealo o guardá en otro.";
+            aviso = codigo + " ya tiene " + deposito.buscar(codigo).getLugares() + " químicos: canjealo o guardá en otro.";
             return false;
         }
 
@@ -330,6 +330,15 @@ public class Juego {
 
     public String getAviso() {
         return aviso;
+    }
+
+    public String getImagenEncargada() {
+        for (Visitante v : todosLosVisitantes) {
+            if (v.getNombre().equals(encargada)) {
+                return v.getImagen();
+            }
+        }
+        return "";
     }
 
     public String getEncargada() {

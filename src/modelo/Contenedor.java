@@ -3,7 +3,7 @@ package modelo;
 import java.util.ArrayList;
 
 public abstract class Contenedor {
-    private static final int LUGARES = 4;
+    public static final int LUGARES = 4;
     protected String codigo;
     protected int lugares;
     protected ArrayList<Quimico> quimicos;

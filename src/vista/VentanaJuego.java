@@ -39,7 +39,7 @@ public class VentanaJuego extends JFrame {
         panelDeposito.getBotonVolver().addActionListener(new VolverAlMostrador());
         for (int i = 0; i < 6; i++) {
             PanelContenedor panel = panelDeposito.getPanel(i);
-            for (int j = 0; j < 4; j++) {
+            for (int j = 0; j < panel.getCantidadCasillas(); j++) {
                 panel.getCasilla(j).addActionListener(new ClicCasilla(i, j));
             }
             panel.getBotonCanjear().addActionListener(new Canjear(i));
