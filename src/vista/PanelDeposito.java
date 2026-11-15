@@ -39,9 +39,8 @@ public class PanelDeposito extends JPanel {
         etiquetaLlevas.setHorizontalAlignment(SwingConstants.RIGHT);
         barra.add(etiquetaLlevas);
         cuadradito = new JLabel();
-        cuadradito.setOpaque(true);
         cuadradito.setBorder(BorderFactory.createLineBorder(Colores.CREMA, 2));
-        cuadradito.setBounds(452, 15, 26, 26);
+        cuadradito.setBounds(450, 13, 30, 30);
         barra.add(cuadradito);
         etiquetaPedido = texto("", Fuentes.texto(17f), Colores.CREMA, 490, 14, 300, 28);
         barra.add(etiquetaPedido);
@@ -81,9 +80,10 @@ public class PanelDeposito extends JPanel {
         // la encargada, entre la heladera y los estantes
         globoPedido = new JLabel();
         globoPedido.setOpaque(true);
+        globoPedido.setBackground(Colores.CREMA);
         globoPedido.setHorizontalAlignment(SwingConstants.CENTER);
-        globoPedido.setBorder(BorderFactory.createMatteBorder(2, 2, 4, 2, Colores.TINTA));
-        globoPedido.setBounds(484, 432, 56, 78);
+        globoPedido.setBorder(BorderFactory.createLineBorder(Colores.TINTA, 3));
+        globoPedido.setBounds(484, 460, 56, 56);
         add(globoPedido);
         etiquetaEncargada = new JLabel();
         etiquetaEncargada.setBounds(480, 524, 64, 90);
@@ -169,19 +169,17 @@ public class PanelDeposito extends JPanel {
         } else {
             temperatura = "calor";
         }
-        cuadradito.setBackground(Colores.de(pedido));
-        globoPedido.setBackground(Colores.de(pedido));
-        globoPedido.setIcon(imagen(pedido.getImagen()));
+        cuadradito.setIcon(imagen("icono_" + pedido.getImagen()));
 
         if (juego.esRetiro()) {
             etiquetaLlevas.setText("TE PIDEN");
             etiquetaPedido.setText(pedido.getNombre() + " · estaba en " + temperatura);
-            globoPedido.setVisible(false);
+            globoPedido.setIcon(imagen("ticket.png"));
             mostrarMensaje("Hacé clic en el químico que vas a entregar. Si sacás uno del medio, se corren.");
         } else {
             etiquetaLlevas.setText("LLEVÁS");
             etiquetaPedido.setText(pedido.getNombre() + " · necesita " + temperatura);
-            globoPedido.setVisible(true);
+            globoPedido.setIcon(imagen("frasco_" + pedido.getImagen()));
             mostrarMensaje("Hacé clic en el estante donde va " + el + nombre + ". Entra al final de la fila.");
         }
 
