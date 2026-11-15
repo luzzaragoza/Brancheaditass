@@ -17,6 +17,7 @@ public class PanelDeposito extends JPanel {
     private PanelContenedor[] paneles = new PanelContenedor[CODIGOS.length];
     private JLabel globoPedido;
     private JLabel etiquetaMensaje;
+    private JLabel etiquetaEncargada;
     private JLabel etiquetaAyuda;
     private JButton botonVolver;
 
@@ -81,9 +82,9 @@ public class PanelDeposito extends JPanel {
         globoPedido.setBorder(BorderFactory.createMatteBorder(2, 2, 4, 2, Colores.TINTA));
         globoPedido.setBounds(484, 432, 56, 78);
         add(globoPedido);
-        JLabel encargada = new JLabel(imagen(juego.getEncargada().toLowerCase().replace(" ", "") + "_x2.png"));
-        encargada.setBounds(480, 524, 64, 90);
-        add(encargada);
+        etiquetaEncargada = new JLabel();
+        etiquetaEncargada.setBounds(480, 524, 64, 90);
+        add(etiquetaEncargada);
 
         // la parte de abajo
         JPanel piso = new JPanel(null);
@@ -140,6 +141,7 @@ public class PanelDeposito extends JPanel {
     }
 
     public void actualizar() {
+        etiquetaEncargada.setIcon(imagen(juego.getEncargada().toLowerCase().replace(" ", "") + "_x2.png"));
         etiquetaTurno.setText("TURNO " + juego.getTurno());
         etiquetaPuntaje.setText("" + juego.getPuntaje());
 

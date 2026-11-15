@@ -159,6 +159,7 @@ public class PanelMostrador extends JPanel {
     }
 
     public void actualizar() {
+        etiquetaEncargada.setIcon(imagen(imagenEncargada("_x4.png")));
         etiquetaTurno.setText("TURNO " + juego.getTurno());
         etiquetaPuntaje.setText("" + juego.getPuntaje());
 

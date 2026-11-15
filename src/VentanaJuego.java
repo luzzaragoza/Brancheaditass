@@ -9,6 +9,7 @@ public class VentanaJuego extends JFrame {
     private PanelMostrador panelMostrador;
     private PanelDeposito panelDeposito;
     private PanelReglas panelReglas;
+    private PanelInicio panelInicio;
 
     public VentanaJuego(Juego juego) {
         this.juego = juego;
@@ -20,13 +21,16 @@ public class VentanaJuego extends JFrame {
         pantallas = new JPanel(cartas);
         pantallas.setPreferredSize(new Dimension(1024, 720));
 
+        panelInicio = new PanelInicio(juego.getEncargada());
         panelReglas = new PanelReglas();
         panelMostrador = new PanelMostrador(juego);
         panelDeposito = new PanelDeposito(juego);
+        pantallas.add(panelInicio, "inicio");
         pantallas.add(panelReglas, "reglas");
         pantallas.add(panelMostrador, "mostrador");
         pantallas.add(panelDeposito, "deposito");
 
+        panelInicio.getBotonSeguir().addActionListener(new ElegirEncargada());
         panelReglas.getBotonEmpezar().addActionListener(new Empezar());
         panelMostrador.getBotonIr().addActionListener(new IrAlDeposito());
         panelDeposito.getBotonVolver().addActionListener(new VolverAlMostrador());
@@ -56,6 +60,14 @@ public class VentanaJuego extends JFrame {
     public void mostrarFinal() {
         pantallas.add(new PantallaFinal(juego), "final");
         cartas.show(pantallas, "final");
+    }
+
+    private class ElegirEncargada implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            juego.elegirEncargada(panelInicio.getElegida());
+            cartas.show(pantallas, "reglas");
+        }
     }
 
     private class Empezar implements ActionListener {
@@ -101,6 +113,10 @@ public class VentanaJuego extends JFrame {
                 return;
             }
             juego.jugar(codigo, posicion);
+            if (!juego.getAviso().isEmpty()) {
+                mostrarMensaje(juego.getAviso());
+                return;
+            }
             actualizarPantalla();
             if (juego.estaTerminado()) {
                 mostrarFinal();
