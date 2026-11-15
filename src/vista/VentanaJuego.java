@@ -16,7 +16,7 @@ public class VentanaJuego extends JFrame {
 
     public VentanaJuego(Juego juego) {
         this.juego = juego;
-        setTitle("Alquimia");
+        setTitle("Pocionella");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
 

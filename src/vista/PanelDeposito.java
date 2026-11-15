@@ -37,8 +37,8 @@ public class PanelDeposito extends JPanel {
         JPanel barra = new JPanel(null);
         barra.setBackground(Colores.TINTA);
         barra.setBounds(0, 0, 1024, 56);
-        barra.add(texto("ALQUIMIA", Fuentes.titulo(20f), Colores.CREMA, 20, 14, 110, 28));
-        barra.add(texto("· DEPÓSITO", Fuentes.texto(13f), Colores.LAVANDA, 122, 18, 120, 24));
+        barra.add(texto("POCIONELLA", Fuentes.titulo(20f), Colores.CREMA, 20, 14, 125, 28));
+        barra.add(texto("· DEPÓSITO", Fuentes.texto(13f), Colores.LAVANDA, 145, 18, 100, 24));
         etiquetaLlevas = texto("", Fuentes.texto(12f), Colores.LAVANDA, 250, 16, 110, 24);
         etiquetaLlevas.setHorizontalAlignment(SwingConstants.RIGHT);
         barra.add(etiquetaLlevas);
@@ -155,7 +155,8 @@ public class PanelDeposito extends JPanel {
     }
 
     public void actualizar() {
-        etiquetaEncargada.setIcon(imagen(juego.getEncargada().toLowerCase().replace(" ", "") + "_x2.png"));
+        // el depósito usa el dibujo chico (_x2) de la misma encargada
+        etiquetaEncargada.setIcon(imagen(juego.getImagenEncargada().replace("_x4", "_x2")));
         etiquetaTurno.setText("TURNO " + juego.getTurno());
         etiquetaPuntaje.setText("" + juego.getPuntaje());
         mostrarRecord();

@@ -39,8 +39,8 @@ public class PanelMostrador extends JPanel {
         JPanel barra = new JPanel(null);
         barra.setBackground(Colores.TINTA);
         barra.setBounds(0, 0, 1024, 56);
-        barra.add(texto("ALQUIMIA", Fuentes.titulo(20f), Colores.CREMA, 20, 14, 110, 28));
-        barra.add(texto("· MOSTRADOR", Fuentes.texto(13f), Colores.LAVANDA, 122, 18, 120, 24));
+        barra.add(texto("POCIONELLA", Fuentes.titulo(20f), Colores.CREMA, 20, 14, 125, 28));
+        barra.add(texto("· MOSTRADOR", Fuentes.texto(13f), Colores.LAVANDA, 145, 18, 100, 24));
         etiquetaTurno = texto("", Fuentes.titulo(18f), Colores.CREMA, 610, 14, 140, 28);
         etiquetaTurno.setHorizontalAlignment(SwingConstants.RIGHT);
         barra.add(etiquetaTurno);
@@ -83,7 +83,7 @@ public class PanelMostrador extends JPanel {
         etiquetaVisitante.setForeground(Colores.CREMA);
         escena.add(etiquetaVisitante);
 
-        etiquetaEncargada = new JLabel(imagen(imagenEncargada("_x4.png")));
+        etiquetaEncargada = new JLabel(imagen(juego.getImagenEncargada()));
         etiquetaEncargada.setBounds(636, 192, 128, 180);
         escena.add(etiquetaEncargada);
 
@@ -162,10 +162,6 @@ public class PanelMostrador extends JPanel {
         return new ImageIcon(url);
     }
 
-    private String imagenEncargada(String terminacion) {
-        return juego.getEncargada().toLowerCase().replace(" ", "") + terminacion;
-    }
-
     private String conArticulo(String nombre) {
         if (nombre.startsWith("Dra.")) {
             return "la " + nombre;
@@ -177,7 +173,7 @@ public class PanelMostrador extends JPanel {
     }
 
     public void actualizar() {
-        etiquetaEncargada.setIcon(imagen(imagenEncargada("_x4.png")));
+        etiquetaEncargada.setIcon(imagen(juego.getImagenEncargada()));
         etiquetaTurno.setText("TURNO " + juego.getTurno());
         etiquetaPuntaje.setText("" + juego.getPuntaje());
         mostrarRecord();
