@@ -126,7 +126,7 @@ public class PartidaConsola {
     private static void canjear(Scanner sc, Juego juego) {
         String llenos = contenedoresLlenos(juego);
         if (llenos.equals("")) {
-            System.out.println("Todavía no hay ningún contenedor lleno. Solo se puede canjear uno lleno (4 químicos).");
+            System.out.println("Todavía no hay ningún contenedor lleno. Solo se puede canjear uno lleno (" + Contenedor.LUGARES + " químicos).");
             return;
         }
 
@@ -167,11 +167,11 @@ public class PartidaConsola {
         System.out.println("- Tu trabajo es guardarlos bien. Si te equivocás, perdés.");
         System.out.println("- Hay 3 heladeras (H1, H2, H3) y 3 estantes (E1, E2, E3).");
         System.out.println("- Los químicos de frío van en heladeras y los de calor en estantes.");
-        System.out.println("- Cada contenedor es una fila de 4 lugares. El químico nuevo va al final.");
+        System.out.println("- Cada contenedor es una fila de " + Contenedor.LUGARES + " lugares. El químico nuevo va al final.");
         System.out.println("- Si sacás uno del medio, los de atrás se corren hacia adelante");
         System.out.println("  y pueden quedar juntos dos que no se llevan bien.");
         System.out.println("- Cada jugada bien hecha suma puntos. Los mejores 5 puntajes quedan en el TOP 5.");
-        System.out.println("- Si un contenedor se llena (4 químicos), escribí CANJE y se vacía.");
+        System.out.println("- Si un contenedor se llena (" + Contenedor.LUGARES + " químicos), escribí CANJE y se vacía.");
         System.out.println("- Escribí FIN para salir.");
         System.out.println();
         System.out.println("REGLAS: NO pueden quedar uno al lado del otro");
@@ -196,12 +196,12 @@ public class PartidaConsola {
 
     private static int leerCasilla(Scanner sc) {
         while (true) {
-            System.out.print("¿Qué casilla sacás? (1 a 4): ");
+            System.out.print("¿Qué casilla sacás? (1 a " + Contenedor.LUGARES + "): ");
             String texto = sc.nextLine().trim();
-            if (texto.length() == 1 && texto.charAt(0) >= '1' && texto.charAt(0) <= '4') {
+            if (texto.length() == 1 && texto.charAt(0) >= '1' && texto.charAt(0) - '0' <= Contenedor.LUGARES) {
                 return texto.charAt(0) - '0';
             }
-            System.out.println("Escribí un número del 1 al 4.");
+            System.out.println("Escribí un número del 1 al " + Contenedor.LUGARES + ".");
         }
     }
 

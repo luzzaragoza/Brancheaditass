@@ -14,15 +14,18 @@ public class PanelContenedor extends JPanel {
 
     private Contenedor contenedor;
     private Color fondo;
-    private JButton[] casillas = new JButton[4];
+    private JButton[] casillas;
     private JButton botonCanjear;
-    private Border[] bordes = new Border[4];
-    private JLabel[] etiquetas = new JLabel[4];
+    private Border[] bordes;
+    private JLabel[] etiquetas;
     private JLabel etiquetaCuenta;
 
     public PanelContenedor(Contenedor contenedor, Color fondo) {
         this.contenedor = contenedor;
         this.fondo = fondo;
+        casillas = new JButton[contenedor.getLugares()];
+        bordes = new Border[contenedor.getLugares()];
+        etiquetas = new JLabel[contenedor.getLugares()];
         setLayout(null);
         setOpaque(false);
         setSize(ANCHO, ALTO);
@@ -112,6 +115,10 @@ public class PanelContenedor extends JPanel {
         etiquetaCuenta.setText(cantidad + "/" + casillas.length);
         etiquetaCuenta.setVisible(!contenedor.estaLleno());
         botonCanjear.setVisible(contenedor.estaLleno());
+    }
+
+    public int getCantidadCasillas() {
+        return casillas.length;
     }
 
     public void setActivo(boolean activo) {
