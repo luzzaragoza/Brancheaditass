@@ -25,11 +25,11 @@ public class Ranking {
         return puntos > puntajes.get(puntajes.size() - 1).getPuntos();
     }
 
-    public void agregar(String iniciales, int puntos) {
+    public void agregar(String iniciales, int puntos, int turno) {
         if (!entra(puntos)) {
             return;
         }
-        puntajes.add(new Puntaje(iniciales, puntos));
+        puntajes.add(new Puntaje(iniciales, puntos, turno));
         Collections.sort(puntajes);
         if (puntajes.size() > CUPOS) {
             puntajes.remove(puntajes.size() - 1);
@@ -44,9 +44,12 @@ public class Ranking {
             String linea = lector.readLine();
             while (linea != null) {
                 String[] partes = linea.split(";");
-                if (partes.length == 2) {
+                if (partes.length == 3) {
                     try {
-                        puntajes.add(new Puntaje(partes[0], Integer.parseInt(partes[1])));
+                        String ini = partes[0].trim();
+                        int pts = Integer.parseInt(partes[1].trim());
+                        int trn = Integer.parseInt(partes[2].trim());
+                        puntajes.add(new Puntaje(ini, pts, trn));
                     } catch (NumberFormatException e) {
                         // línea mal escrita: se ignora
                     }
@@ -75,7 +78,7 @@ public class Ranking {
         try {
             escritor = new PrintWriter(new FileWriter(ARCHIVO));
             for (Puntaje p : puntajes) {
-                escritor.println(p.getIniciales() + ";" + p.getPuntos());
+                escritor.println(p.getIniciales() + ";" + p.getPuntos() + ";" + p.getTurno());
             }
         } catch (IOException e) {
             System.out.println("No se pudo guardar el top 5: " + e.getMessage());
@@ -96,5 +99,9 @@ public class Ranking {
 
     public int getPuntaje(int posicion) {
         return puntajes.get(posicion).getPuntos();
+    }
+
+    public int getTurno(int posicion) {
+        return puntajes.get(posicion).getTurno();
     }
 }

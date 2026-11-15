@@ -142,7 +142,7 @@ public class PantallaFinal extends JPanel {
             aviso.setText("Tienen que ser exactamente 3 letras.");
             return;
         }
-        ranking.agregar(letras, juego.getPuntaje());
+        ranking.agregar(letras, juego.getPuntaje(), juego.getTurno());
         contenido.remove(panelLetras);
         actualizarRanking();
         contenido.revalidate();
@@ -172,7 +172,8 @@ public class PantallaFinal extends JPanel {
             panelRanking.add(centrar(vacio));
         }
         for (int i = 0; i < ranking.getCantidad(); i++) {
-            JLabel fila = new JLabel((i + 1) + ". " + ranking.getIniciales(i) + "   " + ranking.getPuntaje(i));
+            JLabel fila = new JLabel((i + 1) + ". " + ranking.getIniciales(i)
+                    + "   " + ranking.getPuntaje(i) + " (Turno " + ranking.getTurno(i) + ")");
             fila.setFont(Fuentes.texto(14f));
             fila.setForeground(Colores.CREMA);
             panelRanking.add(centrar(fila));

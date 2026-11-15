@@ -71,7 +71,7 @@ public class PartidaConsola {
             System.out.println();
             System.out.println("¡Tu puntaje entra al TOP 5!");
             String iniciales = leerIniciales(sc);
-            ranking.agregar(iniciales, juego.getPuntaje());
+            ranking.agregar(iniciales, juego.getPuntaje(), juego.getTurno());
         }
         mostrarRanking(ranking);
     }
@@ -103,7 +103,8 @@ public class PartidaConsola {
             System.out.println("Todavía no hay puntajes.");
         }
         for (int i = 0; i < ranking.getCantidad(); i++) {
-            System.out.println((i + 1) + ". " + ranking.getIniciales(i) + "  " + ranking.getPuntaje(i));
+            System.out.println((i + 1) + ". " + ranking.getIniciales(i) + "  "
+                    + ranking.getPuntaje(i) + " (Turno " + ranking.getTurno(i) + ")");
         }
         System.out.println();
     }
