@@ -11,7 +11,7 @@ public class Acido extends Quimico {
 
     @Override
     public String getNombre() {
-        return "Acido";
+        return "Ácido";
     }
 
     @Override
