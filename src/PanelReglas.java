@@ -39,7 +39,7 @@ public class PanelReglas extends JPanel {
 
         JPanel tarjeta2 = tarjeta(2, "Nunca dos del mismo grupo pegados",
                 "Ácido y Base son un grupo; Inflamable y Oxidante, el otro. Se alternan, y tampoco van dos iguales.", 360);
-        String[] dibujos = {"acido.png", "inflamable.png", "base.png", "oxidante.png"};
+        Quimico[] dibujos = {new Acido(true), new Inflamable(true), new Base(true), new Oxidante(true)};
         for (int i = 0; i < dibujos.length; i++) {
             tarjeta2.add(dibujo(dibujos[i], 20 + i * 50, 82));
         }
@@ -51,9 +51,9 @@ public class PanelReglas extends JPanel {
 
         JPanel tarjeta3 = tarjeta(3, "Si sacás uno del medio, se corren",
                 "Lo nuevo entra siempre al final. Al retirar, los que quedan pegados también se tienen que llevar bien.", 680);
-        tarjeta3.add(dibujo("acido.png", 20, 82));
-        tarjeta3.add(dibujo("inflamable.png", 70, 82));
-        tarjeta3.add(dibujo("base.png", 120, 82));
+        tarjeta3.add(dibujo(new Acido(true), 20, 82));
+        tarjeta3.add(dibujo(new Inflamable(true), 70, 82));
+        tarjeta3.add(dibujo(new Base(true), 120, 82));
         JLabel sale = new JLabel("<html>Si sale el inflamable,<br>ácido y base quedan<br>pegados: ✘</html>");
         sale.setForeground(Colores.TINTA);
         sale.setBounds(172, 82, 130, 63);
@@ -127,13 +127,16 @@ public class PanelReglas extends JPanel {
         return cartel;
     }
 
-    private JLabel dibujo(String archivo, int x, int y) {
+    private JLabel dibujo(Quimico q, int x, int y) {
         JLabel dibujo = new JLabel();
-        URL url = getClass().getResource("/img/" + archivo);
+        URL url = getClass().getResource("/img/" + q.getImagen());
         if (url != null) {
             dibujo.setIcon(new ImageIcon(url));
         }
-        dibujo.setBounds(x, y, 46, 63);
+        dibujo.setOpaque(true);
+        dibujo.setBackground(Colores.de(q));
+        dibujo.setBorder(BorderFactory.createMatteBorder(2, 2, 4, 2, Colores.TINTA));
+        dibujo.setBounds(x, y, 50, 69);
         return dibujo;
     }
 

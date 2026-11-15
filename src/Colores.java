@@ -13,4 +13,24 @@ public class Colores {
     public static final Color LUZ = new Color(185, 150, 255);
     public static final Color SOFI1 = new Color(255, 108, 159);
     public static final Color SOFI2 = new Color(230, 125, 208);
+    public static final Color ACIDO = new Color(99, 217, 160);
+    public static final Color BASE = new Color(111, 155, 255);
+    public static final Color INFLAMABLE = new Color(255, 122, 89);
+    public static final Color OXIDANTE = new Color(255, 210, 77);
+
+    public static Color de(Quimico q) {
+        if (q instanceof Acido) {
+            return ACIDO;
+        }
+        if (q instanceof Base) {
+            return BASE;
+        }
+        if (q instanceof Inflamable) {
+            return INFLAMABLE;
+        }
+        if (q instanceof Oxidante) {
+            return OXIDANTE;
+        }
+        return CREMA;
+    }
 }

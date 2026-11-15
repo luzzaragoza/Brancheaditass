@@ -66,6 +66,7 @@ public class PanelContenedor extends JPanel {
             etiquetas[i].setText("" + (i + 1));
             if (i < cantidad) {
                 Quimico q = contenedor.getQuimico(i);
+                casillas[i].setBackground(Colores.de(q));
                 URL url = getClass().getResource("/img/" + q.getImagen());
                 if (url != null) {
                     casillas[i].setIcon(new ImageIcon(url));
@@ -79,10 +80,12 @@ public class PanelContenedor extends JPanel {
                     etiquetas[i].setText("último");
                 }
             } else if (i == cantidad && esDejar) {
+                casillas[i].setBackground(Colores.CREMA);
                 casillas[i].setIcon(null);
                 casillas[i].setText("+");
                 bordes[i] = BorderFactory.createDashedBorder(Colores.APAGADO, 3, 6, 4, false);
             } else {
+                casillas[i].setBackground(Colores.CREMA);
                 casillas[i].setIcon(null);
                 casillas[i].setText("");
                 bordes[i] = BorderFactory.createLineBorder(Colores.APAGADO, 1);
