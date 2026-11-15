@@ -7,7 +7,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
@@ -27,26 +29,33 @@ public class PantallaFinal extends JPanel {
     public PantallaFinal(Juego juego) {
         this.juego = juego;
         setLayout(new GridBagLayout());
+        setBackground(Colores.FONDO);
 
         contenido.setLayout(new BoxLayout(contenido, BoxLayout.Y_AXIS));
+        contenido.setBackground(Colores.FONDO);
         contenido.setBorder(BorderFactory.createEmptyBorder(20, 30, 20, 30));
 
         JLabel titulo = new JLabel(juego.getTitulo());
         titulo.setFont(Fuentes.titulo(40f));
+        titulo.setForeground(Colores.ROSA);
         contenido.add(centrar(titulo));
+        contenido.add(centrar(new JLabel(" ")));
 
         JLabel cara = armarCara();
         if (cara != null) {
             contenido.add(centrar(cara));
+            contenido.add(centrar(new JLabel(" ")));
         }
 
         JLabel motivo = new JLabel("<html><body style='width:420px; text-align:center'>" + juego.getMotivo() + "</body></html>");
-        motivo.setFont(Fuentes.texto(16f));
+        motivo.setFont(Fuentes.texto(14f));
+        motivo.setForeground(Colores.CREMA);
         contenido.add(centrar(motivo));
         contenido.add(centrar(new JLabel(" ")));
 
         JLabel resumen = new JLabel("Turno: " + juego.getTurno() + "     Puntaje: " + juego.getPuntaje());
-        resumen.setFont(Fuentes.texto(18f));
+        resumen.setFont(Fuentes.titulo(20f));
+        resumen.setForeground(Colores.CREMA);
         contenido.add(centrar(resumen));
         contenido.add(centrar(new JLabel(" ")));
 
@@ -56,6 +65,7 @@ public class PantallaFinal extends JPanel {
         }
 
         panelRanking.setLayout(new BoxLayout(panelRanking, BoxLayout.Y_AXIS));
+        panelRanking.setBackground(Colores.FONDO);
         actualizarRanking();
         contenido.add(centrar(panelRanking));
         contenido.add(centrar(new JLabel(" ")));
@@ -67,6 +77,15 @@ public class PantallaFinal extends JPanel {
     private JComponent centrar(JComponent componente) {
         componente.setAlignmentX(Component.CENTER_ALIGNMENT);
         return componente;
+    }
+
+    private void pintarBoton(JButton boton, Color fondo) {
+        boton.setBackground(fondo);
+        boton.setForeground(Colores.TINTA);
+        boton.setFont(Fuentes.titulo(16f));
+        boton.setOpaque(true);
+        boton.setFocusPainted(false);
+        boton.setBorder(BorderFactory.createMatteBorder(2, 2, 4, 2, Colores.TINTA));
     }
 
     private JLabel armarCara() {
@@ -83,14 +102,31 @@ public class PantallaFinal extends JPanel {
 
     private void armarPanelLetras() {
         panelLetras.setLayout(new BoxLayout(panelLetras, BoxLayout.Y_AXIS));
+        panelLetras.setBackground(Colores.FONDO);
+
         JLabel texto = new JLabel("¡Tu puntaje entra al TOP 5! Escribí tus 3 letras:");
-        JButton guardar = new JButton("Guardar");
+        texto.setFont(Fuentes.texto(14f));
+        texto.setForeground(Colores.CREMA);
+
+        campoLetras.setMaximumSize(new Dimension(100, 32));
+        campoLetras.setHorizontalAlignment(JTextField.CENTER);
+        campoLetras.setFont(Fuentes.titulo(18f));
+        campoLetras.setBackground(Colores.CREMA);
+        campoLetras.setForeground(Colores.TINTA);
+        campoLetras.setBorder(BorderFactory.createLineBorder(Colores.ROSA, 2));
+
+        JButton guardar = new JButton(" Guardar ");
+        pintarBoton(guardar, Colores.ROSA);
         guardar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 guardarPuntaje();
             }
         });
+
+        aviso.setFont(Fuentes.texto(14f));
+        aviso.setForeground(Colores.ROSA);
+
         panelLetras.add(centrar(texto));
         panelLetras.add(centrar(campoLetras));
         panelLetras.add(centrar(guardar));
@@ -122,14 +158,20 @@ public class PantallaFinal extends JPanel {
     private void actualizarRanking() {
         panelRanking.removeAll();
         JLabel encabezado = new JLabel("----- TOP 5 -----");
-        encabezado.setFont(Fuentes.titulo(22f));
+        encabezado.setFont(Fuentes.titulo(20f));
+        encabezado.setForeground(Colores.ROSA);
         panelRanking.add(centrar(encabezado));
+
         if (ranking.getCantidad() == 0) {
-            panelRanking.add(centrar(new JLabel("Todavía no hay puntajes.")));
+            JLabel vacio = new JLabel("Todavía no hay puntajes.");
+            vacio.setFont(Fuentes.texto(14f));
+            vacio.setForeground(Colores.APAGADO);
+            panelRanking.add(centrar(vacio));
         }
         for (int i = 0; i < ranking.getCantidad(); i++) {
             JLabel fila = new JLabel((i + 1) + ". " + ranking.getIniciales(i) + "   " + ranking.getPuntaje(i));
-            fila.setFont(Fuentes.texto(16f));
+            fila.setFont(Fuentes.texto(14f));
+            fila.setForeground(Colores.CREMA);
             panelRanking.add(centrar(fila));
         }
         panelRanking.revalidate();
@@ -138,7 +180,10 @@ public class PantallaFinal extends JPanel {
 
     private JPanel armarBotones() {
         JPanel botones = new JPanel();
-        JButton otraVez = new JButton("Jugar de nuevo");
+        botones.setBackground(Colores.FONDO);
+
+        JButton otraVez = new JButton(" Jugar de nuevo ");
+        pintarBoton(otraVez, Colores.ROSA);
         otraVez.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -148,13 +193,16 @@ public class PantallaFinal extends JPanel {
                 new VentanaJuego(new Juego(encargada));
             }
         });
-        JButton salir = new JButton("Salir");
+
+        JButton salir = new JButton(" Salir ");
+        pintarBoton(salir, Colores.CREMA);
         salir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
             }
         });
+
         botones.add(otraVez);
         botones.add(salir);
         return botones;
