@@ -53,6 +53,11 @@ public class VentanaJuego extends JFrame {
         panelDeposito.mostrarMensaje(texto);
     }
 
+    public void mostrarFinal() {
+        pantallas.add(new PantallaFinal(juego), "final");
+        cartas.show(pantallas, "final");
+    }
+
     private class Empezar implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -95,12 +100,12 @@ public class VentanaJuego extends JFrame {
                 mostrarMensaje("Esa casilla está vacía. Hacé clic en una que tenga un químico.");
                 return;
             }
-            boolean salioBien = juego.jugar(codigo, posicion);
+            juego.jugar(codigo, posicion);
             actualizarPantalla();
-            if (salioBien) {
-                cartas.show(pantallas, "mostrador");
+            if (juego.estaTerminado()) {
+                mostrarFinal();
             } else {
-                mostrarMensaje("Perdiste: " + juego.getMotivo());
+                cartas.show(pantallas, "mostrador");
             }
         }
     }
@@ -120,7 +125,7 @@ public class VentanaJuego extends JFrame {
             juego.canjear(panelDeposito.getCodigo(estante));
             actualizarPantalla();
             if (juego.estaTerminado()) {
-                mostrarMensaje("Perdiste: " + juego.getMotivo());
+                mostrarFinal();
             } else {
                 mostrarMensaje("¡Canjeaste! Puntaje: " + juego.getPuntaje());
             }
