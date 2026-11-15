@@ -86,10 +86,9 @@ public class PanelMostrador extends JPanel {
         // la tarjeta del pedido
         JPanel tarjeta = caja(Colores.CREMA, 20, 520, 668, 178);
         cajaIcono = new JLabel();
-        cajaIcono.setOpaque(true);
         cajaIcono.setHorizontalAlignment(SwingConstants.CENTER);
-        cajaIcono.setBorder(BorderFactory.createLineBorder(Colores.TINTA, 3));
-        cajaIcono.setBounds(22, 22, 120, 134);
+        cajaIcono.setBorder(BorderFactory.createMatteBorder(3, 3, 6, 3, Colores.TINTA));
+        cajaIcono.setBounds(40, 18, 98, 135);
         tarjeta.add(cajaIcono);
         tarjeta.add(texto("PEDIDO", Fuentes.texto(13f), Colores.APAGADO, 162, 30, 60, 24));
         chipTipo = texto("", Fuentes.titulo(13f), Colores.TINTA, 226, 30, 76, 24);
@@ -185,7 +184,7 @@ public class PanelMostrador extends JPanel {
         String nombre = pedido.getNombre().toLowerCase();
         String un = "un ";
         String el = "el ";
-        if (pedido instanceof Base) {
+        if (pedido.esFemenino()) {
             un = "una ";
             el = "la ";
         }
@@ -198,7 +197,6 @@ public class PanelMostrador extends JPanel {
             chipTemperatura.setBackground(Colores.CARTEL_CALOR);
         }
 
-        cajaIcono.setBackground(Colores.de(pedido));
         ImageIcon dibujo = imagen(pedido.getImagen());
         if (dibujo != null) {
             Image grande = dibujo.getImage().getScaledInstance(92, 126, Image.SCALE_REPLICATE);

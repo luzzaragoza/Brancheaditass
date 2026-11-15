@@ -81,10 +81,11 @@ public class PanelContenedor extends JPanel {
             etiquetas[i].setText("" + (i + 1));
             if (i < cantidad) {
                 Quimico q = contenedor.getQuimico(i);
-                casillas[i].setBackground(Colores.de(q));
                 URL url = getClass().getResource("/img/" + q.getImagen());
                 if (url != null) {
-                    casillas[i].setIcon(new ImageIcon(url));
+                    ImageIcon dibujo = new ImageIcon(url);
+                    casillas[i].setIcon(dibujo);
+                    casillas[i].setDisabledIcon(dibujo);
                     casillas[i].setText("");
                 } else {
                     casillas[i].setIcon(null);

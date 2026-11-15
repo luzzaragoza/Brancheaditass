@@ -136,8 +136,6 @@ public class PanelReglas extends JPanel {
         if (url != null) {
             dibujo.setIcon(new ImageIcon(url));
         }
-        dibujo.setOpaque(true);
-        dibujo.setBackground(Colores.de(q));
         dibujo.setBorder(BorderFactory.createMatteBorder(2, 2, 4, 2, Colores.TINTA));
         dibujo.setBounds(x, y, 50, 69);
         return dibujo;
