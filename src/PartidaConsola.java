@@ -5,9 +5,24 @@ public class PartidaConsola {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Juego juego = new Juego();
+        Ranking ranking = new Ranking();
         mostrarBienvenida(sc);
 
+        boolean otraVez = true;
+        while (otraVez) {
+            Juego juego = new Juego();
+            jugarPartida(sc, juego);
+
+            if (!juego.estaTerminado()) {
+                break;
+            }
+            mostrarFinal(sc, juego, ranking);
+            otraVez = preguntarOtraVez(sc);
+        }
+        sc.close();
+    }
+
+    private static void jugarPartida(Scanner sc, Juego juego) {
         while (!juego.estaTerminado()) {
             mostrarDeposito(juego);
             mostrarPedido(juego);
@@ -20,7 +35,7 @@ public class PartidaConsola {
                 continue;
             }
             if (respuesta.equals("FIN")) {
-                break;
+                return;
             }
 
             if (respuesta.equals("CANJE")) {
@@ -29,18 +44,80 @@ public class PartidaConsola {
                 System.out.println("Ese contenedor no existe. Usá H1, H2, H3, E1, E2 o E3.");
             } else if (juego.esRetiro()) {
                 int casilla = leerCasilla(sc);
+                if (casilla > juego.getContenedor(respuesta).getCantidad()) {
+                    System.out.println("Esa casilla está vacía. Elegí una que tenga un químico.");
+                    continue;
+                }
                 juego.jugar(respuesta, casilla - 1);
             } else {
                 juego.jugar(respuesta, 0);
             }
         }
+    }
 
-        if (juego.estaTerminado()) {
+    private static void mostrarFinal(Scanner sc, Juego juego, Ranking ranking) {
+        System.out.println();
+        System.out.println("=====================================");
+        System.out.println("            FIN DE LA PARTIDA");
+        System.out.println("=====================================");
+        System.out.println(juego.getTitulo());
+        System.out.println(juego.getMotivo());
+        System.out.println("Turno: " + juego.getTurno() + "  Puntaje: " + juego.getPuntaje());
+
+        if (juego.getPuntaje() > 0 && ranking.entra(juego.getPuntaje())) {
             System.out.println();
-            System.out.println("PERDISTE: " + juego.getMotivo());
-            System.out.println("Turno: " + juego.getTurno() + "  Puntaje: " + juego.getPuntaje());
+            System.out.println("¡Tu puntaje entra al TOP 5!");
+            String iniciales = leerIniciales(sc);
+            ranking.agregar(iniciales, juego.getPuntaje());
         }
-        sc.close();
+        mostrarRanking(ranking);
+    }
+
+    private static String leerIniciales(Scanner sc) {
+        while (true) {
+            System.out.print("Escribí tus 3 letras: ");
+            String texto = sc.nextLine().trim().toUpperCase();
+            if (texto.length() == 3 && soloLetras(texto)) {
+                return texto;
+            }
+            System.out.println("Tienen que ser exactamente 3 letras.");
+        }
+    }
+
+    private static boolean soloLetras(String texto) {
+        for (int i = 0; i < texto.length(); i++) {
+            if (!Character.isLetter(texto.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static void mostrarRanking(Ranking ranking) {
+        System.out.println();
+        System.out.println("----- TOP 5 -----");
+        if (ranking.getCantidad() == 0) {
+            System.out.println("Todavía no hay puntajes.");
+        }
+        for (int i = 0; i < ranking.getCantidad(); i++) {
+            System.out.println((i + 1) + ". " + ranking.getIniciales(i) + "  " + ranking.getPuntaje(i));
+        }
+        System.out.println();
+    }
+
+    private static boolean preguntarOtraVez(Scanner sc) {
+        while (true) {
+            System.out.print("¿Jugar de nuevo? (S/N): ");
+            String texto = sc.nextLine().trim().toUpperCase();
+            if (texto.equals("S")) {
+                return true;
+            }
+            if (texto.equals("N")) {
+                System.out.println("¡Gracias por jugar!");
+                return false;
+            }
+            System.out.println("Escribí S o N.");
+        }
     }
 
     private static void canjear(Scanner sc, Juego juego) {
@@ -59,7 +136,7 @@ public class PartidaConsola {
         } else if (juego.canjear(codigo)) {
             System.out.println("Canje hecho. Puntaje: " + juego.getPuntaje());
         } else {
-            System.out.println("Ese contenedor no está lleno. Solo se puede canjear uno lleno (4 químicos).");
+            System.out.println("No se pudo canjear: el contenedor tiene que estar lleno.");
         }
     }
 
@@ -78,9 +155,9 @@ public class PartidaConsola {
     }
 
     private static void mostrarBienvenida(Scanner sc) {
-        System.out.println("========================================");
+        System.out.println("=====================================");
         System.out.println("   BIENVENIDO AL DEPÓSITO DE QUÍMICOS");
-        System.out.println("========================================");
+        System.out.println("=====================================");
         System.out.println();
         System.out.println("CÓMO JUGAR");
         System.out.println("- Vienen visitantes a dejar y a retirar químicos.");
@@ -90,7 +167,8 @@ public class PartidaConsola {
         System.out.println("- Cada contenedor es una fila de 4 lugares. El químico nuevo va al final.");
         System.out.println("- Si sacás uno del medio, los de atrás se corren hacia adelante");
         System.out.println("  y pueden quedar juntos dos que no se llevan bien.");
-        System.out.println("- Si un contenedor se llena (4 químicos), escribí CANJE y ganás " + Juego.PUNTOS_CANJE + " puntos.");
+        System.out.println("- Cada jugada bien hecha suma puntos. Los mejores 5 puntajes quedan en el TOP 5.");
+        System.out.println("- Si un contenedor se llena (4 químicos), escribí CANJE y se vacía.");
         System.out.println("- Escribí FIN para salir.");
         System.out.println();
         System.out.println("REGLAS: NO pueden quedar uno al lado del otro");
