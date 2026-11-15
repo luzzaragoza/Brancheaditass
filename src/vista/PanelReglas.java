@@ -46,9 +46,10 @@ public class PanelReglas extends JPanel {
         for (int i = 0; i < dibujos.length; i++) {
             tarjeta2.add(dibujo(dibujos[i], 20 + i * 50, 82));
         }
-        JLabel bien = new JLabel("✔ bien");
+        JLabel bien = new JLabel("<html>Así<br>va bien.</html>");
         bien.setForeground(Colores.TINTA);
-        bien.setBounds(222, 100, 70, 24);
+        bien.setFont(Fuentes.texto(13f));
+        bien.setBounds(224, 88, 70, 50);
         tarjeta2.add(bien);
         add(tarjeta2);
 
@@ -57,9 +58,11 @@ public class PanelReglas extends JPanel {
         tarjeta3.add(dibujo(new Acido(true), 20, 82));
         tarjeta3.add(dibujo(new Inflamable(true), 70, 82));
         tarjeta3.add(dibujo(new Base(true), 120, 82));
-        JLabel sale = new JLabel("<html>Si sale el inflamable,<br>ácido y base quedan<br>pegados: ✘</html>");
+        JLabel sale = new JLabel("<html>Si sacás el inflamable, ácido y base quedan pegados y explota.</html>");
         sale.setForeground(Colores.TINTA);
-        sale.setBounds(172, 82, 130, 63);
+        sale.setFont(Fuentes.texto(13f));
+        sale.setVerticalAlignment(SwingConstants.TOP);
+        sale.setBounds(176, 80, 114, 98);
         tarjeta3.add(sale);
         add(tarjeta3);
 
@@ -73,11 +76,12 @@ public class PanelReglas extends JPanel {
         botonEmpezar.setBounds(40, 590, 266, 58);
         add(botonEmpezar);
 
-        JLabel canje = new JLabel("<html>Estante lleno: podés canjearlo por puntos extra. Pero si "
+        JLabel canje = new JLabel("<html>Estante lleno: podés canjearlo por +" + Juego.PUNTOS_CANJE + ". Pero si "
                 + "después vuelven a buscar algo de ahí, perdés.</html>");
         canje.setForeground(Colores.CREMA);
         canje.setFont(Fuentes.texto(14f));
-        canje.setBounds(340, 590, 440, 50);
+        canje.setVerticalAlignment(SwingConstants.TOP);
+        canje.setBounds(340, 592, 440, 60);
         add(canje);
 
         JLabel equipo = new JLabel("Sofia1 · Sofia2 · Lyssie · Luz");
@@ -105,8 +109,9 @@ public class PanelReglas extends JPanel {
 
         JLabel etiquetaTitulo = new JLabel("<html>" + titulo + "</html>");
         etiquetaTitulo.setForeground(Colores.TINTA);
-        etiquetaTitulo.setFont(Fuentes.titulo(18f));
-        etiquetaTitulo.setBounds(58, 16, 230, 48);
+        etiquetaTitulo.setFont(Fuentes.titulo(16f));
+        etiquetaTitulo.setVerticalAlignment(SwingConstants.TOP);
+        etiquetaTitulo.setBounds(58, 22, 232, 60);
         tarjeta.add(etiquetaTitulo);
 
         JLabel etiquetaTexto = new JLabel("<html>" + texto + "</html>");
