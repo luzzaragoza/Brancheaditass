@@ -20,4 +20,9 @@ public class Base extends Quimico {
     public String getImagen() {
         return "base.png";
     }
+
+    @Override
+    public boolean esFemenino() {
+        return true;
+    }
 }

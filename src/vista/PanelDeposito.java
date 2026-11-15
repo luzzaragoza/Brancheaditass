@@ -160,7 +160,7 @@ public class PanelDeposito extends JPanel {
         Quimico pedido = juego.getPedido();
         String nombre = pedido.getNombre().toLowerCase();
         String el = "el ";
-        if (pedido instanceof Base) {
+        if (pedido.esFemenino()) {
             el = "la ";
         }
         String temperatura;

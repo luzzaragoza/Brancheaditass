@@ -26,6 +26,10 @@ public abstract class Quimico implements Dibujable {
         return "calor";
     }
 
+    public boolean esFemenino() {
+        return false;
+    }
+
     public abstract boolean esCompatibleCon(Quimico otro);
 
     public abstract String getNombre();
