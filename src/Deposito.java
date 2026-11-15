@@ -2,8 +2,6 @@ import java.util.HashMap;
 
 public class Deposito {
     private HashMap<String, Contenedor> contenedores = new HashMap<>();
-    private String ultimoMotivo = "";
-    private String ultimoTitulo = "";
 
     public Deposito() {
         contenedores.put("H1", new Heladera("H1"));
@@ -18,21 +16,18 @@ public class Deposito {
         return contenedores.get(codigo);
     }
 
-    public boolean guardar(Quimico q, String codigo) {
+    public void guardar(Quimico q, String codigo) throws JugadaInvalidaException {
         Contenedor c = buscar(codigo);
 
         if (c == null) {
-            perder("¡NO EXISTE!", "No hay ningún contenedor " + codigo + ".");
-            return false;
+            throw new JugadaInvalidaException("¡NO EXISTE!", "No hay ningún contenedor " + codigo + ".");
         }
         if (c.estaLleno()) {
-            perder("¡NO ENTRA!", codigo + " ya tiene 4 químicos: había que canjearlo o guardar en otro.");
-            return false;
+            throw new JugadaInvalidaException("¡NO ENTRA!", codigo + " ya tiene 4 químicos: había que canjearlo o guardar en otro.");
         }
         if (!c.aceptaTemperatura(q)) {
-            perder("¡SE ARRUINÓ!", "Guardaste " + q.getNombre() + " que necesita "
+            throw new JugadaInvalidaException("¡SE ARRUINÓ!", "Guardaste " + q.getNombre() + " que necesita "
                     + q.getTemperatura() + " en " + codigo + ".");
-            return false;
         }
         if (c.getCantidad() > 0) {
             Quimico ultimo = c.getQuimico(c.getCantidad() - 1);
@@ -41,45 +36,40 @@ public class Deposito {
                 if (ultimo.esDelMismoTipoQue(q)) {
                     titulo = "¡SE PUDRIERON!";
                 }
-                perder(titulo, "Pusiste " + q.getNombre() + " detrás de " + ultimo.getNombre()
-                        + " en " + codigo + ".");
-                return false;
+                throw new JugadaInvalidaException(titulo, "Pusiste " + q.getNombre() + " detrás de "
+                        + ultimo.getNombre() + " en " + codigo + ".");
             }
         }
 
         c.guardar(q);
-        limpiarMotivo();
-        return true;
     }
 
-    public boolean guardar(Quimico q) {
-        for (Contenedor c :
-        contenedores.values()) {
+    public void guardar(Quimico q) throws JugadaInvalidaException {
+        for (Contenedor c : contenedores.values()) {
             if (c.puedeGuardar(q)) {
-                return guardar(q, c.getCodigo());
+                guardar(q, c.getCodigo());
+                return;
             }
         }
-        perder("¡NO ENTRA!", q.getNombre() + " de " + q.getTemperatura() + " no entra en ningún contenedor.");
-        return false;
+        throw new JugadaInvalidaException("¡NO ENTRA!", q.getNombre() + " de " + q.getTemperatura()
+                + " no entra en ningún contenedor.");
     }
 
-    public boolean retirar(String codigo, int posicion, Quimico pedido) {
+    public void retirar(String codigo, int posicion, Quimico pedido) throws JugadaInvalidaException {
         Contenedor c = buscar(codigo);
         if (c == null) {
-            perder("¡NO EXISTE!", "No hay ningún contenedor " + codigo + ".");
-            return false;
+            throw new JugadaInvalidaException("¡NO EXISTE!", "No hay ningún contenedor " + codigo + ".");
         }
         if (posicion < 0 || posicion >= c.getCantidad()) {
-            perder("¡ESE NO ERA!", "Te pidieron " + pedido.getNombre() + " de " + pedido.getTemperatura()
-                    + " y elegiste una casilla vacía de " + codigo + ".");
-            return false;
+            throw new JugadaInvalidaException("¡ESE NO ERA!", "Te pidieron " + pedido.getNombre() + " de "
+                    + pedido.getTemperatura() + " y elegiste una casilla vacía de " + codigo + ".");
         }
 
         Quimico q = c.getQuimico(posicion);
         if (!q.coincideConPedido(pedido)) {
-            perder("¡ESE NO ERA!", "Te pidieron " + pedido.getNombre() + " de " + pedido.getTemperatura()
-                    + " y entregaste " + q.getNombre() + " de " + q.getTemperatura() + " de " + codigo + ".");
-            return false;
+            throw new JugadaInvalidaException("¡ESE NO ERA!", "Te pidieron " + pedido.getNombre() + " de "
+                    + pedido.getTemperatura() + " y entregaste " + q.getNombre() + " de "
+                    + q.getTemperatura() + " de " + codigo + ".");
         }
 
         boolean ok = c.sacar(posicion);
@@ -90,42 +80,20 @@ public class Deposito {
             if (antes.esDelMismoTipoQue(ahora)) {
                 titulo = "¡SE PUDRIERON!";
             }
-            perder(titulo, "Al sacar " + q.getNombre() + " de " + codigo + ", quedaron pegados "
-                    + antes.getNombre() + " y " + ahora.getNombre() + ".");
-            return false;
+            throw new JugadaInvalidaException(titulo, "Al sacar " + q.getNombre() + " de " + codigo
+                    + ", quedaron pegados " + antes.getNombre() + " y " + ahora.getNombre() + ".");
         }
-
-        limpiarMotivo();
-        return true;
     }
 
-    private void perder(String titulo, String motivo) {
-        ultimoTitulo = titulo;
-        ultimoMotivo = motivo;
-    }
-
-    private void limpiarMotivo() {
-        ultimoTitulo = "";
-        ultimoMotivo = "";
-    }
-
-    public String getUltimoMotivo() {
-        return ultimoMotivo;
-    }
-
-    public String getUltimoTitulo() {
-        return ultimoTitulo;
-    }
-
-    public boolean canjear(String codigo) {
+    public void canjear(String codigo) throws JugadaInvalidaException {
         Contenedor c = buscar(codigo);
-
-        if (c != null && c.estaLleno()) {
-            c.vaciar();
-            return true;
+        if (c == null) {
+            throw new JugadaInvalidaException("NO SE PUEDE CANJEAR", "No hay ningún contenedor " + codigo + ".");
         }
-        return false;
+        if (!c.estaLleno()) {
+            throw new JugadaInvalidaException("NO SE PUEDE CANJEAR", codigo
+                    + " no está lleno. Solo se puede canjear uno lleno (4 químicos).");
+        }
+        c.vaciar();
     }
-
 }
-

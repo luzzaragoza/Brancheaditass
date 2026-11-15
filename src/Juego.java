@@ -43,13 +43,13 @@ public class Juego {
         motivo = null;
 
         Visitante[] todos = {
-            new Visitante("Lyss", "lyss_x4.png"),
-            new Visitante("Luz", "luz_x4.png"),
-            new Visitante("Sofi 1", "sofi1_x4.png"),
-            new Visitante("Sofi 2", "sofi2_x4.png"),
-            new Visitante("Dra. Mora", "mora_x4.png"),
-            new Visitante("Dr. Bigotes", "bigotes_x4.png"),
-            new Visitante("Ing. Paco", "paco_x4.png")
+                new Visitante("Lyss", "lyss_x4.png"),
+                new Visitante("Luz", "luz_x4.png"),
+                new Visitante("Sofi 1", "sofi1_x4.png"),
+                new Visitante("Sofi 2", "sofi2_x4.png"),
+                new Visitante("Dra. Mora", "mora_x4.png"),
+                new Visitante("Dr. Bigotes", "bigotes_x4.png"),
+                new Visitante("Ing. Paco", "paco_x4.png")
         };
         armarVisitantes(todos);
 
@@ -65,15 +65,14 @@ public class Juego {
             return false;
         }
 
-        boolean salioBien;
-        if (tipoPedido == TipoPedido.DEJAR) {
-            salioBien = deposito.guardar(pedido, codigo);
-        } else {
-            salioBien = deposito.retirar(codigo, posicion, pedido);
-        }
-
-        if (!salioBien) {
-            terminar(deposito.getUltimoTitulo(), deposito.getUltimoMotivo());
+        try {
+            if (tipoPedido == TipoPedido.DEJAR) {
+                deposito.guardar(pedido, codigo);
+            } else {
+                deposito.retirar(codigo, posicion, pedido);
+            }
+        } catch (JugadaInvalidaException e) {
+            terminar(e.getTitulo(), e.getMotivo());
             return false;
         }
 
@@ -90,9 +89,13 @@ public class Juego {
         if (terminado) {
             return false;
         }
-        if (!deposito.canjear(codigo)) {
+
+        try {
+            deposito.canjear(codigo);
+        } catch (JugadaInvalidaException e) {
             return false;
         }
+
         puntaje = puntaje + PUNTOS_CANJE;
         if (CANJE_GASTA_TURNO) {
             siguienteTurno();
