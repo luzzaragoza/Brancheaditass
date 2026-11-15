@@ -2,6 +2,8 @@ package modelo;
 
 public class Juego {
     public static final int PUNTOS_CANJE = 40;
+    public static final int PUNTOS_GUARDAR = 10;
+    public static final int PUNTOS_RETIRAR = 10;
 
     public static final boolean CANJE_GASTA_TURNO = false;
 
@@ -97,8 +99,13 @@ public class Juego {
 
         if (tipoPedido == TipoPedido.DEJAR) {
             agregarPendiente(visitante, pedido);
+            puntaje = puntaje + PUNTOS_GUARDAR;
         } else {
             quitarPendiente(pendienteActual);
+            puntaje = puntaje + PUNTOS_RETIRAR;
+        }
+        if (puntaje < 0) {
+            puntaje = 0;
         }
         siguienteTurno();
         return true;
@@ -148,7 +155,7 @@ public class Juego {
         Quimico[] posibles = new Quimico[8];
         int cantidadPosibles = 0;
         boolean[] temperaturas = {true, false};
-        for (int tipo = 0; tipo < 4; tipo ++) {
+        for (int tipo = 0; tipo < 4; tipo++) {
             for (boolean necesitaFrio : temperaturas) {
                 Quimico q = crearQuimico(tipo, necesitaFrio);
                 if (tieneLugar(q)) {
@@ -165,10 +172,11 @@ public class Juego {
             pedido = crearQuimico(tipo, necesitaFrio);
         }
     }
+
     private void generarPedidoDeRetiro() {
         int[] entregables = new int[cantidadPendientes];
         int cantidadEntregables = 0;
-        int [] canjeados = new int [cantidadPendientes];
+        int[] canjeados = new int[cantidadPendientes];
         int cantidadCanjeados = 0;
 
         for (int i = 0; i < cantidadPendientes; i++) {
@@ -185,7 +193,7 @@ public class Juego {
         if (vuelvePorCanjeado && cantidadCanjeados > 0) {
             elegirRetiro(canjeados[(int) (Math.random() * cantidadCanjeados)]);
         } else if (cantidadEntregables > 0) {
-            elegirRetiro(entregables [(int) (Math.random() * cantidadEntregables)]);
+            elegirRetiro(entregables[(int) (Math.random() * cantidadEntregables)]);
         } else {
             generarPedidoDeDejar();
         }
@@ -239,7 +247,7 @@ public class Juego {
     }
 
     private boolean tieneLugar(Quimico q) {
-        for (int i = 0; i< CODIGOS.length; i++) {
+        for (int i = 0; i < CODIGOS.length; i++) {
             if (deposito.buscar(CODIGOS[i]).puedeGuardar(q)) {
                 return true;
             }
