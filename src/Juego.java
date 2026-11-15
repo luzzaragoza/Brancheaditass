@@ -17,7 +17,9 @@ public class Juego {
     private String titulo;
     private String motivo;
     private String encargada;
+    private String aviso;
 
+    private Visitante[] todosLosVisitantes;
     private Visitante[] visitantes;
 
     private TipoPedido tipoPedido;
@@ -41,8 +43,9 @@ public class Juego {
         terminado = false;
         titulo = null;
         motivo = null;
+        aviso = "";
 
-        Visitante[] todos = {
+        todosLosVisitantes = new Visitante[] {
                 new Visitante("Lyss", "lyss_x4.png"),
                 new Visitante("Luz", "luz_x4.png"),
                 new Visitante("Sofi 1", "sofi1_x4.png"),
@@ -51,7 +54,7 @@ public class Juego {
                 new Visitante("Dr. Bigotes", "bigotes_x4.png"),
                 new Visitante("Ing. Paco", "paco_x4.png")
         };
-        armarVisitantes(todos);
+        armarVisitantes(todosLosVisitantes);
 
         pendientesVisitante = new Visitante[MAX_PENDIENTES];
         pendientesQuimico = new Quimico[MAX_PENDIENTES];
@@ -60,8 +63,22 @@ public class Juego {
         generarPedido();
     }
 
+    public void elegirEncargada(String encargada) {
+        if (turno > 1) {
+            return;
+        }
+        this.encargada = encargada;
+        armarVisitantes(todosLosVisitantes);
+        generarPedido();
+    }
+
     public boolean jugar(String codigo, int posicion) {
+        aviso = "";
         if (terminado) {
+            return false;
+        }
+        if (tipoPedido == TipoPedido.DEJAR && estaLleno(codigo)) {
+            aviso = codigo + " ya tiene 4 químicos: canjealo o guardá en otro.";
             return false;
         }
 
@@ -202,6 +219,11 @@ public class Juego {
         }
     }
 
+    private boolean estaLleno(String codigo) {
+        Contenedor c = deposito.buscar(codigo);
+        return c != null && c.estaLleno();
+    }
+
     private boolean hayEnDeposito(Quimico buscado) {
         for (int i = 0; i < CODIGOS.length; i++) {
             Contenedor c = deposito.buscar(CODIGOS[i]);
@@ -302,6 +324,10 @@ public class Juego {
 
     public String getMotivo() {
         return motivo;
+    }
+
+    public String getAviso() {
+        return aviso;
     }
 
     public String getEncargada() {
