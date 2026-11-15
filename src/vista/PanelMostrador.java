@@ -14,6 +14,7 @@ public class PanelMostrador extends JPanel {
     private JLabel escena;
     private JLabel etiquetaVisitante;
     private JLabel etiquetaEncargada;
+    private JLabel sobreMostrador;
     private JLabel etiquetaNombre;
     private JLabel etiquetaViene;
     private JLabel etiquetaDialogo;
@@ -61,6 +62,10 @@ public class PanelMostrador extends JPanel {
         etiquetaDialogo.setVerticalAlignment(SwingConstants.TOP);
         globo.add(etiquetaDialogo);
         escena.add(globo);
+
+        // lo que está arriba del mostrador: el frasco que traen o el ticket del retiro
+        sobreMostrador = new JLabel();
+        escena.add(sobreMostrador);
 
         etiquetaVisitante = new JLabel();
         etiquetaVisitante.setBounds(270, 192, 128, 180);
@@ -209,6 +214,8 @@ public class PanelMostrador extends JPanel {
             chipTipo.setBackground(Colores.TINTA);
             chipTipo.setForeground(Colores.CREMA);
             chipTemperatura.setText("ESTABA EN " + temperatura.toUpperCase());
+            sobreMostrador.setIcon(imagen("ticket.png"));
+            sobreMostrador.setBounds(492, 204, 40, 40);
             etiquetaQuien.setText("Lo busca " + conArticulo(visitante.getNombre()));
             botonIr.setText("IR A BUSCARLO  »");
             etiquetaAyuda.setText("<html>Allá atrás elegís cuál le entregás.</html>");
@@ -220,6 +227,8 @@ public class PanelMostrador extends JPanel {
             chipTipo.setBackground(Colores.ROSA);
             chipTipo.setForeground(Colores.TINTA);
             chipTemperatura.setText("NECESITA " + temperatura.toUpperCase());
+            sobreMostrador.setIcon(imagen("frasco_" + pedido.getImagen()));
+            sobreMostrador.setBounds(492, 196, 40, 48);
             etiquetaQuien.setText("Lo deja " + conArticulo(visitante.getNombre()));
             botonIr.setText("IR AL DEPÓSITO  »");
             etiquetaAyuda.setText("<html>Allá atrás elegís en qué estante guardarlo.</html>");
