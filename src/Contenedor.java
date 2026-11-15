@@ -71,6 +71,7 @@ public abstract class Contenedor {
 
     public String getCodigo() { return codigo; }
     public int getCantidad() { return quimicos.size(); }
+    public int getLugares() { return lugares; }
     public Quimico getQuimico(int posicion) { return quimicos.get(posicion); }
 
     public abstract boolean aceptaTemperatura(Quimico q);
