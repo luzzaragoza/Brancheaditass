@@ -39,7 +39,7 @@ public class VentanaJuego extends JFrame {
         panelDeposito.getBotonVolver().addActionListener(new VolverAlMostrador());
         for (int i = 0; i < 6; i++) {
             PanelContenedor panel = panelDeposito.getPanel(i);
-            for (int j = 0; j < panel.getCantidadCasillas(); j++) {
+            for (int j = 0; j < 4; j++) {
                 panel.getCasilla(j).addActionListener(new ClicCasilla(i, j));
             }
             panel.getBotonCanjear().addActionListener(new Canjear(i));
@@ -65,6 +65,10 @@ public class VentanaJuego extends JFrame {
         cartas.show(pantallas, "final");
     }
 
+    public void mostrarReglas() {
+        cartas.show(pantallas, "reglas");
+    }
+
     private class ElegirEncargada implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -76,6 +80,12 @@ public class VentanaJuego extends JFrame {
     private class Empezar implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            if (juego.estaTerminado()) {
+                String encargadaActual = juego.getEncargada();
+                dispose();
+                new VentanaJuego(new Juego(encargadaActual));
+                return;
+            }
             cartas.show(pantallas, "mostrador");
             panelMostrador.actualizar();
         }
