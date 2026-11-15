@@ -1,60 +1,72 @@
 import javax.swing.*;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.border.Border;
 import java.net.URL;
 
 public class PanelContenedor extends JPanel {
+    public static final int ANCHO = 410;
+    public static final int ALTO = 116;
+
     private Contenedor contenedor;
+    private Color fondo;
     private JButton[] casillas = new JButton[4];
     private JButton botonCanjear;
     private Border[] bordes = new Border[4];
     private JLabel[] etiquetas = new JLabel[4];
-    private static final Dimension TAMANIO_CASILLA = new Dimension(56, 73);
+    private JLabel etiquetaCuenta;
 
     public PanelContenedor(Contenedor contenedor, Color fondo) {
         this.contenedor = contenedor;
-        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-        setBackground(fondo);
+        this.fondo = fondo;
+        setLayout(null);
+        setOpaque(false);
+        setSize(ANCHO, ALTO);
 
-        JLabel codigo = new JLabel(" " + contenedor.getCodigo() + " ");
-        codigo.setForeground(Colores.TINTA);
-        codigo.setFont(Fuentes.titulo(18f));
+        JLabel codigo = new JLabel(contenedor.getCodigo());
+        codigo.setOpaque(true);
+        codigo.setBackground(Colores.TINTA);
+        codigo.setForeground(Colores.CREMA);
+        codigo.setFont(Fuentes.titulo(15f));
+        codigo.setHorizontalAlignment(SwingConstants.CENTER);
+        codigo.setBounds(12, 38, 38, 38);
         add(codigo);
 
         for (int i = 0; i < casillas.length; i++) {
             casillas[i] = new JButton();
-            casillas[i].setMinimumSize(TAMANIO_CASILLA);
-            casillas[i].setPreferredSize(TAMANIO_CASILLA);
-            casillas[i].setMaximumSize(TAMANIO_CASILLA);
+            casillas[i].setBounds(62 + i * 62, 12, 52, 70);
             pintarBoton(casillas[i], Colores.CREMA);
             casillas[i].addMouseListener(new MouseEncima(i));
-            casillas[i].setAlignmentX(CENTER_ALIGNMENT);
+            add(casillas[i]);
 
             etiquetas[i] = new JLabel();
             etiquetas[i].setForeground(Colores.TINTA);
             etiquetas[i].setFont(Fuentes.texto(12f));
-            etiquetas[i].setAlignmentX(CENTER_ALIGNMENT);
-
-            JPanel columna = new JPanel();
-            columna.setLayout(new BoxLayout(columna, BoxLayout.Y_AXIS));
-            columna.setOpaque(false);
-            columna.add(casillas[i]);
-            columna.add(etiquetas[i]);
-            add(columna);
+            etiquetas[i].setHorizontalAlignment(SwingConstants.CENTER);
+            etiquetas[i].setBounds(62 + i * 62 - 5, 86, 62, 18);
+            add(etiquetas[i]);
         }
 
-        botonCanjear = new JButton("Canjear +" + Juego.PUNTOS_CANJE);
+        etiquetaCuenta = new JLabel();
+        etiquetaCuenta.setForeground(Colores.APAGADO);
+        etiquetaCuenta.setFont(Fuentes.titulo(15f));
+        etiquetaCuenta.setHorizontalAlignment(SwingConstants.CENTER);
+        etiquetaCuenta.setBounds(312, 38, 76, 38);
+        add(etiquetaCuenta);
+
+        botonCanjear = new JButton("<html><center>CANJEAR<br>+" + Juego.PUNTOS_CANJE + "</center></html>");
         pintarBoton(botonCanjear, Colores.ROSA);
+        botonCanjear.setFont(Fuentes.titulo(13f));
+        botonCanjear.setBorder(BorderFactory.createMatteBorder(3, 3, 6, 3, Colores.TINTA));
+        botonCanjear.setBounds(312, 14, 80, 68);
         add(botonCanjear);
     }
 
     public void pintarBoton(JButton boton, Color fondo) {
         boton.setBackground(fondo);
         boton.setForeground(Colores.TINTA);
-        boton.setFont(Fuentes.texto(13f));
+        boton.setFont(Fuentes.texto(18f));
         boton.setOpaque(true);
         boton.setFocusPainted(false);
         boton.setBorder(BorderFactory.createLineBorder(Colores.TINTA, 2));
@@ -85,14 +97,16 @@ public class PanelContenedor extends JPanel {
                 casillas[i].setText("+");
                 bordes[i] = BorderFactory.createDashedBorder(Colores.APAGADO, 3, 6, 4, false);
             } else {
-                casillas[i].setBackground(Colores.CREMA);
+                casillas[i].setBackground(fondo);
                 casillas[i].setIcon(null);
                 casillas[i].setText("");
-                bordes[i] = BorderFactory.createLineBorder(Colores.APAGADO, 1);
+                bordes[i] = BorderFactory.createLineBorder(Colores.LAVANDA, 2);
             }
             casillas[i].setBorder(bordes[i]);
         }
 
+        etiquetaCuenta.setText(cantidad + "/" + casillas.length);
+        etiquetaCuenta.setVisible(!contenedor.estaLleno());
         botonCanjear.setVisible(contenedor.estaLleno());
     }
 

@@ -13,12 +13,12 @@ public class VentanaJuego extends JFrame {
     public VentanaJuego(Juego juego) {
         this.juego = juego;
         setTitle("Alquimia");
-        setSize(1024, 720);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+        setResizable(false);
 
         cartas = new CardLayout();
         pantallas = new JPanel(cartas);
+        pantallas.setPreferredSize(new Dimension(1024, 720));
 
         panelReglas = new PanelReglas();
         panelMostrador = new PanelMostrador(juego);
@@ -29,6 +29,7 @@ public class VentanaJuego extends JFrame {
 
         panelReglas.getBotonEmpezar().addActionListener(new Empezar());
         panelMostrador.getBotonIr().addActionListener(new IrAlDeposito());
+        panelDeposito.getBotonVolver().addActionListener(new VolverAlMostrador());
         for (int i = 0; i < 6; i++) {
             PanelContenedor panel = panelDeposito.getPanel(i);
             for (int j = 0; j < 4; j++) {
@@ -38,6 +39,8 @@ public class VentanaJuego extends JFrame {
         }
 
         add(pantallas);
+        pack();
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 
@@ -48,6 +51,11 @@ public class VentanaJuego extends JFrame {
 
     public void mostrarMensaje(String texto) {
         panelDeposito.mostrarMensaje(texto);
+    }
+
+    public void mostrarFinal() {
+        pantallas.add(new PantallaFinal(juego), "final");
+        cartas.show(pantallas, "final");
     }
 
     private class Empezar implements ActionListener {
@@ -61,8 +69,15 @@ public class VentanaJuego extends JFrame {
     private class IrAlDeposito implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            mostrarMensaje("Hacé clic en el estante donde va, o en el químico que entregás.");
+            panelDeposito.actualizar();
             cartas.show(pantallas, "deposito");
+        }
+    }
+
+    private class VolverAlMostrador implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            cartas.show(pantallas, "mostrador");
         }
     }
 
@@ -85,12 +100,12 @@ public class VentanaJuego extends JFrame {
                 mostrarMensaje("Esa casilla está vacía. Hacé clic en una que tenga un químico.");
                 return;
             }
-            boolean salioBien = juego.jugar(codigo, posicion);
+            juego.jugar(codigo, posicion);
             actualizarPantalla();
-            if (salioBien) {
-                cartas.show(pantallas, "mostrador");
+            if (juego.estaTerminado()) {
+                mostrarFinal();
             } else {
-                mostrarMensaje("Perdiste: " + juego.getMotivo());
+                cartas.show(pantallas, "mostrador");
             }
         }
     }
@@ -110,7 +125,7 @@ public class VentanaJuego extends JFrame {
             juego.canjear(panelDeposito.getCodigo(estante));
             actualizarPantalla();
             if (juego.estaTerminado()) {
-                mostrarMensaje("Perdiste: " + juego.getMotivo());
+                mostrarFinal();
             } else {
                 mostrarMensaje("¡Canjeaste! Puntaje: " + juego.getPuntaje());
             }

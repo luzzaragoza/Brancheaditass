@@ -10,7 +10,7 @@ public class PruebaQuimicos {
         System.out.println("base con base: " + base.esCompatibleCon(new Base(false)) + " (tiene que dar false)");
 
         System.out.println("ácido necesita frío: " + acido.necesitaFrio() + " (tiene que dar true)");
-        System.out.println("nombre: " + acido.getNombre() + " (tiene que dar Acido)");
+        System.out.println("nombre: " + acido.getNombre() + " (tiene que dar Ácido)");
 
         System.out.println("ácido de frío coincide con pedido de ácido de frío: "
                 + acido.coincideConPedido(new Acido(true)) + " (tiene que dar true)");
