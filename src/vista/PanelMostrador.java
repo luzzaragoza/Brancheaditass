@@ -9,8 +9,12 @@ import java.net.URL;
 
 public class PanelMostrador extends JPanel {
     private Juego juego;
+    private Ranking ranking = new Ranking();
     private JLabel etiquetaTurno;
     private JLabel etiquetaPuntaje;
+    private JLabel corona;
+    private JLabel etiquetaMejor;
+    private JLabel etiquetaRecord;
     private JLabel escena;
     private JLabel etiquetaVisitante;
     private JLabel etiquetaEncargada;
@@ -37,12 +41,19 @@ public class PanelMostrador extends JPanel {
         barra.setBounds(0, 0, 1024, 56);
         barra.add(texto("ALQUIMIA", Fuentes.titulo(20f), Colores.CREMA, 20, 14, 110, 28));
         barra.add(texto("· MOSTRADOR", Fuentes.texto(13f), Colores.LAVANDA, 122, 18, 120, 24));
-        etiquetaTurno = texto("", Fuentes.titulo(18f), Colores.CREMA, 740, 14, 140, 28);
+        etiquetaTurno = texto("", Fuentes.titulo(18f), Colores.CREMA, 610, 14, 140, 28);
         etiquetaTurno.setHorizontalAlignment(SwingConstants.RIGHT);
         barra.add(etiquetaTurno);
-        barra.add(texto("♥", new Font(Font.SANS_SERIF, Font.BOLD, 22), Colores.ROSA, 900, 13, 24, 28));
-        etiquetaPuntaje = texto("", Fuentes.titulo(18f), Colores.CREMA, 926, 14, 80, 28);
+        barra.add(texto("♥", new Font(Font.SANS_SERIF, Font.BOLD, 22), Colores.ROSA, 770, 13, 24, 28));
+        etiquetaPuntaje = texto("", Fuentes.titulo(18f), Colores.CREMA, 796, 14, 70, 28);
         barra.add(etiquetaPuntaje);
+        corona = new JLabel(imagen("corona.png"));
+        corona.setBounds(870, 21, 21, 12);
+        barra.add(corona);
+        etiquetaMejor = texto("MEJOR", Fuentes.texto(12f), Colores.LAVANDA, 898, 16, 50, 24);
+        barra.add(etiquetaMejor);
+        etiquetaRecord = texto("", Fuentes.titulo(18f), Colores.CREMA, 946, 14, 70, 28);
+        barra.add(etiquetaRecord);
         add(barra);
 
         // la escena: el fondo es un JLabel con la imagen, y adentro van las personas y el globo
@@ -169,6 +180,7 @@ public class PanelMostrador extends JPanel {
         etiquetaEncargada.setIcon(imagen(imagenEncargada("_x4.png")));
         etiquetaTurno.setText("TURNO " + juego.getTurno());
         etiquetaPuntaje.setText("" + juego.getPuntaje());
+        mostrarRecord();
 
         Visitante visitante = juego.getVisitante();
         etiquetaNombre.setText(visitante.getNombre().toUpperCase());
@@ -233,6 +245,17 @@ public class PanelMostrador extends JPanel {
         }
 
         animarLlegada();
+    }
+
+    // el mejor puntaje de puntajes.txt; si todavía no hay ninguno, no se muestra
+    private void mostrarRecord() {
+        boolean hayRecord = ranking.getCantidad() > 0;
+        corona.setVisible(hayRecord);
+        etiquetaMejor.setVisible(hayRecord);
+        etiquetaRecord.setVisible(hayRecord);
+        if (hayRecord) {
+            etiquetaRecord.setText("" + ranking.getPuntaje(0));
+        }
     }
 
     private void animarLlegada() {
